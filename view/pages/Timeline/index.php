@@ -58,12 +58,12 @@
 
                             <!-- Collapse here -->
                             <div class="collapse m-2" id="collapse<?php echo htmlspecialchars($timelineItem['id']); ?>">
-                                <?php 
-                                    $contentID = $timelineItem['content_id'];
-                                    $contents = $timeline->getContentByTimelineId($contentID);
-                                    if (!empty($contents)):
-                                        foreach ($contents as $content):
-                                ?>
+                            <?php 
+                                $contentID = $timelineItem['content_id'];
+                                $contents = $timeline->getContentByTimelineId($contentID);
+                                if (!empty($contents)):
+                                    foreach ($contents as $content):
+                            ?>
                                 <span class="badge badge-secondary py-1 px-2 my-2">
                                     <?php
                                     // Convert history_time from 'HH:MM:SS.000000' to 'HH:MM AM/PM'
@@ -73,14 +73,22 @@
                                     echo htmlspecialchars($formattedTime); ?>
                                 </span>
 
-                                    <div class="card mb-2">
-                                    <div class="card-body 
-                                        <?php echo ($content['status'] == 'success') ? 'my-bg-success' : 'my-bg-info'; ?> 
-                                        rounded">
-
-                                        <p><?php echo htmlspecialchars($content['content']); ?></p>
+                                <div class="card mb-2">
+                                    <div class="card-body d-flex justify-content-between align-items-center
+                                    <?php echo ($content['status'] == 'success') ? 'my-bg-success' : 'my-bg-info'; ?> 
+                                    rounded">
+                                        <p class="me-3"><?php echo htmlspecialchars($content['content']); ?></p>
+                                        <div>
+                                            <a class="btn btn-outline-info mx-1 px-3 px-md-5" onclick="setEditContentData(<?php echo htmlspecialchars(json_encode($content)); ?>)">
+                                                Edit
+                                            </a>
+                                            <a class="btn btn-outline-danger mx-1 px-3 px-md-5" onclick="setDeleteContent('<?php echo htmlspecialchars($content['id']); ?>')">
+                                                Delete
+                                            </a>
                                         </div>
                                     </div>
+                                </div>
+
                                 <?php 
                                         endforeach;
                                     else:
@@ -88,7 +96,7 @@
                                     <p class="text-danger">No content available for this timeline item.</p>
                                 <?php endif; ?>
                               
-                                <a class="btn btn-primary w-100 my-2" data-toggle="modal" data-target="#createContentModal"  data-id="<?php echo htmlspecialchars($timelineItem['content_id']);?>" onclick="setCreateId(this)">
+                                <a class="btn btn-outline-warning w-100 my-2" data-toggle="modal" data-target="#createContentModal"  data-id="<?php echo htmlspecialchars($timelineItem['content_id']);?>" onclick="setCreateId(this)">
                                     Create Content
                                 </a>
                             </div>

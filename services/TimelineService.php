@@ -24,27 +24,7 @@ class Timeline extends config {
             return false; // Return false if the operation fails
         }
     }
-    public function createContent($contentID, $content, $status) {
-        try {
-            // Define the query with placeholders
-            $query = "INSERT INTO `content_tbl`(`content_id_fk`, `content`, `status`) 
-                      VALUES (:content_id_fk, :content, :status)";
-            // Prepare the query
-            $stmt = $this->pdo->prepare($query);
-            // Bind the values to the placeholders
-            $stmt->bindParam(':content_id_fk', $contentID);
-            $stmt->bindParam(':content', $content);
-            $stmt->bindParam(':status', $status);
-            // Execute the query
-            $stmt->execute();
-            // Return success or other relevant response (e.g., the ID of the inserted row)
-            return true; // Return the ID of the newly created record
-        } catch (PDOException $e) {
-            echo "Error: " . $e->getMessage();
-            return false; // Return false if the operation fails
-        }
-    }
-
+    
     public function getTimelineById($plant_id_fk) {
         try {
                 $query = "SELECT `id`, `plant_id_fk`, `content_id`, `timeline_title`, `history_date`
@@ -61,21 +41,7 @@ class Timeline extends config {
         }
     }
     
-    public function getContentByTimelineId($content_id_fk) {
-        try {
-            $query = "SELECT `id`, `content_id_fk`, `content`, `status`, `history_time`
-                      FROM `content_tbl` 
-                      WHERE `content_id_fk` = :content_id_fk 
-                      ORDER BY `history_time`";
-            $stmt = $this->pdo->prepare($query);
-            $stmt->bindParam(':content_id_fk', $content_id_fk);
-            $stmt->execute();
-            return $stmt->fetchAll(PDO::FETCH_ASSOC); // Ensure this line returns the content
-        }
-        catch (PDOException $e) {
-            echo "Error: " . $e->getMessage();
-        }
-    }
+    
 
 
 
@@ -120,6 +86,86 @@ class Timeline extends config {
         }
     }
     
+    
+    // CONTENT //
+    public function getContentByTimelineId($content_id_fk) {
+        try {
+            $query = "SELECT `id`, `content_id_fk`, `content`, `status`, `history_time`
+                      FROM `content_tbl` 
+                      WHERE `content_id_fk` = :content_id_fk 
+                      ORDER BY `history_time`";
+            $stmt = $this->pdo->prepare($query);
+            $stmt->bindParam(':content_id_fk', $content_id_fk);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC); // Ensure this line returns the content
+        }
+        catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+
+    public function createContent($contentID, $content, $status) {
+        try {
+            // Define the query with placeholders
+            $query = "INSERT INTO `content_tbl`(`content_id_fk`, `content`, `status`) 
+                      VALUES (:content_id_fk, :content, :status)";
+            // Prepare the query
+            $stmt = $this->pdo->prepare($query);
+            // Bind the values to the placeholders
+            $stmt->bindParam(':content_id_fk', $contentID);
+            $stmt->bindParam(':content', $content);
+            $stmt->bindParam(':status', $status);
+            // Execute the query
+            $stmt->execute();
+            // Return success or other relevant response (e.g., the ID of the inserted row)
+            return true; // Return the ID of the newly created record
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false; // Return false if the operation fails
+        }
+    }
+    
+    public function updateContent($id, $content, $status) {
+        try {
+            // Define the query with placeholders for updating an existing record
+            $query = "UPDATE `content_tbl` 
+                      SET `content` = :content, `status` = :status
+                      WHERE `id` = :id";
+    
+            // Prepare the query
+            $stmt = $this->pdo->prepare($query);
+            // Bind the values to the placeholders
+            $stmt->bindParam(':content', $content);
+            $stmt->bindParam(':status', $status);
+            $stmt->bindParam(':id', $id); // Bind the ID to identify which record to update
+    
+            // Execute the query
+            $stmt->execute();
+    
+            // Return success or other relevant response
+            return true;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false; // Return false if the operation fails
+        }
+    }
+    
+
+    public function deleteContent($id) {
+        try {
+            $query = "DELETE FROM `content_tbl` WHERE `id` = :id";
+            $stmt = $this->pdo->prepare($query);
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+            
+            // Check if the deletion was successful
+            return $stmt->rowCount() > 0; // Return true if at least one row was deleted
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
+    }
+
     
 
 }

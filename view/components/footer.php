@@ -23,6 +23,16 @@
             $('#deleteModal').modal('show');
         }
 
+        function setEditContentData(contentItem) {
+            document.getElementById('edit_content').value = contentItem.content; // Update to match contentItem properties
+            document.getElementById('edit_status').value = contentItem.status;   // Update to match contentItem properties
+            document.getElementById('edit_id').value = contentItem.id; // Correct hidden input for content ID
+            $('#editContentModal').modal('show'); // Show modal
+        }
+        function setDeleteContent(id) {
+            document.getElementById('delete_content_id').value = id;
+            $('#deleteContentModal').modal('show');
+        }
         // JavaScript for search and filter functionality
         document.getElementById('searchInput').addEventListener('keyup', function() {
             var input, filter, table, tr, td, i, j, txtValue, found;
