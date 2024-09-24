@@ -6,26 +6,30 @@ $nurseryOwner = new NurseryOwner();
 $owners = $nurseryOwner->getNurseryOwners();
 
 $plantInfo = new PlantInfo();
-
 $id = $_GET['userID'];
+
 $plantSpecificInfo = $plantInfo->getPlantInfoId($id);
 
 // Check if form is submitted
-if (isset($_POST['action']) && $_POST['action'] == 'create') {
+if (isset($_POST['action']) && $_POST['action'] == 'update') {
     // Clean input data
-    $nurser_owner_id_fk = $nurseryOwner->clean('nurser_owner_id_fk', 'post');
-    $plant_type = $nurseryOwner->clean('plant_type', 'post');
-    $plant_variety = $nurseryOwner->clean('plant_variety', 'post');
-    $planted_date = $nurseryOwner->clean('planted_date', 'post');
+    $nurser_owner_id_fk = $plantInfo->clean('nurser_owner_id_fk', 'post');
+    $plant_type = $plantInfo->clean('plant_type', 'post');
+    $plant_variety = $plantInfo->clean('plant_variety', 'post');
+    $planted_date = $plantInfo->clean('planted_date', 'post');
     // Call create method to add the new owner
     $plantStatus = $plantInfo->update($id, $nurser_owner_id_fk, $plant_type, $plant_variety, $planted_date);
     // Optionally, you can redirect or show a success message after creation
-    if($owners == true){
+    if($plantStatus == true){
          // Redirect to index.php
          header("Location: index.php"); 
          exit(); // Important to stop the script after the redirection
-    }else{
-        header("Location: create.php"); 
+    }else if($plantStatus === false) {
+
+        echo "<br> nursery ID is $nurser_owner_id_fk";
+        echo "<br> nursery ID is $plant_type";
+        echo "Update failed. Error: " . $plantInfo->getLastError(); // Implement getLastError() in PlantInfo class
+        exit;
     }
 }
 include_once('../../components/header.php');
@@ -63,44 +67,42 @@ include_once('../../components/header.php');
 
     </style>
 <div class="p-3 m-5">
-    <h1>Create Plant</h1>
+    <a class="btn btn-outline-danger m-2" href="index.php" width="200"> Back </a>
+    <h1>Plant Update</h1>
     <div class="card p-4">
-        <form method="POST" action="">
+        <form method="post" action="">
             <label for="fullname">Nursery Owner</label>
-            <div class="col">
-
-                <div class="dropdown">
-                    <input type="text" id="searchInput" value="<?php echo htmlspecialchars($plantSpecificInfo['nursery_owner_fullname']); ?>" class="form-control" name="nurser_owner_id_fk" placeholder="Choose" onkeyup="filterFunction()" onclick="toggleDropdown()" required>
-                    <!-- Hidden input to store nursery_owner_id -->
-                    <input type="hidden" id="nurser_owner_id_fk" name="nurser_owner_id_fk">
-                    <div id="dropdownContent" class="dropdown-content">
-                        <?php if (!empty($owners)): ?>
-                            <?php foreach ($owners as $owner): ?>
-                                <!-- Pass nursery_owner_id as a data attribute -->
-                                <div onclick="selectItem(this)" data-id="<?php echo $owner['nurser_owner_id']; ?>">
-                                    <?php echo htmlspecialchars(trim($owner['fullname'])); ?>
-
-                                </div>
-                            <?php endforeach; ?>
-                        <?php else: ?>
-                            <div onclick="selectItem(this)">No Found</div>
-                        <?php endif; ?>
+                <div class="col">
+                    <div class="dropdown">
+                        <input type="text" id="searchInput" value="<?php echo htmlspecialchars($plantSpecificInfo['nursery_owner_fullname']); ?>" class="form-control" name="data" placeholder="Choose" onkeyup="filterFunction()" onclick="toggleDropdown()" required>
+                        <!-- Hidden input to store nursery_owner_id, pre-filled with existing value -->
+                        <input type="hidden" id="nurser_owner_id_fk" name="nurser_owner_id_fk" value="<?php echo htmlspecialchars($plantSpecificInfo['nurser_owner_id']); ?>">
+                        <div id="dropdownContent" class="dropdown-content">
+                            <?php if (!empty($owners)): ?>
+                                <?php foreach ($owners as $owner): ?>
+                                    <div onclick="selectItem(this)" data-id="<?php echo $owner['nurser_owner_id']; ?>">
+                                        <?php echo htmlspecialchars(trim($owner['fullname'])); ?>
+                                    </div>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <div onclick="selectItem(this)">No Found</div>
+                            <?php endif; ?>
+                        </div>
                     </div>
                 </div>
-            </div>
             <div class="form-group">
                 <label for="plant_type">Type</label>
-                <input type="text" class="form-control"  value="<?php echo htmlspecialchars($plantSpecificInfo['plant_type']); ?>"  name="plant_type" id="plant_type" placeholder="ex. Type A" required>
+                <input type="text" class="form-control"  value="<?php echo htmlspecialchars($plantSpecificInfo['plant_type']); ?>"  name="plant_type" id="id_plant_type" placeholder="ex. Type A" required>
             </div>
             <div class="form-group">
                 <label for="plant_variety">Variety</label>
-                <input type="text" class="form-control"  value="<?php echo htmlspecialchars($plantSpecificInfo['plant_variety']); ?>"  name="plant_variety" id="plant_variety" placeholder="ex. Class B" required>
+                <input type="text" class="form-control"  value="<?php echo htmlspecialchars($plantSpecificInfo['plant_variety']); ?>"  name="plant_variety" id="id_plant_variety" placeholder="ex. Class B" required>
             </div>
             <div class="form-group">
                 <label for="planted_date">Planted Date</label>
-                <input type="date" class="form-control"  value="<?php echo htmlspecialchars($plantSpecificInfo['planted_date']); ?>"  name="planted_date" id="planted_date" placeholder="01/01/2024" required>
+                <input type="date" class="form-control"  value="<?php echo htmlspecialchars($plantSpecificInfo['planted_date']); ?>"  name="planted_date" id="id_planted_date" placeholder="01/01/2024" required>
             </div>
-            <input type="hidden" name="action" value="create">
+            <input type="hidden" name="action" value="update">
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>

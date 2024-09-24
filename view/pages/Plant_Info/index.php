@@ -47,9 +47,10 @@ if (isset($_POST['action']) && $_POST['action'] == 'delete') {
 
 
 <div class="p-3">
+    <a class="btn btn-outline-danger m-2" href="../Nursery_Owner/index.php" width="200"> Back </a>
     <div class="card p-4">
-        
-    <h1>Plant List</h1>
+      
+      <h1>Plant List</h1>
 
     <!-- Search Input -->
     <div class="mb-3">

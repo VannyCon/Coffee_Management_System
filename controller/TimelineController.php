@@ -1,5 +1,9 @@
 <?php 
-
+    // Redirect to login if not logged in
+    if (!isset($_SESSION['username'])) {
+        header("Location: ../../../index.php");
+        exit();
+    }
     // Check if form is submitted
     if (isset($_POST['action']) && $_POST['action'] == 'createTimeline') {
         // Clean input data

@@ -4,6 +4,7 @@ include_once('../../components/header.php');
 ?>
 
 <div class="p-3 m-5">
+    <a class="btn btn-outline-danger m-2" href="index.php" width="200"> Back </a>
     <h1>Create Nursery Owner</h1>
     <div class="card p-4">
         <form method="POST" action="">

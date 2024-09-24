@@ -33,41 +33,63 @@
             document.getElementById('delete_content_id').value = id;
             $('#deleteContentModal').modal('show');
         }
-        // JavaScript for search and filter functionality
-        document.getElementById('searchInput').addEventListener('keyup', function() {
-            var input, filter, table, tr, td, i, j, txtValue, found;
-            input = document.getElementById('searchInput');
-            filter = input.value.toLowerCase();
-            table = document.getElementById('nurseryOwnersTable');
-            tr = table.getElementsByTagName('tr');
-            found = false;
 
-            // Loop through all table rows, excluding the header
-            for (i = 1; i < tr.length; i++) {
-                tr[i].style.display = "none"; // Hide the row initially
+        function selectItem(element) {
+            var selectedValue = element.innerHTML.trim();  // Trim any extra spaces
+            var selectedId = element.getAttribute('data-id'); // Get nursery_owner_id from data attribute
 
-                // Check if any cell in the row contains the search input value
-                td = tr[i].getElementsByTagName('td');
-                for (j = 0; j < td.length; j++) {
-                    if (td[j]) {
-                        txtValue = td[j].textContent || td[j].innerText;
-                        if (txtValue.toLowerCase().indexOf(filter) > -1) {
-                            tr[i].style.display = ""; // Show the row if a match is found
-                            found = true;
-                            break;
+            // Set the selected value in the input
+            document.getElementById("searchInput").value = selectedValue;
+            
+            // Set the selected nursery_owner_id in the hidden input
+            document.getElementById("nurser_owner_id_fk").value = selectedId;
+            
+            // Close the dropdown
+            document.getElementById("dropdownContent").classList.remove("show");
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeSearchFilter('searchInput', 'nurseryOwnersTable', 'noRecords');
+        });
+        
+        // searchFilter.js
+        function initializeSearchFilter(searchInputId, tableId, noRecordsId) {
+            document.getElementById(searchInputId).addEventListener('keyup', function() {
+                var input, filter, table, tr, td, i, j, txtValue, found;
+                input = document.getElementById(searchInputId);
+                filter = input.value.toLowerCase();
+                table = document.getElementById(tableId);
+                tr = table.getElementsByTagName('tr');
+                found = false;
+
+                // Loop through all table rows, excluding the header
+                for (i = 1; i < tr.length; i++) {
+                    tr[i].style.display = "none"; // Hide the row initially
+
+                    // Check if any cell in the row contains the search input value
+                    td = tr[i].getElementsByTagName('td');
+                    for (j = 0; j < td.length; j++) {
+                        if (td[j]) {
+                            txtValue = td[j].textContent || td[j].innerText;
+                            if (txtValue.toLowerCase().indexOf(filter) > -1) {
+                                tr[i].style.display = ""; // Show the row if a match is found
+                                found = true;
+                                break;
+                            }
                         }
                     }
                 }
-            }
 
-            // Show or hide the 'No records' message and button
-            var noRecords = document.getElementById('noRecords');
-            if (!found) {
-                noRecords.style.display = "block"; // Show "no records" message if nothing is found
-            } else {
-                noRecords.style.display = "none"; // Hide "no records" message if results are found
-            }
-        });
+                // Show or hide the 'No records' message
+                var noRecords = document.getElementById(noRecordsId);
+                if (!found) {
+                    noRecords.style.display = "block"; // Show "no records" message if nothing is found
+                } else {
+                    noRecords.style.display = "none"; // Hide "no records" message if results are found
+                }
+            });
+            
+        };
     </script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>

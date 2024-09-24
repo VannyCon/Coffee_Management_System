@@ -14,11 +14,11 @@
                     <form method="POST" action="">
                             <div class="form-group">
                                 <label for="timeline_title">Timeline Title</label>
-                                <input type="text" class="form-control" id="timeline_title"  name="timeline_title"  placeholder="Enter first value">
+                                <input type="text" class="form-control" id="timeline_title"  name="timeline_title"  placeholder="Enter first value" required>
                             </div>
                             <div class="form-group">
                                 <label for="history_date">Date</label>
-                                <input type="date" class="form-control" id="history_date" name="history_date" placeholder="Enter second value">
+                                <input type="date" class="form-control" id="history_date" name="history_date" placeholder="Enter second value" required>
                             </div>
                         </div>
                         <input type="hidden" name="action" value="createTimeline">

@@ -42,6 +42,7 @@ class config {
         return $data;
     }
     function logout(){
+        session_start();
         // Unset all session variables
         $_SESSION = array();
         // Destroy the session

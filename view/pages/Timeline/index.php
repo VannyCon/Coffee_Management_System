@@ -20,6 +20,7 @@
 
     <div class="m-1 p-1 p-lg-5">
         <div class="timeline-container">
+        <a class="btn btn-outline-danger m-2" href="../Plant_Info/index.php" width="200"> Back </a>
             <h2>Timeline</h2>
             <div class="timeline">
             <?php if (!empty($timelines)): ?>

@@ -17,7 +17,8 @@ class PlantInfo extends config {
                 n.created_date
             FROM plant_info_tbl p
             JOIN nursery_owner_tbl n
-            ON p.nurser_owner_id_fk = n.nurser_owner_id;
+            ON p.nurser_owner_id_fk = n.nurser_owner_id
+            ORDER BY p.planted_date DESC;
             ";
             $stmt = $this->pdo->prepare($query); // Prepare the query
             $stmt->execute(); // Execute the query
@@ -57,6 +58,7 @@ class PlantInfo extends config {
                                 p.id,
                                 p.plant_id,
                                 n.fullname AS nursery_owner_fullname,
+                                n.nurser_owner_id,
                                 p.plant_type,
                                 p.plant_variety,
                                 p.planted_date,
@@ -85,7 +87,10 @@ class PlantInfo extends config {
         try {
             // Define the query with placeholders for updating an existing record
             $query = "UPDATE `plant_info_tbl` 
-                      SET `nurser_owner_id_fk` = :nurser_owner_id_fk, `plant_type` = :plant_type, `plant_variety` = :plant_variety
+                      SET `nurser_owner_id_fk` = :nurser_owner_id_fk,
+                          `plant_type` = :plant_type,
+                          `plant_variety` = :plant_variety,
+                          `planted_date` = :planted_date
                       WHERE `id` = :id";
     
             // Prepare the query
@@ -94,13 +99,13 @@ class PlantInfo extends config {
             $stmt->bindParam(':nurser_owner_id_fk', $nurser_owner_id_fk);
             $stmt->bindParam(':plant_type', $plant_type);
             $stmt->bindParam(':plant_variety', $plant_variety);
-            $stmt->bindParam(':id', $id); // Bind the ID to identify which record to update
+            $stmt->bindParam(':planted_date', $planted_date);
+            $stmt->bindParam(':id', $id);
     
             // Execute the query
             $stmt->execute();
-    
             // Return success or other relevant response
-            return true;
+            return $stmt->rowCount() > 0; // Returns true if at least one row was affected
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
             return false; // Return false if the operation fails

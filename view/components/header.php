@@ -14,11 +14,11 @@
 <body>
 <style>
 body{
+    padding: 5px;
     background-color: #fcf2e6;
 }
 .timeline-container {
     max-width: 100%;
-    margin: 50px auto;
     background-color: white;
     padding: 15px;
     border-radius: 8px;
@@ -113,10 +113,12 @@ h2 {
 <?php 
     // Redirect to login if not logged in
     if (!isset($_SESSION['user_id'])) {
-        echo "<form action='' method='post'>
-        <input type='hidden' name='action' value='logout'>
-        <button class='btn btn-danger btn-lg btn-block' type='submit'>Logout</button>
-        </form>";
+        echo "<div class='d-flex justify-content-end mr-3'>
+                <form action='' method='post'>
+                    <input type='hidden' name='action' value='logout'>
+                    <button class='btn btn-danger btn-lg' type='submit'>Logout</button>
+                </form>
+              </div>";
     }
 ?>
 
