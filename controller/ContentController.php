@@ -1,4 +1,10 @@
 <?php 
+
+    // Redirect to login if not logged in
+    if (!isset($_SESSION['user_id'])) {
+        header("Location: ../../../index.php");
+        exit();
+    }
     if(isset($_POST['action']) && $_POST['action'] == 'createContent'){
         // Clean input data
         $contentID = $timeline->clean('contentID', 'post');

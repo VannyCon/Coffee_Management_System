@@ -1,24 +1,6 @@
 <?php 
-require_once('../../../services/NurseryOwnerService.php');
-
-// Instantiate the class and get nursery owners
-$nurseryOwner = new NurseryOwner();
-$owners = $nurseryOwner->getNurseryOwners();
-
-if (isset($_POST['action']) && $_POST['action'] == 'delete') {
-    $id = $nurseryOwner->clean('id', 'post');
-    error_log("Attempting to delete owner with ID: $id"); // Log the ID
-    $result = $nurseryOwner->delete($id);
-    
-    if ($result) {
-        header("Location: index.php");
-        exit();
-    } else {
-        error_log("Deletion failed for ID: $id");
-        header("Location: index.php");
-    }
-}
 include_once('../../components/header.php');
+include_once('../../../controller/NurseryController.php');
 ?>
 <!-- Delete Confirmation Modal -->
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">

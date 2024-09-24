@@ -1,3 +1,7 @@
+<?php 
+    include_once('../../../controller/LogoutController.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +13,10 @@
 </head>
 <body>
 <style>
-     .timeline-container {
+body{
+    background-color: #fcf2e6;
+}
+.timeline-container {
     max-width: 100%;
     margin: 50px auto;
     background-color: white;
@@ -103,3 +110,13 @@ h2 {
     background-color: #f2e4e4;
 }
 </style>
+<?php 
+    // Redirect to login if not logged in
+    if (!isset($_SESSION['user_id'])) {
+        echo "<form action='' method='post'>
+        <input type='hidden' name='action' value='logout'>
+        <button class='btn btn-danger btn-lg btn-block' type='submit'>Logout</button>
+        </form>";
+    }
+?>
+
