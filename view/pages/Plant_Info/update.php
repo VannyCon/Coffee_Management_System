@@ -1,4 +1,6 @@
 <?php
+
+$title = "PlantInfo";
 require_once('../../../services/NurseryOwnerService.php');
 require_once('../../../services/PlantInfoService.php');
 // Instantiate the class to get nursery owners

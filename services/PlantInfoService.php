@@ -82,6 +82,35 @@ class PlantInfo extends config {
         }
     }
 
+    public function getPlantDataByID($plant_id) {
+        try {
+                $query = "SELECT 
+                                p.id,
+                                p.plant_id,
+                                n.fullname AS nursery_owner_fullname,
+                                p.plant_type,
+                                p.plant_variety,
+                                p.planted_date,
+                                p.created_by
+                            FROM 
+                                plant_info_tbl p
+                            JOIN 
+                                nursery_owner_tbl n
+                            ON 
+                                p.nurser_owner_id_fk = n.nurser_owner_id
+                            WHERE 
+                                p.plant_id = :plant_id;
+                            ";
+                $stmt = $this->pdo->prepare($query); // Prepare the query
+                $stmt->bindParam(':plant_id', $plant_id); // Bind the value
+                $stmt->execute(); // Execute the query
+                return $stmt->fetch(PDO::FETCH_ASSOC); // Fetch the result
+        }
+        catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+
 
     public function update($id, $nurser_owner_id_fk, $plant_type, $plant_variety, $planted_date) {
         try {

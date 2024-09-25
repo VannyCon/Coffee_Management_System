@@ -1,4 +1,5 @@
 <?php
+    $title = "Nursery";
 require_once('../../../services/NurseryOwnerService.php');
 include_once('../../components/header.php');
 // Redirect to login if not logged in

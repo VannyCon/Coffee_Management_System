@@ -1,32 +1,27 @@
 <?php 
-  $title = "Timeline";
+  $title = "User";
   require_once('../../../services/TimelineService.php');
   require_once('../../../services/PlantInfoService.php');
   // Instantiate the class and get nursery owners
   $timeline = new Timeline();
   $plant = new PlantInfo();
-  include_once('../../components/header.php');
 
   ///make a logic here where return to plantINfo if plandID not found
   $plantID = $_GET['plantID'];
   $timelines = $timeline->getTimelineById($plantID);
   $plantData = $plant->getPlantDataByID($plantID);
-  require_once('../../../controller/ContentController.php');
-  require_once('../../../controller/TimelineController.php');  
 
+  include_once('../../components/header.php');
 ?>
-<?php include_once('../../components/header.php'); ?>
-<?php include_once('../../components/timelineModals.php'); ?>
-
 
 
     <div class="m-1 p-1 p-lg-5">
         <div class="timeline-container">
-        <a class="btn btn-outline-danger m-2" href="../Plant_Info/index.php" width="200"> Back </a>
+        <a class="btn btn-outline-danger m-2" href="index.php" width="200"> Back </a>
         <div class="p-3">
             <div class="row">
                 <div class="col-md-12 text-left">
-                    <p><strong>Nursery Owner Fullname:</strong> <?php echo $plantData['nursery_owner_fullname']; ?></p>
+                <p><strong>Nursery Owner Fullname:</strong> <?php echo $plantData['nursery_owner_fullname']; ?></p>
                     <p><strong>Type:</strong> <?php echo $plantData['plant_type']; ?></p>
                     <p><strong>Variety:</strong> <?php echo $plantData['plant_variety']; ?></p>
                     <p><strong>Age: </strong> <?php
@@ -59,6 +54,7 @@
                 </div>
             </div>
         </div>
+
             <h2>Timeline</h2>
             <div class="timeline">
             <?php if (!empty($timelines)): ?>
@@ -67,7 +63,7 @@
                     <div class="timeline-item">
                         <div class="card p-2 timeline-content ml-2 p-1">
                             <div class="row g-0 p-2">
-                                <div class="col-6 col-md-9 ml-md-2">
+                                <div class="col-12 col-md-12 ml-md-2">
                                     <a class="w-100 text-left" data-toggle="collapse" href="#collapse<?php echo htmlspecialchars($timelineItem['id']); ?>" role="button" aria-expanded="false" aria-controls="collapseExample">
                                         <p class="m-0">
                                             <strong>
@@ -85,14 +81,7 @@
                                         </p>
                                     </a>
                                 </div>
-                                <div class="col-6 col-md-2 d-flex justify-content-center align-items-center mt-2 mt-md-0">
-                                    <a class="btn btn-info mx-1 px-3 px-md-5" onclick="setEditTimelineData(<?php echo htmlspecialchars(json_encode($timelineItem)); ?>)">
-                                        Edit
-                                    </a>
-                                    <a class="btn btn-danger mx-1 px-3 px-md-5" onclick="setDeleteTimelineId('<?php echo htmlspecialchars($timelineItem['id']); ?>')">
-                                        Delete
-                                    </a>
-                                </div>
+                               
                             </div>
 
                             <!-- Collapse here -->
@@ -117,14 +106,6 @@
                                     <?php echo ($content['status'] == 'success') ? 'my-bg-success' : 'my-bg-info'; ?> 
                                     rounded">
                                         <p class="me-3"><?php echo htmlspecialchars($content['content']); ?></p>
-                                        <div>
-                                            <a class="btn btn-outline-info mx-1 px-3 px-md-5" onclick="setEditContentData(<?php echo htmlspecialchars(json_encode($content)); ?>)">
-                                                Edit
-                                            </a>
-                                            <a class="btn btn-outline-danger mx-1 px-3 px-md-5" onclick="setDeleteContent('<?php echo htmlspecialchars($content['id']); ?>')">
-                                                Delete
-                                            </a>
-                                        </div>
                                     </div>
                                 </div>
 
@@ -135,9 +116,7 @@
                                     <p class="text-danger">No content available for this timeline item.</p>
                                 <?php endif; ?>
                               
-                                <a class="btn btn-outline-warning w-100 my-2" data-toggle="modal" data-target="#createContentModal"  data-id="<?php echo htmlspecialchars($timelineItem['content_id']);?>" onclick="setCreateId(this)">
-                                    Create Content
-                                </a>
+                             
                             </div>
                         </div>
                     </div>
@@ -147,9 +126,6 @@
                 <div class="text-center">No records found.</div>
             <?php endif; ?>
             </div>
-            <a class="btn btn-warning w-100 my-2" data-toggle="modal" data-target="#createTimelineModal">
-                Create
-            </a>
         </div>
     </div>
 

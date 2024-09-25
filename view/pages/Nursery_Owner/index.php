@@ -1,4 +1,5 @@
 <?php 
+    $title = "Nursery";
 include_once('../../components/header.php');
 include_once('../../../controller/NurseryController.php');
 ?>
@@ -41,48 +42,52 @@ include_once('../../../controller/NurseryController.php');
         <a type="button" class="btn btn-warning " href="create.php">Create</a>
         <a type="button" class="btn btn-primary mx-2" href="../plant_info/index.php">Check Plant List</a>
     </div>
-    <!-- Table for nursery owners -->
-    <table border="1" class="table" id="nurseryOwnersTable">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Full Name</th>
-                <th>Contact Number</th>
-                <th>Address</th>
-                <th>Manage</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php if (!empty($owners)): ?>
-                <?php foreach ($owners as $owner): ?>
-                    <tr>
-                        <td><?php echo htmlspecialchars($owner['id']); ?></td>
-                        <td><?php echo htmlspecialchars($owner['fullname']); ?></td>
-                        <td><?php echo htmlspecialchars($owner['contact_number']); ?></td>
-                        <td><?php echo htmlspecialchars($owner['address']); ?></td>
-                        <td>
-                            <a type="button" class="btn btn-info mx-2" href="update.php?userID=<?php echo htmlspecialchars($owner['id']); ?>">Update</a>
-                            <button type="button" class="btn btn-danger" data-id="<?php echo htmlspecialchars($owner['id']); ?>" onclick="setDeleteId(this)">Delete</button>
-                        </td>
-
-                        
-                    </tr>
-                <?php endforeach; ?>
-            <?php else: ?>
+    <div class="table-responsive">
+       <!-- Table for nursery owners -->
+        <table border="1" class="table" id="nurseryOwnersTable">
+            <thead>
                 <tr>
-                    <td colspan="5" class="text-center">No records found.</td>
+                    <th>ID</th>
+                    <th>Full Name</th>
+                    <th>Contact Number</th>
+                    <th>Address</th>
+                    <th>Manage</th>
                 </tr>
-            <?php endif; ?>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                <?php if (!empty($owners)): ?>
+                    <?php foreach ($owners as $owner): ?>
+                        <tr>
+                            <td><?php echo htmlspecialchars($owner['id']); ?></td>
+                            <td><?php echo htmlspecialchars($owner['fullname']); ?></td>
+                            <td><?php echo htmlspecialchars($owner['contact_number']); ?></td>
+                            <td><?php echo htmlspecialchars($owner['address']); ?></td>
+                            <td>
+                                <a type="button" class="btn btn-info mx-2" href="update.php?userID=<?php echo htmlspecialchars($owner['id']); ?>">Update</a>
+                                <button type="button" class="btn btn-danger" data-id="<?php echo htmlspecialchars($owner['id']); ?>" onclick="setDeleteId(this)">Delete</button>
+                            </td>
 
-    <!-- Button if no records are found -->
-    <div id="noRecords" class="text-center mt-3" style="display: none;">
-        <p>No results found.</p>
-        <a type="button" class="btn btn-warning" href="create.php">Create</a>
+                            
+                        </tr>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <tr>
+                        <td colspan="5" class="text-center">No records found.</td>
+                    </tr>
+                <?php endif; ?>
+            </tbody>
+        </table>
+
+        <!-- Button if no records are found -->
+        <div id="noRecords" class="text-center mt-3" style="display: none;">
+            <p>No results found.</p>
+            <a type="button" class="btn btn-warning" href="create.php">Create</a>
+        </div>
+        </div>
     </div>
+
     </div>
-</div>
+   
 
 
 <?php include_once('../../components/footer.php'); ?>

@@ -1,4 +1,5 @@
 <?php
+        $title = "Nursery";
 include_once('../../../controller/NurseryController.php');
 include_once('../../components/header.php');
 ?>

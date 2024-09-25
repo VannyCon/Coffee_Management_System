@@ -43,6 +43,11 @@
 
                           <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
                   </form>
+
+                  <div class="mt-2 text-center">
+                        <p>or</p>
+                      <a class="btn btn-outline-info btn-block py-3" href="view/pages/User/index.php"> Quick Check </a>
+                  </div>
             </div>
           </div>
         </div>

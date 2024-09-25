@@ -1,4 +1,5 @@
 <?php 
+    $title = "PlantInfo";
 require_once('../../../services/PlantInfoService.php');
 
 // Instantiate the class and get nursery owners
@@ -60,55 +61,57 @@ if (isset($_POST['action']) && $_POST['action'] == 'delete') {
     <div class="my-2">
      <a type="button" class="btn btn-warning " href="create.php">Create</a>
     </div>
-   
-    <!-- Table for nursery owners -->
-    <table border="1" class="table" id="nurseryOwnersTable">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nursery Owner</th>
-                <th>Type</th>
-                <th>Variety</th>
-                <th>Planted Date</th>
-                <th>Action</th>
-                <th>Timeline</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php if (!empty($plants)): ?>
-                <?php foreach ($plants as $plant): ?>
-                    <tr>
-                        <td><?php echo htmlspecialchars($plant['id']); ?></td>
-                        <td><?php echo htmlspecialchars($plant['fullname']); ?></td>
-                        <td><?php echo htmlspecialchars($plant['plant_type']); ?></td>
-                        <td><?php echo htmlspecialchars($plant['plant_variety']); ?></td>
-                        <td><?php echo htmlspecialchars($plant['planted_date']); ?></td>
-                        <td>
-                            <a type="button" class="btn btn-info mx-2" href="update.php?userID=<?php echo htmlspecialchars($plant['id']); ?>">Update</a>
-                            <button type="button" class="btn btn-danger" data-id="<?php echo htmlspecialchars($plant['id']); ?>" onclick="setDeleteId(this)">Delete</button>
-                        </td>
-                        <td>
-                        <a type="button" class="btn btn-success mx-2" href="../Timeline/index.php?id=<?php echo htmlspecialchars($plant['id']); ?>&plantID=<?php echo htmlspecialchars($plant['plant_id']); ?>">Create</a>
+      <div class="table-responsive">
+                <!-- Table for nursery owners -->
+                <table border="1" class="table" id="nurseryOwnersTable">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nursery Owner</th>
+                            <th>Type</th>
+                            <th>Variety</th>
+                            <th>Planted Date</th>
+                            <th>Action</th>
+                            <th>Timeline</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php if (!empty($plants)): ?>
+                            <?php foreach ($plants as $plant): ?>
+                                <tr>
+                                    <td><?php echo htmlspecialchars($plant['id']); ?></td>
+                                    <td><?php echo htmlspecialchars($plant['fullname']); ?></td>
+                                    <td><?php echo htmlspecialchars($plant['plant_type']); ?></td>
+                                    <td><?php echo htmlspecialchars($plant['plant_variety']); ?></td>
+                                    <td><?php echo htmlspecialchars($plant['planted_date']); ?></td>
+                                    <td>
+                                        <a type="button" class="btn btn-info mx-2" href="update.php?userID=<?php echo htmlspecialchars($plant['id']); ?>">Update</a>
+                                        <button type="button" class="btn btn-danger" data-id="<?php echo htmlspecialchars($plant['id']); ?>" onclick="setDeleteId(this)">Delete</button>
+                                    </td>
+                                    <td>
+                                    <a type="button" class="btn btn-success mx-2" href="../Timeline/index.php?id=<?php echo htmlspecialchars($plant['id']); ?>&plantID=<?php echo htmlspecialchars($plant['plant_id']); ?>">Create</a>
 
-                        </td>
-                        
-                    </tr>
-                <?php endforeach; ?>
-            <?php else: ?>
-                <tr>
-                    <td colspan="5" class="text-center">No records found.</td>
-                </tr>
-            <?php endif; ?>
-        </tbody>
-    </table>
+                                    </td>
+                                    
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <tr>
+                                <td colspan="5" class="text-center">No records found.</td>
+                            </tr>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
 
-    <!-- Button if no records are found -->
-    <div id="noRecords" class="text-center mt-3" style="display: none;">
-        <p>No results found.</p>
-        <a type="button" class="btn btn-warning" href="create.php">Create</a>
-    </div>
-    </div>
-</div>
+                <!-- Button if no records are found -->
+                <div id="noRecords" class="text-center mt-3" style="display: none;">
+                    <p>No results found.</p>
+                    <a type="button" class="btn btn-warning" href="create.php">Create</a>
+                </div>
+                </div>
+            </div>
 
+      </div>
+    
 
 <?php include_once('../../components/footer.php'); ?>
