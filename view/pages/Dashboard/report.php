@@ -59,48 +59,4 @@
         
     </div>
 
-    <script>
-        // Fetch data from your MySQL database using AJAX or manually input the data
-        const Jan = <?php echo isset($m['Jan']) ? $m['Jan'] : 0; ?>;
-        const Feb = <?php echo isset($m['Feb']) ? $m['Feb'] : 0; ?>;
-        const Mar = <?php echo isset($m['Mar']) ? $m['Mar'] : 0; ?>;
-        const Apr = <?php echo isset($m['Apr']) ? $m['Apr'] : 0; ?>;
-        const May = <?php echo isset($m['May']) ? $m['May'] : 0; ?>;
-        const Jun = <?php echo isset($m['Jun']) ? $m['Jun'] : 0; ?>;
-        const Jul = <?php echo isset($m['Jul']) ? $m['Jul'] : 0; ?>;
-        const Aug = <?php echo isset($m['Aug']) ? $m['Aug'] : 0; ?>;
-        const Sep = <?php echo isset($m['Sep']) ? $m['Sep'] : 0; ?>;
-        const Oct = <?php echo isset($m['Oct']) ? $m['Oct'] : 0; ?>;
-        const Nov = <?php echo isset($m['Nov']) ? $m['Nov'] : 0; ?>;
-        const Dec = <?php echo isset($m['Dec']) ? $m['Dec'] : 0; ?>;
-
-        // Create the line chart
-        const ctx = document.getElementById('nurseryPlantChart').getContext('2d');
-        const nurseryPlantChart = new Chart(ctx, {
-            type: 'line',  // Changed from 'bar' to 'line'
-            data: {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                datasets: [{
-                    label: 'Nursery Plant Summary',
-                    data: [Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec],
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)',  // A single color for the fill
-                    borderColor: 'rgba(75, 192, 192, 1)',  // A single color for the border
-                    borderWidth: 2,
-                    fill: true,  // Fill under the line
-                    tension: 0.3  // Smooth the line (0 = straight, 1 = completely rounded)
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
-    </script>
-
-
     <?php include_once('../../components/footer.php'); ?>

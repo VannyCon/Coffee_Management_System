@@ -91,10 +91,64 @@
             
         };
 
+
+        
+        // Toggle dropdown visibility
+        function toggleDropdown() {
+            document.getElementById("dropdownContent").classList.toggle("show");
+        }
+
+        // Filter dropdown options
+        function filterFunction() {
+            var input, filter, div, i;
+            input = document.getElementById("searchInput");
+            filter = input.value.toUpperCase();
+            div = document.getElementById("dropdownContent").getElementsByTagName("div");
+
+            for (i = 0; i < div.length; i++) {
+                txtValue = div[i].textContent || div[i].innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    div[i].style.display = "";
+                } else {
+                    div[i].style.display = "none";
+                }
+            }
+        }
+
+        // Select an item from the dropdown, update the search input and hidden input
+        function selectItem(element) {
+            var selectedValue = element.innerHTML.trim();  // Trim any extra spaces
+            var selectedId = element.getAttribute('data-id'); // Get nursery_owner_id from data attribute
+
+            // Set the selected value in the input
+            document.getElementById("searchInput").value = selectedValue;
+            
+            // Set the selected nursery_owner_id in the hidden input
+            document.getElementById("nurser_owner_id_fk").value = selectedId;
+            
+            // Close the dropdown
+            document.getElementById("dropdownContent").classList.remove("show");
+        }
+
+
+        // Close the dropdown if clicked outside
+        window.onclick = function(event) {
+            if (!event.target.matches('#searchInput')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                for (var i = 0; i < dropdowns.length; i++) {
+                    if (dropdowns[i].classList.contains('show')) {
+                        dropdowns[i].classList.remove('show');
+                    }
+                }
+            }
+        }
+
+
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </body>
 </html>

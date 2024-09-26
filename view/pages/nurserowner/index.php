@@ -1,7 +1,7 @@
 <?php 
-    $title = "Nursery";
-include_once('../../components/header.php');
-include_once('../../../controller/NurseryController.php');
+  $title = "Nursery";
+  include_once('../../components/header.php');
+  include_once('../../../controller/NurseryController.php');
 ?>
 <!-- Delete Confirmation Modal -->
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
@@ -9,7 +9,7 @@ include_once('../../../controller/NurseryController.php');
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -17,7 +17,7 @@ include_once('../../../controller/NurseryController.php');
         Are you sure you want to delete this owner?
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
         <form id="deleteForm" method="POST">
           <input type="hidden" name="action" value="delete">
           <input type="hidden" name="id" id="deleteId">
@@ -30,7 +30,7 @@ include_once('../../../controller/NurseryController.php');
 
 
 <div class="p-3">
-<a class="btn btn-outline-danger m-2" href="../Dashboard/index.php" width="200"> Back </a>
+<a class="btn btn-outline-danger m-2" href="../dashboard/index.php" width="200"> Back </a>
     <div class="card p-4">
 
     <h1>Choose Nursery Owner</h1>
@@ -41,7 +41,7 @@ include_once('../../../controller/NurseryController.php');
     </div>
     <div class="mb-3">
         <a type="button" class="btn btn-warning " href="create.php">Create</a>
-        <a type="button" class="btn btn-primary mx-2" href="../plant_info/index.php">Check Plant List</a>
+        <a type="button" class="btn btn-primary mx-2" href="../plantinfo/index.php">Check Plant List</a>
     </div>
     <div class="table-responsive">
        <!-- Table for nursery owners -->

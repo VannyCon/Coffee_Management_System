@@ -15,17 +15,17 @@
   require_once('../../../controller/TimelineController.php');  
 
 ?>
-<?php include_once('../../components/header.php'); ?>
 <?php include_once('../../components/timelineModals.php'); ?>
 
 
 
     <div class="m-1 p-1 p-lg-5">
         <div class="timeline-container">
-        <a class="btn btn-outline-danger m-2" href="../Plant_Info/index.php" width="200"> Back </a>
+        <a class="btn btn-outline-danger m-2" href="../plantinfo/index.php" width="200"> Back </a>
         <div class="p-3">
             <div class="row">
                 <div class="col-md-12 text-left">
+                
                     <p><strong>Nursery Owner Fullname:</strong> <?php echo $plantData['nursery_owner_fullname']; ?></p>
                     <p><strong>Type:</strong> <?php echo $plantData['plant_type']; ?></p>
                     <p><strong>Variety:</strong> <?php echo $plantData['plant_variety']; ?></p>
@@ -42,20 +42,13 @@
                                                     // Calculate the difference between the current date and the planted date
                                                     $interval = $plantedDateObj->diff($currentDate);
 
-                                                    // Display age based on the difference
-                                                    if ($interval->y > 0) {
-                                                        // If the difference is in years
-                                                        echo $interval->y . 'years old';
-                                                    } elseif ($interval->m > 0) {
-                                                        // If the difference is in months
-                                                        echo $interval->m . 'months old';
-                                                    } else {
-                                                        // If the difference is in days
-                                                        echo $interval->d . 'days old';
-                                                    }
+                                                    
                                                     ?>
                                                     </p>
                     <p><strong>Planted Date:</strong> <?php echo $plantData['planted_date']; ?></p>
+                    <a class="btn btn-primary px-5" href="download_pdf.php?plantID=<?php echo htmlspecialchars($plantID); ?>"> 
+                        Print 
+                    </a>
                 </div>
             </div>
         </div>
@@ -68,7 +61,7 @@
                         <div class="card p-2 timeline-content ml-2 p-1">
                             <div class="row g-0 p-2">
                                 <div class="col-6 col-md-9 ml-md-2">
-                                    <a class="w-100 text-left" data-toggle="collapse" href="#collapse<?php echo htmlspecialchars($timelineItem['id']); ?>" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                    <a class="w-100 text-left text-decoration-none" data-bs-toggle="collapse" href="#collapse<?php echo htmlspecialchars($timelineItem['id']); ?>" role="button" aria-expanded="false" aria-controls="collapseExample">
                                         <p class="m-0">
                                             <strong>
                                                 <?php echo htmlspecialchars($timelineItem['timeline_title']); ?>
@@ -103,7 +96,7 @@
                                 if (!empty($contents)):
                                     foreach ($contents as $content):
                             ?>
-                                <span class="badge badge-secondary py-1 px-2 my-2">
+                                <span class="badge text-bg-secondary py-1 px-2 my-2">
                                     <?php
                                     // Convert history_time from 'HH:MM:SS.000000' to 'HH:MM AM/PM'
                                     $historyTime = htmlspecialchars($content['history_time']); // Access from $content
@@ -135,7 +128,7 @@
                                     <p class="text-danger">No content available for this timeline item.</p>
                                 <?php endif; ?>
                               
-                                <a class="btn btn-outline-warning w-100 my-2" data-toggle="modal" data-target="#createContentModal"  data-id="<?php echo htmlspecialchars($timelineItem['content_id']);?>" onclick="setCreateId(this)">
+                                <a class="btn btn-outline-warning w-100 my-2" data-bs-toggle="modal" data-target="#createContentModal"  data-id="<?php echo htmlspecialchars($timelineItem['content_id']);?>" onclick="setCreateId(this)">
                                     Create Content
                                 </a>
                             </div>
@@ -147,9 +140,10 @@
                 <div class="text-center">No records found.</div>
             <?php endif; ?>
             </div>
-            <a class="btn btn-warning w-100 my-2" data-toggle="modal" data-target="#createTimelineModal">
+            <a class="btn btn-warning w-100 my-2" data-bs-toggle="modal" data-bs-target="#createTimelineModal">
                 Create
             </a>
+           
         </div>
     </div>
 

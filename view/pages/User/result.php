@@ -51,6 +51,9 @@
                                                     ?>
                                                     </p>
                     <p><strong>Planted Date:</strong> <?php echo $plantData['planted_date']; ?></p>
+                    <a class="btn btn-primary px-5" href="download_pdf.php?plantID=<?php echo htmlspecialchars($plantID); ?>"> 
+                        Print 
+                    </a>
                 </div>
             </div>
         </div>

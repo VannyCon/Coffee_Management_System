@@ -2,7 +2,6 @@
     $title = "Nursery";
     include_once('../../components/header.php');
     include_once('../../../controller/NurseryController.php');
-
 ?>
 
 <div>

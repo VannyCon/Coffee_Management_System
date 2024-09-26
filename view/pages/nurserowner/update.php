@@ -1,5 +1,5 @@
 <?php
-    $title = "Nursery";
+    $title = "NurseryOwner Update";
     require_once('../../../services/NurseryOwnerService.php');
     include_once('../../components/header.php');
     // Redirect to login if not logged in
@@ -7,28 +7,7 @@
         header("Location: ../../../index.php");
         exit();
     }
-
-// Instantiate the class and get nursery owners
-$user_id = $_GET['userID'];
-$nurseryOwner = new NurseryOwner();
-$getSpecificOwner = $nurseryOwner->getNurseryOwnerById($user_id);
-
-if (isset($_POST['action']) && $_POST['action'] == 'update') {
-    // Clean input data
-    $fullname = $nurseryOwner->clean('fullname', 'post');
-    $contact_number = $nurseryOwner->clean('contact_number', 'post');
-    $address = $nurseryOwner->clean('address', 'post');
-    // Call create method to add the new owner
-    $owners = $nurseryOwner->update($getSpecificOwner['id'], $fullname, $contact_number, $address);
-    // Optionally, you can redirect or show a success message after creation
-    if($owners == true){
-        // Redirect to index.php
-        header("Location: index.php"); 
-        exit(); // Important to stop the script after the redirection
-    }else{
-        header("Location: create.php"); 
-    }
-}
+    require_once('../../../controller/NurseryController.php');
 ?>
 <div>
   <a class="btn btn-outline-danger m-2" href="index.php" width="200"> Back </a>

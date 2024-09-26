@@ -46,7 +46,7 @@
 
                   <div class="mt-2 text-center">
                         <p>or</p>
-                      <a class="btn btn-outline-info btn-block py-3" href="view/pages/User/index.php"> Quick Check </a>
+                      <a class="btn btn-outline-info btn-block py-3" href="view/pages/user/index.php"> Quick Check </a>
                   </div>
             </div>
           </div>

@@ -88,7 +88,7 @@ class PlantInfo extends config {
                                 n.fullname AS nursery_owner_fullname,
                                 p.plant_type,
                                 p.plant_variety,
-                                p.planted_date,
+                                p.planted_date
                             FROM 
                                 plant_info_tbl p
                             JOIN 
@@ -108,9 +108,25 @@ class PlantInfo extends config {
         }
     }
 
-
     public function update($id, $nurser_owner_id_fk, $plant_type, $plant_variety, $planted_date) {
         try {
+            // Fetch current values from the database
+            $currentQuery = "SELECT `nurser_owner_id_fk`, `plant_type`, `plant_variety`, `planted_date` 
+                             FROM `plant_info_tbl` WHERE `id` = :id";
+            $stmt = $this->pdo->prepare($currentQuery);
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+            $currentValues = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+            // Check if the values are different
+            if ($currentValues['nurser_owner_id_fk'] == $nurser_owner_id_fk && 
+                $currentValues['plant_type'] == $plant_type && 
+                $currentValues['plant_variety'] == $plant_variety && 
+                $currentValues['planted_date'] == $planted_date) {
+                // No changes detected, return early
+                return true; // Or some indication that no changes were made
+            }
+    
             // Define the query with placeholders for updating an existing record
             $query = "UPDATE `plant_info_tbl` 
                       SET `nurser_owner_id_fk` = :nurser_owner_id_fk,
@@ -118,7 +134,7 @@ class PlantInfo extends config {
                           `plant_variety` = :plant_variety,
                           `planted_date` = :planted_date
                       WHERE `id` = :id";
-    
+     
             // Prepare the query
             $stmt = $this->pdo->prepare($query);
             // Bind the values to the placeholders
@@ -127,10 +143,9 @@ class PlantInfo extends config {
             $stmt->bindParam(':plant_variety', $plant_variety);
             $stmt->bindParam(':planted_date', $planted_date);
             $stmt->bindParam(':id', $id);
-    
+     
             // Execute the query
             $stmt->execute();
-            // Return success or other relevant response
             return $stmt->rowCount() > 0; // Returns true if at least one row was affected
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();

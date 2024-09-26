@@ -46,6 +46,7 @@
     </style>
 </head>
 <body>
+    <a class="btn btn-outline-danger m-2" href="../../../index.php" width="200"> Back </a>
     <p>Please Start the button then Place the QR on the Box</p>
     <video id="reader"></video>
     <button id="startButton">Start Scanning</button>
