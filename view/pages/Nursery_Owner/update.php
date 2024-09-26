@@ -1,12 +1,12 @@
 <?php
     $title = "Nursery";
-require_once('../../../services/NurseryOwnerService.php');
-include_once('../../components/header.php');
-// Redirect to login if not logged in
-if (isset($_SESSION['user_id'])) {
-    header("Location: ../../../index.php");
-    exit();
-}
+    require_once('../../../services/NurseryOwnerService.php');
+    include_once('../../components/header.php');
+    // Redirect to login if not logged in
+    if (isset($_SESSION['user_id'])) {
+        header("Location: ../../../index.php");
+        exit();
+    }
 
 // Instantiate the class and get nursery owners
 $user_id = $_GET['userID'];
@@ -30,10 +30,11 @@ if (isset($_POST['action']) && $_POST['action'] == 'update') {
     }
 }
 ?>
-<div class="p-3 m-5">
-<a class="btn btn-outline-danger m-2" href="index.php" width="200"> Back </a>
-    <h1>Update Nursery Owner</h1>
+<div>
+  <a class="btn btn-outline-danger m-2" href="index.php" width="200"> Back </a>
+   
     <div class="card p-4">
+    <h1>Update Nursery Owner</h1>
         <form method="POST" action="">
             
             <div class="form-group">

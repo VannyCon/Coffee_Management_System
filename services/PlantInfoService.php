@@ -12,7 +12,6 @@ class PlantInfo extends config {
                 p.plant_type,
                 p.plant_variety,
                 p.planted_date,
-                p.created_by,
                 n.fullname,
                 n.created_date
             FROM plant_info_tbl p
@@ -61,8 +60,7 @@ class PlantInfo extends config {
                                 n.nurser_owner_id,
                                 p.plant_type,
                                 p.plant_variety,
-                                p.planted_date,
-                                p.created_by
+                                p.planted_date
                             FROM 
                                 plant_info_tbl p
                             JOIN 
@@ -91,7 +89,6 @@ class PlantInfo extends config {
                                 p.plant_type,
                                 p.plant_variety,
                                 p.planted_date,
-                                p.created_by
                             FROM 
                                 plant_info_tbl p
                             JOIN 

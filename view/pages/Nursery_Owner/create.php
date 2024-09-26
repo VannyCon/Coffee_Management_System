@@ -1,13 +1,15 @@
 <?php
-        $title = "Nursery";
-include_once('../../../controller/NurseryController.php');
-include_once('../../components/header.php');
+    $title = "Nursery";
+    include_once('../../components/header.php');
+    include_once('../../../controller/NurseryController.php');
+
 ?>
 
-<div class="p-3 m-5">
+<div>
     <a class="btn btn-outline-danger m-2" href="index.php" width="200"> Back </a>
-    <h1>Create Nursery Owner</h1>
+   
     <div class="card p-4">
+      <h1>Create Nursery Owner</h1>
         <form method="POST" action="">
             <div class="form-group">
                 <label for="fullname">Fullname</label>

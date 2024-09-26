@@ -30,8 +30,9 @@ include_once('../../../controller/NurseryController.php');
 
 
 <div class="p-3">
+<a class="btn btn-outline-danger m-2" href="../Dashboard/index.php" width="200"> Back </a>
     <div class="card p-4">
-        
+
     <h1>Choose Nursery Owner</h1>
 
     <!-- Search Input -->

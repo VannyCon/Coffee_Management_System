@@ -61,10 +61,11 @@ include_once('../../components/header.php');
         }
 
     </style>
-<div class="p-3 m-5">
+<div>
    <a class="btn btn-outline-danger m-2" href="index.php" width="200"> Back </a>
-    <h1>Create Plant</h1>
+
     <div class="card p-4">
+    <h1>Create Plant</h1>
         <form method="POST" action="">
             <label for="fullname">Nursery Owner</label>
             <div class="col">
@@ -100,7 +101,7 @@ include_once('../../components/header.php');
                 <input type="date" class="form-control" name="planted_date" id="planted_date" placeholder="01/01/2024" required>
             </div>
             <input type="hidden" name="action" value="create">
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary w-100">Submit</button>
         </form>
     </div>
 </div>
