@@ -1,18 +1,18 @@
 <?php 
   $title = "Timeline";
-  require_once('../../../services/TimelineService.php');
-  require_once('../../../services/PlantInfoService.php');
+  require_once('../../../services/PlantTimelineService.php');
+  require_once('../../../services/PlantNurseryService.php');
   // Instantiate the class and get nursery owners
   $timeline = new Timeline();
   $plant = new PlantInfo();
   include_once('../../components/header.php');
 
   ///make a logic here where return to plantINfo if plandID not found
-  $plantID = $_GET['plantID'];
-  $timelines = $timeline->getTimelineById($plantID);
-  $plantData = $plant->getPlantDataByID($plantID);
-  require_once('../../../controller/ContentController.php');
-  require_once('../../../controller/TimelineController.php');  
+  $nurseryID = $_GET['nurseryID'];
+  $timelines = $timeline->getTimelineById($nurseryID);
+  $plantData = $plant->getPlantDataByID($nurseryID);
+  require_once('../../../controller/PlantContentController.php');
+  require_once('../../../controller/PlantTimelineController.php');  
 
 ?>
 <?php include_once('../../components/timelineModals.php'); ?>
@@ -21,14 +21,16 @@
 
     <div class="m-1 p-1 p-lg-5">
         <div class="timeline-container">
-        <a class="btn btn-outline-danger m-2" href="../plantinfo/index.php" width="200"> Back </a>
+        <a class="btn btn-outline-danger m-2" href="../plant_nursery/index.php" width="200"> Back </a>
         <div class="p-3">
             <div class="row">
                 <div class="col-md-12 text-left">
                 
-                    <p><strong>Nursery Owner Fullname:</strong> <?php echo $plantData['nursery_owner_fullname']; ?></p>
-                    <p><strong>Type:</strong> <?php echo $plantData['plant_type']; ?></p>
-                    <p><strong>Variety:</strong> <?php echo $plantData['plant_variety']; ?></p>
+                    <p><strong>Nursery Owner Fullname:</strong> <?php echo $plantData['source_fullname']; ?></p>
+                    <p><strong>Type:</strong> <?php echo $plantData['type_name']; ?></p>
+                    <p><strong>Type Description:</strong> <?php echo $plantData['type_description']; ?></p>
+                    <p><strong>Variety:</strong> <?php echo $plantData['variety_name']; ?></p>
+                    <p><strong>Variety Description:</strong> <?php echo $plantData['variety_description']; ?></p>
                     <p><strong>Age: </strong> <?php
                                                     // Sample planted_date from $plantData
                                                     $plantedDate = $plantData['planted_date']; // Format: YYYY-MM-DD
@@ -42,11 +44,21 @@
                                                     // Calculate the difference between the current date and the planted date
                                                     $interval = $plantedDateObj->diff($currentDate);
 
-                                                    
+                                                    // Display age based on the difference
+                                                    if ($interval->y > 0) {
+                                                        // If the difference is in years
+                                                        echo $interval->y . ' years old';
+                                                    } elseif ($interval->m > 0) {
+                                                        // If the difference is in months
+                                                        echo $interval->m . ' months old';
+                                                    } else {
+                                                        // If the difference is in days
+                                                        echo $interval->d . ' days old';
+                                                    }
                                                     ?>
                                                     </p>
                     <p><strong>Planted Date:</strong> <?php echo $plantData['planted_date']; ?></p>
-                    <a class="btn btn-primary px-5" href="download_pdf.php?plantID=<?php echo htmlspecialchars($plantID); ?>"> 
+                    <a class="btn btn-primary px-5" href="download_pdf.php?nurseryID=<?php echo htmlspecialchars($nurseryID); ?>"> 
                         Print 
                     </a>
                 </div>

@@ -104,6 +104,10 @@
                                 <label for="status">Status</label>
                                 <input type="text" class="form-control" id="status"  name="status"  placeholder="Enter first value">
                             </div>
+                            <div class="form-group">
+                                <label for="history_time">Time</label>
+                                <input type="time" class="form-control" id="status"  name="status"  placeholder="10:00pm">
+                            </div>
                         </div>
                         <input type="hidden" name="contentID" id="contentID">
                         <input type="hidden" name="action" value="createContent">

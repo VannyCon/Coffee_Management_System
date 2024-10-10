@@ -62,7 +62,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p id="modalMessage"><strong> QR Successfully Identify:</strong> <br> <span id="plantID"></span></p>
+                    <p id="modalMessage"><strong> QR Successfully Identify:</strong> <br> <span id="nurseryID"></span></p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -94,8 +94,8 @@
 
             // Redirect to the URL when the button is clicked
             $('#redirectButton').click(function() {
-                const plantID = $('#plantID').text(); // Get the scanned plant ID
-                const redirectUrl = `result.php?plantID=${plantID}`;
+                const nurseryID = $('#nurseryID').text(); // Get the scanned plant ID
+                const redirectUrl = `result.php?nurseryID=${nurseryID}`;
                 window.location.href = redirectUrl; // Redirect to the URL
             });
         });
@@ -108,7 +108,7 @@
                         if (result) {
                             console.log(result);
                             $('#result').text(result.text);
-                            $('#plantID').text(result.text); // Set the plant ID in the modal
+                            $('#nurseryID').text(result.text); // Set the plant ID in the modal
                             $('#resultModal').modal('show'); // Show the modal
                             codeReader.reset(); // Stop scanning
                         }

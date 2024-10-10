@@ -5,7 +5,7 @@ if (!isset($_SESSION['username'])) {
     header("Location: ../../../index.php");
     exit();
 }
-require_once('../../../services/NurseryOwnerService.php');
+require_once('../../../services/PlantSourceService.php');
 // Instantiate the class and get nursery owners
 $nurseryOwner = new NurseryOwner();
 $owners = $nurseryOwner->getNurseryOwners();

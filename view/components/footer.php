@@ -34,25 +34,97 @@
             $('#deleteContentModal').modal('show');
         }
 
-        function selectItem(element) {
-            var selectedValue = element.innerHTML.trim();  // Trim any extra spaces
-            var selectedId = element.getAttribute('data-id'); // Get nursery_owner_id from data attribute
-
-            // Set the selected value in the input
-            document.getElementById("searchInput").value = selectedValue;
-            
-            // Set the selected nursery_owner_id in the hidden input
-            document.getElementById("nurser_owner_id_fk").value = selectedId;
-            
-            // Close the dropdown
-            document.getElementById("dropdownContent").classList.remove("show");
-        }
-
         document.addEventListener('DOMContentLoaded', function() {
             initializeSearchFilter('searchInput', 'nurseryOwnersTable', 'noRecords');
         });
+
+
+
+        ////////////////////////////////////////////////////DROP DOWN//////////////////////////////////////////////////////////////
+       // SELECT SOURCE DROPDOWN
+        function selectSource(element) {
+            var selectedValue = element.innerHTML.trim();
+            var selectedId = element.getAttribute('data-id');
+            document.getElementById("searchSourceInput").value = selectedValue;
+            document.getElementById("source_id").value = selectedId;
+            document.getElementById("sourceDropdownContent").classList.remove("show");
+        }
+
+        function toggleSourceDropdown() {
+            document.getElementById("sourceDropdownContent").classList.toggle("show");
+        }
+
+        function filterSourceOptions() {
+            filterDropdown("searchSourceInput", "sourceDropdownContent");
+        }
+
+        // SELECT TYPE DROPDOWN
+        function selectType(element) {
+            var selectedValue = element.innerHTML.trim();
+            var selectedId = element.getAttribute('data-id');
+            document.getElementById("searchTypeInput").value = selectedValue;
+            document.getElementById("type_id").value = selectedId;
+            document.getElementById("typeDropdownContent").classList.remove("show");
+        }
+
+        function toggleTypeDropdown() {
+            document.getElementById("typeDropdownContent").classList.toggle("show");
+        }
+
+        function filterTypeOptions() {
+            filterDropdown("searchTypeInput", "typeDropdownContent");
+        }
+
+        // SELECT VARIETY DROPDOWN
+        function selectVariety(element) {
+            var selectedValue = element.innerHTML.trim();
+            var selectedId = element.getAttribute('data-id');
+            document.getElementById("searchVarietyInput").value = selectedValue;
+            document.getElementById("variety_id").value = selectedId;
+            document.getElementById("varietyDropdownContent").classList.remove("show");
+        }
+
+        function toggleVarietyDropdown() {
+            document.getElementById("varietyDropdownContent").classList.toggle("show");
+        }
+
+        function filterVarietyOptions() {
+            filterDropdown("searchVarietyInput", "varietyDropdownContent");
+        }
+                
+        // General Dropdown Filter
+        function filterDropdown(inputId, dropdownContentId) {
+            var input, filter, div, i;
+            input = document.getElementById(inputId);
+            filter = input.value.toUpperCase();
+            div = document.getElementById(dropdownContentId).getElementsByTagName("div");
+
+            for (i = 0; i < div.length; i++) {
+                txtValue = div[i].textContent || div[i].innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    div[i].style.display = "";
+                } else {
+                    div[i].style.display = "none";
+                }
+            }
+        }
+
+        // Close dropdown when clicking outside
+        window.onclick = function(event) {
+            if (!event.target.matches('.form-control')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                for (var i = 0; i < dropdowns.length; i++) {
+                    if (dropdowns[i].classList.contains('show')) {
+                        dropdowns[i].classList.remove('show');
+                    }
+                }
+            }
+        }
+
+       ////////////////////////////////////////////////////DROP DOWN//////////////////////////////////////////////////////////////
+
         
-        // searchFilter.js
+       ////////////////////////////////////////////////////SEARCHBAR//////////////////////////////////////////////////////////////
         function initializeSearchFilter(searchInputId, tableId, noRecordsId) {
             document.getElementById(searchInputId).addEventListener('keyup', function() {
                 var input, filter, table, tr, td, i, j, txtValue, found;
@@ -90,58 +162,44 @@
             });
             
         };
-
+        ////////////////////////////////////////////////////SEARCHBAR//////////////////////////////////////////////////////////////
 
         
-        // Toggle dropdown visibility
-        function toggleDropdown() {
-            document.getElementById("dropdownContent").classList.toggle("show");
-        }
+        // // Toggle dropdown visibility
+        // function toggleDropdown() {
+        //     document.getElementById("dropdownContent").classList.toggle("show");
+        // }
 
-        // Filter dropdown options
-        function filterFunction() {
-            var input, filter, div, i;
-            input = document.getElementById("searchInput");
-            filter = input.value.toUpperCase();
-            div = document.getElementById("dropdownContent").getElementsByTagName("div");
+        // // Filter dropdown options
+        // function filterFunction() {
+        //     var input, filter, div, i;
+        //     input = document.getElementById("searchInput");
+        //     filter = input.value.toUpperCase();
+        //     div = document.getElementById("dropdownContent").getElementsByTagName("div");
 
-            for (i = 0; i < div.length; i++) {
-                txtValue = div[i].textContent || div[i].innerText;
-                if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                    div[i].style.display = "";
-                } else {
-                    div[i].style.display = "none";
-                }
-            }
-        }
-
-        // Select an item from the dropdown, update the search input and hidden input
-        function selectItem(element) {
-            var selectedValue = element.innerHTML.trim();  // Trim any extra spaces
-            var selectedId = element.getAttribute('data-id'); // Get nursery_owner_id from data attribute
-
-            // Set the selected value in the input
-            document.getElementById("searchInput").value = selectedValue;
-            
-            // Set the selected nursery_owner_id in the hidden input
-            document.getElementById("nurser_owner_id_fk").value = selectedId;
-            
-            // Close the dropdown
-            document.getElementById("dropdownContent").classList.remove("show");
-        }
+        //     for (i = 0; i < div.length; i++) {
+        //         txtValue = div[i].textContent || div[i].innerText;
+        //         if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        //             div[i].style.display = "";
+        //         } else {
+        //             div[i].style.display = "none";
+        //         }
+        //     }
+        // }
 
 
-        // Close the dropdown if clicked outside
-        window.onclick = function(event) {
-            if (!event.target.matches('#searchInput')) {
-                var dropdowns = document.getElementsByClassName("dropdown-content");
-                for (var i = 0; i < dropdowns.length; i++) {
-                    if (dropdowns[i].classList.contains('show')) {
-                        dropdowns[i].classList.remove('show');
-                    }
-                }
-            }
-        }
+
+        // // Close the dropdown if clicked outside
+        // window.onclick = function(event) {
+        //     if (!event.target.matches('#searchInput')) {
+        //         var dropdowns = document.getElementsByClassName("dropdown-content");
+        //         for (var i = 0; i < dropdowns.length; i++) {
+        //             if (dropdowns[i].classList.contains('show')) {
+        //                 dropdowns[i].classList.remove('show');
+        //             }
+        //         }
+        //     }
+        // }
 
 
     </script>

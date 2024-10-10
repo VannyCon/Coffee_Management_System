@@ -20,7 +20,7 @@
                         <div class="stats-col me-2">
                             <div class="dashboard-card text-center stats-card">
                                 <div class="stat-number"><?php echo $getSummary['total_plants']; ?></div>
-                                <div class="stat-label">Total Plants</div>
+                                <div class="stat-label">Total Batch Plants</div>
                             </div>
                         </div>
                         <div class="stats-col ms-2">
@@ -50,13 +50,20 @@
         
         <div class="row mt-1">
             <div class="col-md-6">
-                <a class="action-button py-3 btn" href="../nurserowner/index.php">Manage Nursery Owner</a>
+                <a class="action-button py-3 btn" href="../plant_source/index.php">Manage Source</a>
             </div>
             <div class="col-md-6">
-                <a class="action-button py-3 btn" href="../plantinfo/index.php">Manage Plants</a>
+                <a class="action-button py-3 btn" href="../plant_nursery/index.php">Manage Nursery</a>
             </div>
         </div>
-        
+        <div class="row mt-1">
+            <div class="col-md-6">
+                <a class="action-button py-3 btn" href="../plant_type/index.php">Manage Type</a>
+            </div>
+            <div class="col-md-6">
+                <a class="action-button py-3 btn" href="../plant_variety/index.php">Manage Variety</a>
+            </div>
+        </div>
     </div>
 
     <script>

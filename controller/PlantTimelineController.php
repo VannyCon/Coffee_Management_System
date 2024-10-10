@@ -10,11 +10,11 @@
         $timeline_title = $timeline->clean('timeline_title', 'post');
         $history_date = $timeline->clean('history_date', 'post');
         // Call create method to add the new owner
-        $timelineCreate = $timeline->create($plantID,$timeline_title, $history_date);
+        $timelineCreate = $timeline->create($nurseryID,$timeline_title, $history_date);
         // Optionally, you can redirect or show a success message after creation
         if($timelineCreate == true){
             // Redirect to index.php
-            header("Location: index.php?plantID=$plantID"); 
+            header("Location: index.php?nurseryID=$nurseryID"); 
             exit(); // Important to stop the script after the redirection
         }else{
             header("Location: create.php"); 
@@ -26,7 +26,7 @@
         
         $result = $timeline->updateTimeline($timelineID, $timeline_title, $history_date);
         if ($result) {
-            header("Location: index.php?plantID=$plantID");
+            header("Location: index.php?nurseryID=$nurseryID");
             exit();
         }
     } else if (isset($_POST['action']) && $_POST['action'] == 'deleteTimeline') {
@@ -34,7 +34,7 @@
         
         $result = $timeline->deleteTimeline($timelineID);
         if ($result) {
-            header("Location: index.php?plantID=$plantID");
+            header("Location: index.php?nurseryID=$nurseryID");
             exit();
         }
     }

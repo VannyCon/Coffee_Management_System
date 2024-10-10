@@ -16,7 +16,7 @@
         if (!empty($username) && !empty($password)) { 
             $status = $access->login($username,$password);
             if($status == true){
-                header("Location: view/pages/Dashboard/index.php");
+                header("Location: view/pages/dashboard/index.php");
                 exit();
             }else{
                 header("Location: index.php?error=1");

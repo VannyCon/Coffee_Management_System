@@ -1,8 +1,8 @@
 <?php 
-  $title = "PlantInfo";
+  $title = "PlantNursery";
   include_once('../../components/header.php');
-  require_once('../../../services/PlantInfoService.php');
-  include_once('../../../controller/PlantInfoController.php');
+  require_once('../../../services/PlantNurseryService.php');
+  include_once('../../../controller/PlantNurseryController.php');
 ?>
 <!-- Delete Confirmation Modal -->
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
@@ -10,9 +10,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
-        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         Are you sure you want to delete this owner?
@@ -34,7 +32,7 @@
     <a class="btn btn-outline-danger m-2" href="../dashboard/index.php" width="200"> Back </a>
     <div class="card p-4">
       
-      <h1>Plant List</h1>
+      <h3>Manage Nursery</h3>
 
     <!-- Search Input -->
     <div class="mb-3">
@@ -50,7 +48,8 @@
                     <thead>
                         <tr>
                             <th>Id</th>
-                            <th>Nursery Owner</th>
+                            <th>Source Fullname</th>
+                            <th>Quantity</th>
                             <th>Type</th>
                             <th>Variety</th>
                             <th>Planted Date</th>
@@ -60,23 +59,24 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php if (!empty($plants)): ?>
-                            <?php foreach ($plants as $plant): ?>
+                        <?php if (!empty($nurserys)): ?>
+                            <?php foreach ($nurserys as $nursery): ?>
                                 <tr>
-                                    <td><?php echo htmlspecialchars($plant['id']); ?></td>
-                                    <td><?php echo htmlspecialchars($plant['fullname']); ?></td>
-                                    <td><?php echo htmlspecialchars($plant['plant_type']); ?></td>
-                                    <td><?php echo htmlspecialchars($plant['plant_variety']); ?></td>
-                                    <td><?php echo htmlspecialchars($plant['planted_date']); ?></td>
+                                    <td><?php echo htmlspecialchars($nursery['id']); ?></td>
+                                    <td><?php echo htmlspecialchars($nursery['source_fullname']); ?></td>
+                                    <td><?php echo htmlspecialchars($nursery['quantity']); ?></td>
+                                    <td><?php echo htmlspecialchars($nursery['type_name']); ?></td>
+                                    <td><?php echo htmlspecialchars($nursery['variety_name']); ?></td>
+                                    <td><?php echo htmlspecialchars($nursery['planted_date']); ?></td>
                                     <td>
-                                        <a type="button" class="btn btn-info mx-2" href="update.php?userID=<?php echo htmlspecialchars($plant['id']); ?>">Update</a>
-                                        <button type="button" class="btn btn-danger" data-id="<?php echo htmlspecialchars($plant['id']); ?>" onclick="setDeleteId(this)">Delete</button>
+                                        <a type="button" class="btn btn-info mx-0 mx-md-2 my-1 my-md-0" href="update.php?ID=<?php echo htmlspecialchars($nursery['id']); ?>">Update</a>
+                                        <button type="button" class="btn btn-danger" data-id="<?php echo htmlspecialchars($nursery['id']); ?>" onclick="setDeleteId(this)">Delete</button>
                                     </td>
                                     <td>
-                                      <a type="button" class="btn btn-success mx-2" href="../timeline/index.php?id=<?php echo htmlspecialchars($plant['id']); ?>&plantID=<?php echo htmlspecialchars($plant['plant_id']); ?>">Create</a>
+                                      <a type="button" class="btn btn-success mx-2" href="../plant_timeline/index.php?id=<?php echo htmlspecialchars($nursery['id']); ?>&nurseryID=<?php echo htmlspecialchars($nursery['nursery_id']); ?>">Check</a>
                                     </td>
                                     <td>
-                                      <a type="button" class="btn btn-primary mx-2" href="qr.php?plantID=<?php echo htmlspecialchars($plant['plant_id']); ?>">Donwload</a>
+                                      <a type="button" class="btn btn-primary mx-2" href="qr.php?plantID=<?php echo htmlspecialchars($nursery['nursery_id']); ?>">Donwload</a>
                                     </td>
                                     
                                 </tr>

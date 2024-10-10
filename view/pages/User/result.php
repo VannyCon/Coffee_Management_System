@@ -1,15 +1,15 @@
 <?php 
   $title = "User";
-  require_once('../../../services/TimelineService.php');
-  require_once('../../../services/PlantInfoService.php');
+  require_once('../../../services/PlantTimelineService.php');
+  require_once('../../../services/PlantNurseryService.php');
   // Instantiate the class and get nursery owners
   $timeline = new Timeline();
   $plant = new PlantInfo();
 
   ///make a logic here where return to plantINfo if plandID not found
-  $plantID = $_GET['plantID'];
-  $timelines = $timeline->getTimelineById($plantID);
-  $plantData = $plant->getPlantDataByID($plantID);
+  $nurseryID = $_GET['nurseryID'];
+  $timelines = $timeline->getTimelineById($nurseryID);
+  $plantData = $plant->getPlantDataByID($nurseryID);
 
   include_once('../../components/header.php');
 ?>
@@ -18,12 +18,16 @@
     <div class="m-1 p-1 p-lg-5">
         <div class="timeline-container">
         <a class="btn btn-outline-danger m-2" href="index.php" width="200"> Back </a>
+
+        <h4 class="m-3"> <strong>Plant Information</strong></h4>
         <div class="p-3">
             <div class="row">
                 <div class="col-md-12 text-left">
-                <p><strong>Nursery Owner Fullname:</strong> <?php echo $plantData['nursery_owner_fullname']; ?></p>
-                    <p><strong>Type:</strong> <?php echo $plantData['plant_type']; ?></p>
-                    <p><strong>Variety:</strong> <?php echo $plantData['plant_variety']; ?></p>
+                <p><strong>Source Fullname:</strong> <?php echo $plantData['source_fullname']; ?></p>
+                    <p><strong>Type:</strong> <?php echo $plantData['type_name']; ?></p>
+                    <p><strong>Type Description:</strong> <?php echo $plantData['type_description']; ?></p>
+                    <p><strong>Variety:</strong> <?php echo $plantData['variety_name']; ?></p>
+                    <p><strong>Variety Description:</strong> <?php echo $plantData['variety_description']; ?></p>
                     <p><strong>Age: </strong> <?php
                                                     // Sample planted_date from $plantData
                                                     $plantedDate = $plantData['planted_date']; // Format: YYYY-MM-DD
@@ -51,7 +55,7 @@
                                                     ?>
                                                     </p>
                     <p><strong>Planted Date:</strong> <?php echo $plantData['planted_date']; ?></p>
-                    <a class="btn btn-primary px-5" href="download_pdf.php?plantID=<?php echo htmlspecialchars($plantID); ?>"> 
+                    <a class="btn btn-primary px-5" href="download_pdf.php?nurseryID=<?php echo htmlspecialchars($nurseryID); ?>"> 
                         Print 
                     </a>
                 </div>
@@ -67,7 +71,7 @@
                         <div class="card p-2 timeline-content ml-2 p-1">
                             <div class="row g-0 p-2">
                                 <div class="col-12 col-md-12 ml-md-2">
-                                    <a class="w-100 text-left" data-toggle="collapse" href="#collapse<?php echo htmlspecialchars($timelineItem['id']); ?>" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                    <a class="w-100 text-left  text-decoration-none" data-bs-toggle="collapse" href="#collapse<?php echo htmlspecialchars($timelineItem['id']); ?>" role="button" aria-expanded="false" aria-controls="collapseExample">
                                         <p class="m-0">
                                             <strong>
                                                 <?php echo htmlspecialchars($timelineItem['timeline_title']); ?>
@@ -95,7 +99,7 @@
                                 if (!empty($contents)):
                                     foreach ($contents as $content):
                             ?>
-                                <span class="badge badge-secondary py-1 px-2 my-2">
+                                <span class="badge text-bg-secondary py-1 px-2 my-2">
                                     <?php
                                     // Convert history_time from 'HH:MM:SS.000000' to 'HH:MM AM/PM'
                                     $historyTime = htmlspecialchars($content['history_time']); // Access from $content

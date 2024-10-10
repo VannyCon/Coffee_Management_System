@@ -7,7 +7,7 @@ class LoginAccess extends config {
     public function login($username, $password){
         try {
             // Prepare and execute query to get user by username
-            $query = "SELECT * FROM admin_access WHERE username = :username";
+            $query = "SELECT * FROM tbl_admin_access WHERE username = :username";
             $stmt = $this->pdo->prepare($query);
             $stmt->bindParam(':username', $username);
             $stmt->execute();

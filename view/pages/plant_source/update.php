@@ -1,13 +1,13 @@
 <?php
     $title = "NurseryOwner Update";
-    require_once('../../../services/NurseryOwnerService.php');
+    require_once('../../../services/PlantSourceService.php');
     include_once('../../components/header.php');
     // Redirect to login if not logged in
     if (isset($_SESSION['user_id'])) {
         header("Location: ../../../index.php");
         exit();
     }
-    require_once('../../../controller/NurseryController.php');
+    require_once('../../../controller/PlantSourceController.php');
 ?>
 <div>
   <a class="btn btn-outline-danger m-2" href="index.php" width="200"> Back </a>
@@ -18,15 +18,15 @@
             
             <div class="form-group">
                 <label for="fullname">Fullname</label>
-                <input type="text" value="<?php echo htmlspecialchars($getSpecificOwner['fullname']); ?>" class="form-control" name="fullname" id="fullname" placeholder="ex. Juan Dela Cruz" required>
+                <input type="text" value="<?php echo htmlspecialchars($getSpecificOwner['source_fullname']); ?>" class="form-control" name="fullname" id="fullname" placeholder="ex. Juan Dela Cruz" required>
             </div>
             <div class="form-group">
                 <label for="contact_number">Contact Number</label>
-                <input type="number" value="<?php echo htmlspecialchars($getSpecificOwner['contact_number']); ?>" class="form-control" name="contact_number" id="contact_number" placeholder="ex. 0912341232324" required>
+                <input type="number" value="<?php echo htmlspecialchars($getSpecificOwner['source_contact_number']); ?>" class="form-control" name="contact_number" id="contact_number" placeholder="ex. 0912341232324" required>
             </div>
             <div class="form-group">
                 <label for="address">Address</label>
-                <input type="text" value="<?php echo htmlspecialchars($getSpecificOwner['address']); ?>" class="form-control" name="address" id="address" placeholder="ex. Brgy. Banquerohan" required>
+                <input type="text" value="<?php echo htmlspecialchars($getSpecificOwner['source_address']); ?>" class="form-control" name="address" id="address" placeholder="ex. Brgy. Banquerohan" required>
             </div>
             <div class="form-check">
                 <input type="checkbox" class="form-check-input" id="exampleCheck1">

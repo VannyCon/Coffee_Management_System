@@ -1,15 +1,15 @@
 <?php
 require_once('../../../vendor/autoload.php');
-require_once('../../../services/TimelineService.php');
-require_once('../../../services/PlantInfoService.php');
+require_once('../../../services/PlantTimelineService.php');
+require_once('../../../services/PlantNurseryService.php');
 
-$plantID = $_GET['plantID'];
+$nurseryID = $_GET['nurseryID'];
 
 // Fetch data
 $timeline = new Timeline();
 $plant = new PlantInfo();
-$plantData = $plant->getPlantDataByID($plantID);
-$timelines = $timeline->getTimelineById($plantID);
+$plantData = $plant->getPlantDataByID($nurseryID);
+$timelines = $timeline->getTimelineById($nurseryID);
 
 // Calculate Plant Age
 $plantedDate = $plantData['planted_date']; // Format: YYYY-MM-DD
@@ -25,9 +25,9 @@ if ($interval->y > 0) {
     $age = $interval->d . ' days old';
 }
 
-if (!isset($plantID)) {
+if (!isset($nurseryID)) {
     // Redirect to plant info page if no data is found
-    header("Location: index.php?plantID=$plantID");
+    header("Location: index.php?nurseryID=$nurseryID");
     exit;
 }
 
@@ -45,19 +45,29 @@ $pdf->Cell(0, 10, "Plant Information", 0, 1, 'C', true);
 $pdf->Ln(5);
 $pdf->SetTextColor(0, 0, 0); // Black text
 $pdf->SetFont('helvetica', 'B', 12);
-$pdf->Cell(45, 10, "Nursery Owner", 0, 0);
+$pdf->Cell(45, 10, "Source Fullname", 0, 0);
 $pdf->SetFont('helvetica', '', 12);
-$pdf->Cell(0, 10, $plantData['nursery_owner_fullname'], 0, 1);
+$pdf->Cell(0, 10, $plantData['source_fullname'], 0, 1);
 
 $pdf->SetFont('helvetica', 'B', 12);
 $pdf->Cell(45, 10, "Type:", 0, 0);
 $pdf->SetFont('helvetica', '', 12);
-$pdf->Cell(0, 10, $plantData['plant_type'], 0, 1);
+$pdf->Cell(0, 10, $plantData['type_name'], 0, 1);
+
+$pdf->SetFont('helvetica', 'B', 12);
+$pdf->Cell(45, 10, "Type Description:", 0, 0);
+$pdf->SetFont('helvetica', '', 12);
+$pdf->Cell(0, 10, $plantData['type_description'], 0, 1);
 
 $pdf->SetFont('helvetica', 'B', 12);
 $pdf->Cell(45, 10, "Variety:", 0, 0);
 $pdf->SetFont('helvetica', '', 12);
-$pdf->Cell(0, 10, $plantData['plant_variety'], 0, 1);
+$pdf->Cell(0, 10, $plantData['variety_name'], 0, 1);
+
+$pdf->SetFont('helvetica', 'B', 12);
+$pdf->Cell(45, 10, "Variety Description:", 0, 0);
+$pdf->SetFont('helvetica', '', 12);
+$pdf->Cell(0, 10, $plantData['variety_description'], 0, 1);
 
 $pdf->SetFont('helvetica', 'B', 12);
 $pdf->Cell(45, 10, "Age:", 0, 0);

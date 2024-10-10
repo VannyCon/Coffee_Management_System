@@ -6,7 +6,7 @@ class Dashboard extends config {
 
     public function getPlantInfoSummary() {
         try {
-            $query = "SELECT `total_plants`, `total_types`, `total_varieties`, `total_nursery_owners` FROM `nursery_plant_summary` WHERE 1;
+            $query = "SELECT `total_plants`, `total_types`, `total_varieties`, `total_source` FROM `nursery_plant_summary` WHERE 1;
             ";
             $stmt = $this->pdo->prepare($query); // Prepare the query
             $stmt->execute(); // Execute the query

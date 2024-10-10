@@ -1,26 +1,22 @@
 <?php
     $title = "Nursery";
     include_once('../../components/header.php');
-    include_once('../../../controller/NurseryController.php');
+    include_once('../../../controller/PlantVarietyController.php');
 ?>
 
 <div>
     <a class="btn btn-outline-danger m-2" href="index.php" width="200"> Back </a>
    
     <div class="card p-4">
-      <h1>Create Nursery Owner</h1>
+      <h1>Create Variety</h1>
         <form method="POST" action="">
             <div class="form-group">
-                <label for="fullname">Fullname</label>
-                <input type="text" class="form-control" name="fullname" id="fullname" placeholder="ex. Juan Dela Cruz" required>
+                <label for="variety_name">Type Name</label>
+                <input type="text" class="form-control" name="variety_name" id="variety_name" placeholder="ex. Variety 1" required>
             </div>
             <div class="form-group">
-                <label for="contact_number">Contact Number</label>
-                <input type="number" class="form-control" name="contact_number" id="contact_number" placeholder="ex. 0912341232324" required>
-            </div>
-            <div class="form-group">
-                <label for="address">Address</label>
-                <input type="text" class="form-control" name="address" id="address" placeholder="ex. Brgy. Banquerohan" required>
+                <label for="contact_number">Description</label>
+                <textarea class="form-control" id="description" name="description"></textarea>
             </div>
             <div class="form-check">
                 <input type="checkbox" class="form-check-input" id="exampleCheck1">
