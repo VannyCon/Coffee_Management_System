@@ -15,7 +15,7 @@
             <label for="fullname">Nursery Owner</label>
             <div class="col">
                 <div class="dropdown w-100">
-                    <input type="text" id="searchSourceInput" class="form-control" name="source_id" placeholder="Choose" onkeyup="filterSourceOptions()" onclick="toggleSourceDropdown()" required>
+                    <input type="text" id="searchSourceInput" class="form-control" name="source_id" placeholder="Choose Source" onkeyup="filterSourceOptions()" onclick="toggleSourceDropdown()" required>
                     <input type="hidden" id="source_id" name="source_id">
                     <div id="sourceDropdownContent" class="dropdown-content w-100">
                         <?php if (!empty($sources)): ?>
@@ -35,7 +35,7 @@
             <div class="form-group my-1">
                 <label for="plant_type">Type</label>
                 <div class="dropdown w-100">
-                    <input type="text" id="searchTypeInput" class="form-control" name="type_id" placeholder="Choose" onkeyup="filterTypeOptions()" onclick="toggleTypeDropdown()" required>
+                    <input type="text" id="searchTypeInput" class="form-control" name="type_id" placeholder="Choose Type" onkeyup="filterTypeOptions()" onclick="toggleTypeDropdown()" required>
                     <input type="hidden" id="type_id" name="type_id">
                     <div id="typeDropdownContent" class="dropdown-content w-100">
                         <?php if (!empty($types)): ?>
@@ -55,7 +55,7 @@
             <div class="form-group my-1">
                 <label for="plant_variety">Variety</label>
                 <div class="dropdown w-100">
-                    <input type="text" id="searchVarietyInput" class="form-control" name="variety_id" placeholder="Choose" onkeyup="filterVarietyOptions()" onclick="toggleVarietyDropdown()" required>
+                    <input type="text" id="searchVarietyInput" class="form-control" name="variety_id" placeholder="Choose Variety" onkeyup="filterVarietyOptions()" onclick="toggleVarietyDropdown()" required>
                     <input type="hidden" id="variety_id" name="variety_id">
                     <div id="varietyDropdownContent" class="dropdown-content w-100">
                         <?php if (!empty($varietys)): ?>

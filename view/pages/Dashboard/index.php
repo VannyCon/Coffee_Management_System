@@ -40,7 +40,7 @@
                         <div class="stats-col ms-2">
                             <div class="dashboard-card text-center stats-card">
                                 <div class="stat-number"><?php echo $getSummary['total_varieties']; ?></div>
-                                <div class="stat-label">Total Nurser Owner</div>
+                                <div class="stat-label">Total Source</div>
                             </div>
                         </div>
                     </div>
