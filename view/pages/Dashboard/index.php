@@ -1,12 +1,14 @@
 <?php 
   $title = "Dashboard";
-      include_once('../../components/header.php'); 
-      require_once('../../../controller/DashboardController.php');
+  include_once('../../components/header.php'); 
+  require_once('../../../controller/DashboardController.php');
+
 
 ?>
+    <h1 class="ps-2"> Dashboard</h1>
     <div class="container-fluid mt-2">
         <div class="row g-3">
-            <div class="col-md-8 p-2">
+            <div class="col-md-12 p-2 mb-0">
                 <div class="dashboard-card" style="height: 100%;">
                 <div class="stat-label"><strong>Planted this Year</strong></div>
                     <div style="width: 100%; margin: auto;" class="mt-2">
@@ -14,7 +16,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 p-2">
+            <div class="col-md-12 p-2 mt-0">
                 <div class="stats-container">
                  <div class="stats-row mb-3">
                         <div class="stats-col me-2">
@@ -45,23 +47,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        
-        <div class="row mt-1">
-            <div class="col-md-6">
-                <a class="action-button py-3 btn" href="../plant_source/index.php">Manage Source</a>
-            </div>
-            <div class="col-md-6">
-                <a class="action-button py-3 btn" href="../plant_nursery/index.php">Manage Nursery</a>
-            </div>
-        </div>
-        <div class="row mt-1">
-            <div class="col-md-6">
-                <a class="action-button py-3 btn" href="../plant_type/index.php">Manage Type</a>
-            </div>
-            <div class="col-md-6">
-                <a class="action-button py-3 btn" href="../plant_variety/index.php">Manage Variety</a>
             </div>
         </div>
     </div>

@@ -1,8 +1,9 @@
 <?php 
+
   $title = "PlantNursery";
-  include_once('../../components/header.php');
   require_once('../../../services/PlantNurseryService.php');
   include_once('../../../controller/PlantNurseryController.php');
+  include_once('../../components/header.php');
 ?>
 <!-- Delete Confirmation Modal -->
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
@@ -29,7 +30,7 @@
 
 
 <div>
-    <a class="btn btn-outline-danger m-2" href="../dashboard/index.php" width="200"> Back </a>
+    <a class="btn btn-outline-danger my-2" href="../dashboard/index.php" width="200"> Back </a>
     <div class="card p-4">
       
       <h3>Manage Nursery</h3>

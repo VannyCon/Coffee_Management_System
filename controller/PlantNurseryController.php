@@ -1,4 +1,5 @@
 <?php
+
     require_once('../../../services/PlantSourceService.php');
     require_once('../../../services/PlantNurseryService.php');
     require_once('../../../services/PlantTypeService.php');
@@ -7,15 +8,15 @@
     $nurseryServices = new PlantInfo();
     $nurserys = $nurseryServices->getPlantInfos();
 
-    ///THIS PART TO GET NURSERYOWNER
+    /// THIS PART TO GET NURSERYOWNER
     $sourceServices = new NurseryOwner();
     $sources = $sourceServices->getNurseryOwners();
 
-    ///THIS PART TO GET NURSERYOWNER
+    /// THIS PART TO GET NURSERYOWNER
     $typeService = new TypeServices();
     $types = $typeService->getPlantType();
 
-            ///THIS PART TO GET NURSERYOWNER
+    /// THIS PART TO GET NURSERYOWNER
     $varietyService = new VarietyServices();
     $varietys = $varietyService->getPlantVariety();
 
