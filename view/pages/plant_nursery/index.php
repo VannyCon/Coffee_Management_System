@@ -41,44 +41,82 @@
     </div>
 
     <div class="my-2">
-     <a type="button" class="btn btn-warning " href="create.php">Create</a>
+     <a type="button" class="btn btn-warning " href="create.php">Add Record</a>
     </div>
       <div class="table-responsive">
                 <!-- Table for nursery owners -->
                 <table border="1" class="table" id="nurseryOwnersTable">
                     <thead>
                         <tr>
-                            <th>Id</th>
+                            
                             <th>Source Fullname</th>
                             <th>Quantity</th>
                             <th>Type</th>
                             <th>Variety</th>
                             <th>Planted Date</th>
                             <th>Action</th>
-                            <th>Timeline</th>
                             <th>QR</th>
+                            <th>Timeline</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php if (!empty($nurserys)): ?>
                             <?php foreach ($nurserys as $nursery): ?>
-                                <tr>
-                                    <td><?php echo htmlspecialchars($nursery['id']); ?></td>
+                                <tr> 
+                                    
                                     <td><?php echo htmlspecialchars($nursery['source_fullname']); ?></td>
                                     <td><?php echo htmlspecialchars($nursery['quantity']); ?></td>
                                     <td><?php echo htmlspecialchars($nursery['type_name']); ?></td>
                                     <td><?php echo htmlspecialchars($nursery['variety_name']); ?></td>
-                                    <td><?php echo htmlspecialchars($nursery['planted_date']); ?></td>
+                                    <td>
+                                        <?php 
+                                            // Convert the planted date to a DateTime object
+                                            $plantedDate = new DateTime($nursery['planted_date']);
+                                            
+                                            // Format the date as 'F j, Y' (e.g., September 19, 2024)
+                                            echo $plantedDate->format('F j, Y');
+                                        ?>
+                                    </td>
+
                                     <td>
                                         <a type="button" class="btn btn-info mx-0 mx-md-2 my-1 my-md-0" href="update.php?ID=<?php echo htmlspecialchars($nursery['id']); ?>">Update</a>
                                         <button type="button" class="btn btn-danger" data-id="<?php echo htmlspecialchars($nursery['id']); ?>" onclick="setDeleteId(this)">Delete</button>
                                     </td>
                                     <td>
-                                      <a type="button" class="btn btn-success mx-2" href="../plant_timeline/index.php?id=<?php echo htmlspecialchars($nursery['id']); ?>&nurseryID=<?php echo htmlspecialchars($nursery['nursery_id']); ?>">Check</a>
-                                    </td>
-                                    <td>
                                       <a type="button" class="btn btn-primary mx-2" href="qr.php?plantID=<?php echo htmlspecialchars($nursery['nursery_id']); ?>">Donwload</a>
                                     </td>
+                                    <td>
+                                      <a type="button" class="btn btn-outline-success mx-2" href="../plant_timeline/index.php?id=<?php echo htmlspecialchars($nursery['id']); ?>&nurseryID=<?php echo htmlspecialchars($nursery['nursery_id']); ?>">Check</a>
+                                    </td>
+                                    <td>
+                                      <?php 
+                                          // Get the relevant date (e.g., harvest date or planted date)
+                                          $history_date = $nurseryServices->getHarvestStatus($nursery['nursery_id']);
+
+                                          // Get the current date
+                                          $now = new DateTime();
+
+                                          // Ensure the relevant_date is in 'Y-m-d' format (or adjust accordingly)
+                                          $relevant_date = new DateTime($history_date['relevant_date']);
+
+                                          // Calculate the difference between now and the relevant date
+                                          $interval = $now->diff($relevant_date);
+
+                                          // Check if the relevant date is today
+                                          if ($relevant_date->format('Y-m-d') == $now->format('Y-m-d') && $history_date['status'] == 'True') {
+                                              echo '<span class="badge text-bg-success">Harvested</span>';
+                                          }
+                                          // Check if the difference is 3 months or more
+                                          else if ($interval->y > 0 || $interval->m >= 3) {
+                                              echo '<span class="badge text-bg-warning text-white">Ready</span>';
+                                          }
+                                          // Otherwise, show "Not Ready"
+                                          else {
+                                              echo '<span class="badge text-bg-danger">Not Ready</span>';
+                                          }
+                                      ?>
+                                  </td>
                                     
                                 </tr>
                             <?php endforeach; ?>

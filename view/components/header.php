@@ -97,6 +97,7 @@
     // Redirect to login if not logged in
     if (!isset($_SESSION['username']) && $title != "User") {
 ?>
+
 <nav class="sidebar close">
         <header>
             <div class="image-text">
@@ -123,14 +124,6 @@
                             <span class="text nav-text">Dashboard</span>
                         </a>
                     </li>
-
-                    <li class="nav-link">
-                        <a href="../plant_nursery/index.php">
-                            <i class='bx bx-face icon'></i>
-                            <span class="text nav-text">Source</span>
-                        </a>
-                    </li>
-
                     <li class="nav-link">
                         <a href="../plant_type/index.php">
                             <i class='bx bx-list-ol icon'></i>
@@ -145,6 +138,19 @@
                         </a>
                     </li>
 
+                    <li class="nav-link">
+                        <a href="../plant_source/index.php">
+                            <i class='bx bx-face icon'></i>
+                            <span class="text nav-text">Source</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-link">
+                        <a href="../plant_nursery/index.php">
+                            <i class='bx bx-leaf icon'></i>
+                            <span class="text nav-text">Nursery</span>
+                        </a>
+                    </li>
 
                 </ul>
             </div>

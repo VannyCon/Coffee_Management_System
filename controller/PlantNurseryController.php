@@ -1,5 +1,4 @@
 <?php
-
     require_once('../../../services/PlantSourceService.php');
     require_once('../../../services/PlantNurseryService.php');
     require_once('../../../services/PlantTypeService.php');
@@ -21,7 +20,7 @@
     $varietys = $varietyService->getPlantVariety();
 
     
-    include_once('../../components/header.php');
+
 
     if (isset($_POST['action']) && $_POST['action'] == 'delete') {
         $id = $nurseryServices->clean('id', 'post');
@@ -34,6 +33,7 @@
         } else {
             error_log("Deletion failed for ID: $id");
             header("Location: index.php");
+            exit();
         }
     } else if (isset($_POST['action']) && $_POST['action'] == 'create') {
         // Clean input data
@@ -46,7 +46,6 @@
         $plantStatus = $nurseryServices->create($source_id, $type_id, $variety_id, $quantity, $planted_date);
         // Optionally, you can redirect or show a success message after creation
         if($plantStatus == true){
-            // Redirect to index.php
             header("Location: index.php"); 
             exit(); // Important to stop the script after the redirection
         }else{
@@ -90,9 +89,4 @@
             exit; // Stop execution if userID is not present
         }
     }
-    
-
-
-
-
 ?>

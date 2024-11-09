@@ -30,8 +30,7 @@ class PlantInfo extends config {
                         JOIN 
                             tbl_variety v ON n.variety_id = v.variety_id
                         WHERE 
-                            1
-                        ORDER BY n.planted_date DESC;
+                            1;
                         ";
             $stmt = $this->pdo->prepare($query); // Prepare the query
             $stmt->execute(); // Execute the query
@@ -103,40 +102,45 @@ class PlantInfo extends config {
 
     public function getPlantDataByID($nurseryID) {
         try {
-                $query = "SELECT 
-                                n.id,
-                                n.nursery_id,
-                                s.source_fullname,
-                                s.source_contact_number,
-                                s.source_address,
-                                n.type_id,
-                                t.type_name,
-                                t.description AS type_description,
-                                n.variety_id,
-                                v.variety_name,
-                                v.description AS variety_description,
-                                n.quantity,
-                                n.planted_date,
-                                n.created_date
-                            FROM 
-                                tbl_nursery n
-                            JOIN 
-                                tbl_source s ON n.source_id = s.source_id
-                            JOIN 
-                                tbl_type t ON n.type_id = t.type_id
-                            JOIN 
-                                tbl_variety v ON n.variety_id = v.variety_id
-                            WHERE
-                                n.nursery_id = :nurseryID";
-                $stmt = $this->pdo->prepare($query); // Prepare the query
-                $stmt->bindParam(':nurseryID', $nurseryID); // Bind the value
-                $stmt->execute(); // Execute the query
-                return $stmt->fetch(PDO::FETCH_ASSOC); // Fetch the result
+            $query = "SELECT 
+                            n.id,
+                            n.nursery_id,
+                            s.source_fullname,
+                            s.source_contact_number,
+                            s.source_address,
+                            n.type_id,
+                            t.type_name,
+                            t.description AS type_description,
+                            n.variety_id,
+                            v.variety_name,
+                            v.description AS variety_description,
+                            n.quantity,
+                            n.planted_date,
+                            n.created_date,
+                            -- This will count the number of harvested plants for the specific nursery ID
+                            (SELECT COUNT(*) 
+                             FROM tbl_timeline 
+                             WHERE timeline_title = 'Harvested' AND nursery_id_fk = n.nursery_id) AS harvest_count
+                        FROM 
+                            tbl_nursery n
+                        JOIN 
+                            tbl_source s ON n.source_id = s.source_id
+                        JOIN 
+                            tbl_type t ON n.type_id = t.type_id
+                        JOIN 
+                            tbl_variety v ON n.variety_id = v.variety_id
+                        WHERE
+                            n.nursery_id = :nurseryID";
+            $stmt = $this->pdo->prepare($query); // Prepare the query
+            $stmt->bindParam(':nurseryID', $nurseryID, PDO::PARAM_INT); // Bind the value
+            $stmt->execute(); // Execute the query
+            return $stmt->fetch(PDO::FETCH_ASSOC); // Fetch the result
         }
         catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }
     }
+    
 
     public function update($id, $source_id, $type_id, $variety_id, $quantity, $planted_date) {
         try {
@@ -183,6 +187,52 @@ class PlantInfo extends config {
         }
     }
     
+
+    ///THIS PART RETURN THE HARVEST STATUS OF A SPECIFIED NURSEY ID
+    /// The query checks if there is a 'Harvested' timeline entry for the given nursery ID.
+    /// If the timeline entry exists, it returns the most recent harvest date.
+    /// If the timeline entry does not exist, it returns the planted date of the nursery.
+    /// The 'Harvested' timeline entry is assumed to be the last entry for the given nursery ID.
+    /// The status is also returned as 'True' if a harvest entry exists, or 'False' otherwise. 
+    // The function to retrieve harvest status for a specific nursery ID. 
+    // Note: This function assumes that there is a 'Harvested' timeline entry for each nursery.
+    // If the timeline entry does not exist for a particular nursery, it will return the planted date. 
+    public function getHarvestStatus($nurseryID) {
+        try {
+            $query = "
+                SELECT 
+                    CASE
+                        WHEN EXISTS (
+                            SELECT 1 FROM tbl_timeline WHERE nursery_id_fk = :nurseryID AND timeline_title = 'Harvested'
+                        ) 
+                        THEN (
+                            SELECT MAX(history_date) FROM tbl_timeline WHERE nursery_id_fk = :nurseryID AND timeline_title = 'Harvested'
+                        )
+                        ELSE (
+                            SELECT planted_date FROM tbl_nursery WHERE nursery_id = :nurseryID
+                        )
+                    END AS relevant_date, 					
+                    CASE
+                        WHEN EXISTS (
+                            SELECT 1 
+                            FROM tbl_timeline 
+                            WHERE nursery_id_fk = :nurseryID 
+                            AND timeline_title = 'Harvested'
+                        ) 
+                        THEN 'True'
+                        ELSE 'False'
+                    END AS status
+            ";
+    
+            $stmt = $this->pdo->prepare($query); // Prepare the query
+            $stmt->bindParam(':nurseryID', $nurseryID); // Bind the value
+            $stmt->execute(); // Execute the query
+            return $stmt->fetch(PDO::FETCH_ASSOC); // Fetch the result
+        }
+        catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
     
 
 }

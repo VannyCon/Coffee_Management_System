@@ -1,10 +1,5 @@
 <?php
-session_start();
-// Redirect to login if not logged in
-if (!isset($_SESSION['username'])) {
-    header("Location: ../../../index.php");
-    exit();
-}
+
 require_once('../../../services/PlantSourceService.php');
 // Instantiate the class and get nursery owners
 $nurseryOwner = new NurseryOwner();

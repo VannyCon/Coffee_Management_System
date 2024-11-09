@@ -46,7 +46,6 @@
         <table border="1" class="table" id="nurseryOwnersTable">
             <thead>
                 <tr>
-                    <th>ID</th>
                     <th>Full Name</th>
                     <th>Contact Number</th>
                     <th>Address</th>
@@ -57,7 +56,6 @@
                 <?php if (!empty($owners)): ?>
                     <?php foreach ($owners as $owner): ?>
                         <tr>
-                            <td><?php echo htmlspecialchars($owner['id']); ?></td>
                             <td><?php echo htmlspecialchars($owner['source_fullname']); ?></td>
                             <td><?php echo htmlspecialchars($owner['source_contact_number']); ?></td>
                             <td><?php echo htmlspecialchars($owner['source_address']); ?></td>

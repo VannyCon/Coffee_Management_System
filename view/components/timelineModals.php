@@ -13,7 +13,16 @@
                     <form method="POST" action="">
                             <div class="form-group">
                                 <label for="timeline_title">Timeline Title</label>
-                                <input type="text" class="form-control" id="timeline_title"  name="timeline_title"  placeholder="Enter first value" required>
+                                <!-- <input type="text" class="form-control" id="timeline_title"  name="timeline_title"  placeholder="Enter first value" required> -->
+
+                                <select class="form-select" name="timeline_title" id="timeline_title" aria-label="Plant Status">
+                                    <option value="Harvested">Harvesting</option>
+                                    <option value="Abuno">Abuno</option>
+                                    <option value="Fertilizing">Fertilizing</option>
+                                    <option value="Weeding">Weeding</option>
+                                    <option value="Mulching">Mulching</option>
+                                </select>
+
                             </div>
                             <div class="form-group">
                                 <label for="history_date">Date</label>

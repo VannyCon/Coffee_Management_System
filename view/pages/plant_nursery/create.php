@@ -1,7 +1,8 @@
 <?php
     $title = "PlantInfo Create";
-    include_once('../../components/header.php');
+
     include_once('../../../controller/PlantNurseryController.php');
+    include_once('../../components/header.php');
 ?>
 
 <div>

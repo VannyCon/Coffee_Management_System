@@ -46,7 +46,6 @@
         <table border="1" class="table" id="nurseryOwnersTable">
             <thead>
                 <tr>
-                    <th>ID</th>
                     <th>Variety Name</th>
                     <th>Description</th>
                 </tr>
@@ -55,7 +54,6 @@
                 <?php if (!empty($varietys)): ?>
                     <?php foreach ($varietys as $variety): ?>
                         <tr>
-                            <td><?php echo htmlspecialchars($variety['id']); ?></td>
                             <td><?php echo htmlspecialchars($variety['variety_name']); ?></td>
                             <td><?php echo htmlspecialchars($variety['description']); ?></td>
                             <td>

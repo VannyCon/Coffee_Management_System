@@ -5,14 +5,15 @@
   // Instantiate the class and get nursery owners
   $timeline = new Timeline();
   $plant = new PlantInfo();
-  include_once('../../components/header.php');
-
+  
   ///make a logic here where return to plantINfo if plandID not found
   $nurseryID = $_GET['nurseryID'];
   $timelines = $timeline->getTimelineById($nurseryID);
   $plantData = $plant->getPlantDataByID($nurseryID);
   require_once('../../../controller/PlantContentController.php');
   require_once('../../../controller/PlantTimelineController.php');  
+  include_once('../../components/header.php');
+
 
 ?>
 <?php include_once('../../components/timelineModals.php'); ?>
@@ -25,12 +26,13 @@
         <div class="p-3">
             <div class="row">
                 <div class="col-md-12 text-left">
-                
-                    <p><strong>Nursery Owner Fullname:</strong> <?php echo $plantData['source_fullname']; ?></p>
+                    <p><strong>Nursery Owner Fullname:</strong> Doc. Patrick Escalante</p>
+                   
                     <p><strong>Type:</strong> <?php echo $plantData['type_name']; ?></p>
                     <p><strong>Type Description:</strong> <?php echo $plantData['type_description']; ?></p>
                     <p><strong>Variety:</strong> <?php echo $plantData['variety_name']; ?></p>
                     <p><strong>Variety Description:</strong> <?php echo $plantData['variety_description']; ?></p>
+                    <p><strong>Seedling Source Fullname:</strong> <?php echo $plantData['source_fullname']; ?></p>
                     <p><strong>Age: </strong> <?php
                                                     // Sample planted_date from $plantData
                                                     $plantedDate = $plantData['planted_date']; // Format: YYYY-MM-DD
@@ -57,7 +59,41 @@
                                                     }
                                                     ?>
                                                     </p>
-                    <p><strong>Planted Date:</strong> <?php echo $plantData['planted_date']; ?></p>
+                    <p><strong>Planted Date:</strong> 
+                    <?php
+                        $plantedDate = new DateTime($plantData['planted_date']);
+                        echo $plantedDate->format('F j, Y');
+                    ?></p>
+
+                    <p><strong>Harvest Count:</strong> <?php echo $plantData['harvest_count']; ?></p>
+                    <p>
+                    <strong>Harvest Date:</strong>
+                    <?php 
+                        // Example $history_date array with 'relevant_date'
+                        $history_date = $plant->getHarvestStatus($plantData['nursery_id']);
+                        $relevant_date = $history_date['relevant_date']; // '2024-08-12'
+
+                        // Create a DateTime object from the relevant date
+                        $date = new DateTime($relevant_date);
+
+                        // Initialize an array to hold the next three months
+                        $next_three_months = [];
+
+                        // Loop to calculate the next 3 months
+                        for ($i = 1; $i <= 3; $i++) {
+                            // Modify the date to add 1 month for each iteration
+                            $date->modify('+1 month');
+                            
+                            // Add the modified date to the array in the desired format
+                            $next_three_months[] = $date->format('F j, Y'); // Format the date here
+                        }
+
+                        echo $next_three_months[2]; // This will print the last month (e.g., 'November')
+                    ?>
+
+                    </p>
+
+                    
                     <a class="btn btn-primary px-5" href="download_pdf.php?nurseryID=<?php echo htmlspecialchars($nurseryID); ?>"> 
                         Print 
                     </a>
