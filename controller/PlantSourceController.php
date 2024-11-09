@@ -1,6 +1,7 @@
 <?php
 
 require_once('../../../services/PlantSourceService.php');
+
 // Instantiate the class and get nursery owners
 $nurseryOwner = new NurseryOwner();
 $owners = $nurseryOwner->getNurseryOwners();
@@ -12,7 +13,6 @@ if (isset($_POST['action']) && $_POST['action'] == 'delete') {
     
     if ($result) {
         header("Location: index.php");
-        exit();
     } else {
         error_log("Deletion failed for ID: $id");
         header("Location: index.php");
@@ -29,6 +29,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'delete') {
          // Redirect to index.php
          header("Location: index.php"); 
          exit(); // Important to stop the script after the redirection
+         
     }else{
         header("Location: create.php"); 
     }
