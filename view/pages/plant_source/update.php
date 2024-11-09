@@ -25,6 +25,10 @@
                 <input type="number" value="<?php echo htmlspecialchars($getSpecificOwner['source_contact_number']); ?>" class="form-control" name="contact_number" id="contact_number" placeholder="ex. 0912341232324" required>
             </div>
             <div class="form-group">
+                <label for="source_email">Email</label>
+                <input type="email" value="<?php echo htmlspecialchars($getSpecificOwner['source_email']); ?>" class="form-control" name="source_email" id="source_email" placeholder="ex. test@gmail.com" required>
+            </div>
+            <div class="form-group">
                 <label for="address">Address</label>
                 <input type="text" value="<?php echo htmlspecialchars($getSpecificOwner['source_address']); ?>" class="form-control" name="address" id="address" placeholder="ex. Brgy. Banquerohan" required>
             </div>

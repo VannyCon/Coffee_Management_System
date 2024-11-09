@@ -48,6 +48,7 @@
                 <tr>
                     <th>Full Name</th>
                     <th>Contact Number</th>
+                    <th>Email</th>
                     <th>Address</th>
                     <th>Manage</th>
                 </tr>
@@ -58,6 +59,7 @@
                         <tr>
                             <td><?php echo htmlspecialchars($owner['source_fullname']); ?></td>
                             <td><?php echo htmlspecialchars($owner['source_contact_number']); ?></td>
+                            <td><?php echo htmlspecialchars($owner['source_email']); ?></td>
                             <td><?php echo htmlspecialchars($owner['source_address']); ?></td>
                             <td>
                                 <a type="button" class="btn btn-info mx-0 mx-md-2 my-1 my-md-0" href="update.php?userID=<?php echo htmlspecialchars($owner['id']); ?>">Update</a>

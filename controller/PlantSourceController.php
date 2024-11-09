@@ -20,10 +20,11 @@ if (isset($_POST['action']) && $_POST['action'] == 'delete') {
 }else if (isset($_POST['action']) && $_POST['action'] == 'create') {
     // Clean input data
     $fullname = $nurseryOwner->clean('fullname', 'post');
+    $source_email = $nurseryOwner->clean('source_email', 'post');
     $contact_number = $nurseryOwner->clean('contact_number', 'post');
     $address = $nurseryOwner->clean('address', 'post');
     // Call create method to add the new owner
-    $owners = $nurseryOwner->create($fullname, $contact_number, $address);
+    $owners = $nurseryOwner->create($fullname, $contact_number,$source_email,  $address);
     // Optionally, you can redirect or show a success message after creation
     if($owners == true){
          // Redirect to index.php
@@ -46,10 +47,11 @@ if($title = "NurseryOwner Update"){
         if (isset($_POST['action']) && $_POST['action'] == 'update') {
             // Clean input data
             $fullname = $nurseryOwner->clean('fullname', 'post');
+            $source_email = $nurseryOwner->clean('source_email', 'post');
             $contact_number = $nurseryOwner->clean('contact_number', 'post');
             $address = $nurseryOwner->clean('address', 'post');
             // Call create method to add the new owner
-            $owners = $nurseryOwner->update($getSpecificOwner['id'], $fullname, $contact_number, $address);
+            $owners = $nurseryOwner->update($getSpecificOwner['id'], $fullname, $contact_number,$source_email, $address);
             // Optionally, you can redirect or show a success message after creation
             if($owners == true){
                 // Redirect to index.php

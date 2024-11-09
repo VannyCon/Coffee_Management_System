@@ -6,7 +6,7 @@ class NurseryOwner extends config {
 
     public function getNurseryOwners() {
         try {
-            $query = "SELECT `id`, `source_id`, `source_fullname`, `source_contact_number`, `source_address`, `created_date` FROM `tbl_source` WHERE 1";
+            $query = "SELECT `id`, `source_id`, `source_fullname`, `source_contact_number`,`source_email`,  `source_address`, `created_date` FROM `tbl_source` WHERE 1";
             $stmt = $this->pdo->prepare($query); // Prepare the query
             $stmt->execute(); // Execute the query
             return $stmt->fetchAll(PDO::FETCH_ASSOC); // Fetch all results
@@ -14,16 +14,17 @@ class NurseryOwner extends config {
             echo "Error: " . $e->getMessage();
         }
     }
-    public function create($fullname, $contact_number, $address) {
+    public function create($fullname, $contact_number, $source_email, $address) {
         try {
             // Define the query with placeholders
-            $query = "INSERT INTO `tbl_source` (`source_id`, `source_fullname`, `source_contact_number`, `source_address`, `created_date`) 
-                      VALUES (UUID(), :fullname, :contact_number, :address, NOW())";
+            $query = "INSERT INTO `tbl_source` (`source_id`, `source_fullname`, `source_contact_number`, `source_email`,  `source_address`, `created_date`) 
+                      VALUES (UUID(), :fullname, :contact_number, :source_email,  :address, NOW())";
             // Prepare the query
             $stmt = $this->pdo->prepare($query);
             // Bind the values to the placeholders
             $stmt->bindParam(':fullname', $fullname);
             $stmt->bindParam(':contact_number', $contact_number);
+            $stmt->bindParam(':source_email', $source_email);
             $stmt->bindParam(':address', $address);
             // Execute the query
             $stmt->execute();
@@ -39,7 +40,7 @@ class NurseryOwner extends config {
 
     public function getNurseryOwnerById($id) {
         try {
-                $query = "SELECT `id`, `source_id`, `source_fullname`, `source_contact_number`, `source_address`, `created_date` FROM `tbl_source` WHERE `id` = :id";
+                $query = "SELECT `id`, `source_id`, `source_fullname`, `source_contact_number`, `source_email`,  `source_address`, `created_date` FROM `tbl_source` WHERE `id` = :id";
                 $stmt = $this->pdo->prepare($query); // Prepare the query
                 $stmt->bindParam(':id', $id); // Bind the value
                 $stmt->execute(); // Execute the query
@@ -51,11 +52,11 @@ class NurseryOwner extends config {
     }
 
 
-    public function update($id, $fullname, $contact_number, $address) {
+    public function update($id, $fullname, $contact_number,$source_email, $address) {
         try {
             // Define the query with placeholders for updating an existing record
             $query = "UPDATE `tbl_source` 
-                      SET `source_fullname` = :fullname, `source_contact_number` = :contact_number, `source_address` = :address
+                      SET `source_fullname` = :fullname, `source_contact_number` = :contact_number, `source_email` = :source_email, `source_address` = :address
                       WHERE `id` = :id";
     
             // Prepare the query
@@ -63,6 +64,7 @@ class NurseryOwner extends config {
             // Bind the values to the placeholders
             $stmt->bindParam(':fullname', $fullname);
             $stmt->bindParam(':contact_number', $contact_number);
+            $stmt->bindParam(':source_email', $source_email);
             $stmt->bindParam(':address', $address);
             $stmt->bindParam(':id', $id); // Bind the ID to identify which record to update
     
