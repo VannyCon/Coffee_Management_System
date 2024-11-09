@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 10, 2024 at 05:35 AM
+-- Generation Time: Nov 09, 2024 at 07:07 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -67,16 +67,6 @@ CREATE TABLE `tbl_content` (
   `history_time` time(6) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `tbl_content`
---
-
-INSERT INTO `tbl_content` (`id`, `content_id_fk`, `content`, `status`, `history_time`) VALUES
-(13, 'fc55808e-7bcb-11ef-93ce-6c2408a7860e', 'Successfull', 'success', '13:56:06.000000'),
-(14, '8950a910-7bcc-11ef-93ce-6c2408a7860e', 'done ', 'done', '13:59:56.000000'),
-(15, '8950a910-7bcc-11ef-93ce-6c2408a7860e', 'done1', 'asdasd', '21:03:00.000000'),
-(17, '8950a910-7bcc-11ef-93ce-6c2408a7860e', 'ssdsadsad', 'ssssss', '02:06:00.000000');
-
 -- --------------------------------------------------------
 
 --
@@ -99,11 +89,7 @@ CREATE TABLE `tbl_nursery` (
 --
 
 INSERT INTO `tbl_nursery` (`id`, `nursery_id`, `source_id`, `type_id`, `variety_id`, `quantity`, `planted_date`, `created_date`) VALUES
-(18, 'cb3248bf-7bb8-11ef-a2a5-6c2408a7860e', '3796cfc4-7944-11ef-945c-6c2408a7860e', 'TID-001', 'VID-001', 1, '2024-07-24', '2024-09-26 03:38:24.661249'),
-(19, '9b4d3fb2-7bbc-11ef-a2a5-6c2408a7860e', '3ce2b267-793f-11ef-945c-6c2408a7860e', 'TID-002', 'VID-002', 2, '2024-09-26', '2024-09-26 04:05:42.294278'),
-(21, 'ab05766c-7bc0-11ef-a2a5-6c2408a7860e', '3ce2b267-793f-11ef-945c-6c2408a7860e', 'TID-003', 'VID-003', 3, '2024-09-26', '2024-09-26 04:34:46.654306'),
-(22, '4ecc34b2-86ac-11ef-abd4-6c2408a7860e', '3796cfc4-7944-11ef-945c-6c2408a7860e', 'TID-003', 'VID-003', 10, '2024-10-12', '2024-10-10 02:06:48.627609'),
-(24, 'fc0108b6-86ac-11ef-abd4-6c2408a7860e', 'aa83a5da-86ac-11ef-abd4-6c2408a7860e', 'TID-002', 'VID-003', 12, '2024-10-12', '2024-10-10 02:11:39.219526');
+(35, '459d61ef-9e56-11ef-a7c1-6c2408a7860e', '3796cfc4-7944-11ef-945c-6c2408a7860e', 'TID-002', 'VID-002', 20, '2024-08-09', '2024-11-09 04:51:23.282467');
 
 -- --------------------------------------------------------
 
@@ -116,6 +102,7 @@ CREATE TABLE `tbl_source` (
   `source_id` varchar(255) DEFAULT NULL,
   `source_fullname` varchar(255) DEFAULT NULL,
   `source_contact_number` varchar(255) DEFAULT NULL,
+  `source_email` varchar(255) NOT NULL,
   `source_address` varchar(255) DEFAULT NULL,
   `created_date` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -124,12 +111,11 @@ CREATE TABLE `tbl_source` (
 -- Dumping data for table `tbl_source`
 --
 
-INSERT INTO `tbl_source` (`id`, `source_id`, `source_fullname`, `source_contact_number`, `source_address`, `created_date`) VALUES
-(1, '3ce2b267-793f-11ef-945c-6c2408a7860e', 'Dr. Patrick Escalante', '097123213435', 'Cadiz City', '2024-10-03 13:43:27.945044'),
-(3, '3796cfc4-7944-11ef-945c-6c2408a7860e', 'Angel Paborada', '09812323224', 'Calatrava City', '2024-09-24 01:56:01.564304'),
-(4, '3b8909f2-7944-11ef-945c-6c2408a7860e', 'Beverly Saabanal', '0922222222', 'Toboso', '2024-09-26 03:50:32.030540'),
-(7, '12eece16-79ac-11ef-ab8b-6c2408a7860e', 'Jessa Mae Nicos', '09232451222', 'Escalante City, Negros Occidental', '2024-09-24 02:20:09.970608'),
-(10, 'aa83a5da-86ac-11ef-abd4-6c2408a7860e', 'Ivan Con', '0909090909', 'Banquerohan', '2024-10-10 02:09:22.000000');
+INSERT INTO `tbl_source` (`id`, `source_id`, `source_fullname`, `source_contact_number`, `source_email`, `source_address`, `created_date`) VALUES
+(1, '3ce2b267-793f-11ef-945c-6c2408a7860e', 'Dr. Patrick Escalante', '097123213435', 'dr.pat@gmail.com', 'Cadiz City', '2024-11-09 06:06:13.729958'),
+(3, '3796cfc4-7944-11ef-945c-6c2408a7860e', 'Angel Paborada', '09812323224', 'angel@gmail.com', 'Calatrava City', '2024-11-09 06:06:21.142822'),
+(4, '3b8909f2-7944-11ef-945c-6c2408a7860e', 'Beverly Saabanal', '0922222222', 'bev@gmail.com', 'Toboso', '2024-11-09 06:06:30.485247'),
+(7, '12eece16-79ac-11ef-ab8b-6c2408a7860e', 'Jessa Mae Nicos', '09232451222', 'jes@gmail.com', 'Escalante City, Negros Occidental', '2024-11-09 06:06:37.518360');
 
 -- --------------------------------------------------------
 
@@ -144,14 +130,6 @@ CREATE TABLE `tbl_timeline` (
   `timeline_title` varchar(255) NOT NULL,
   `history_date` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `tbl_timeline`
---
-
-INSERT INTO `tbl_timeline` (`id`, `nursery_id_fk`, `content_id`, `timeline_title`, `history_date`) VALUES
-(19, 'cb3248bf-7bb8-11ef-a2a5-6c2408a7860e', 'fc55808e-7bcb-11ef-93ce-6c2408a7860e', 'Abuno', '2024-09-26'),
-(20, 'cb3248bf-7bb8-11ef-a2a5-6c2408a7860e', '8950a910-7bcc-11ef-93ce-6c2408a7860e', 'Abuno 4th', '2024-09-30');
 
 -- --------------------------------------------------------
 
@@ -171,7 +149,7 @@ CREATE TABLE `tbl_type` (
 --
 
 INSERT INTO `tbl_type` (`id`, `type_id`, `type_name`, `description`) VALUES
-(1, 'TID-001', 'type1', 'type 1'),
+(1, 'TID-001', 'type1', 'type 122'),
 (2, 'TID-002', 'type2', 'type 2'),
 (3, 'TID-003', 'type3', 'type 3');
 
@@ -320,31 +298,31 @@ ALTER TABLE `tbl_content`
 -- AUTO_INCREMENT for table `tbl_nursery`
 --
 ALTER TABLE `tbl_nursery`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `tbl_source`
 --
 ALTER TABLE `tbl_source`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `tbl_timeline`
 --
 ALTER TABLE `tbl_timeline`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `tbl_type`
 --
 ALTER TABLE `tbl_type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tbl_variety`
 --
 ALTER TABLE `tbl_variety`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Constraints for dumped tables
