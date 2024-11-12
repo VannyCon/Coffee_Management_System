@@ -1,5 +1,5 @@
 <?php 
-  $title = "Nursery";
+  $title = "Type";
   include_once('../../components/header.php');
   include_once('../../../controller/PlantTypeController.php');
 ?>
@@ -35,10 +35,10 @@
 
     <!-- Search Input -->
     <div class="mb-3">
-        <input type="text" id="searchInput" class="form-control" placeholder="Search for owner...">
+        <input type="text" id="searchInput" class="form-control" placeholder="Search for Type...">
     </div>
     <div class="mb-3">
-        <a type="button" class="btn btn-warning " href="create.php">Create</a>
+        <a type="button" class="btn btn-warning " href="create.php">Add Record</a>
         <a type="button" class="btn btn-primary mx-2" href="../plant_nursery/index.php">Check Plant List</a>
     </div>
     <div class="table-responsive">

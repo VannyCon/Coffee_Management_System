@@ -26,13 +26,13 @@
         <div class="p-3">
             <div class="row">
                 <div class="col-md-12 text-left">
-                    <p><strong>Nursery Owner Fullname:</strong> Doc. Patrick Escalante</p>
-                   
+                    <p><strong>Nursery Owner:</strong> Doc. Patrick Escalante</p>
+                    <p><strong>Field:</strong> <?php echo $plantData['nursery_field']; ?></p>
                     <p><strong>Type:</strong> <?php echo $plantData['type_name']; ?></p>
                     <p><strong>Type Description:</strong> <?php echo $plantData['type_description']; ?></p>
                     <p><strong>Variety:</strong> <?php echo $plantData['variety_name']; ?></p>
                     <p><strong>Variety Description:</strong> <?php echo $plantData['variety_description']; ?></p>
-                    <p><strong>Seedling Source Fullname:</strong> <?php echo $plantData['source_fullname']; ?></p>
+                    <p><strong>Seedling Source Fullname:</strong> <?php echo $plantData['nursery_seedling_source']; ?></p>
                     <p><strong>Age: </strong> <?php
                                                     // Sample planted_date from $plantData
                                                     $plantedDate = $plantData['planted_date']; // Format: YYYY-MM-DD
@@ -65,34 +65,32 @@
                         echo $plantedDate->format('F j, Y');
                     ?></p>
 
-                    <p><strong>Harvest Count:</strong> <?php echo $plantData['harvest_count']; ?></p>
+                    
                     <p>
                     <strong>Harvest Date:</strong>
-                    <?php 
-                        // Example $history_date array with 'relevant_date'
-                        $history_date = $plant->getHarvestStatus($plantData['nursery_id']);
-                        $relevant_date = $history_date['relevant_date']; // '2024-08-12'
+                        <?php 
+                            // Example $history_date array with 'relevant_date'
+                            $history_date = $plant->getHarvestStatus($plantData['nursery_id']);
+                            $relevant_date = $history_date['relevant_date']; // '2024-11-01' (example)
 
-                        // Create a DateTime object from the relevant date
-                        $date = new DateTime($relevant_date);
+                            // Create a DateTime object from the relevant date (planted date)
+                            $start_date = new DateTime($relevant_date);
 
-                        // Initialize an array to hold the next three months
-                        $next_three_months = [];
+                            // Clone the date to create the end date range
+                            $end_date = clone $start_date;
 
-                        // Loop to calculate the next 3 months
-                        for ($i = 1; $i <= 3; $i++) {
-                            // Modify the date to add 1 month for each iteration
-                            $date->modify('+1 month');
-                            
-                            // Add the modified date to the array in the desired format
-                            $next_three_months[] = $date->format('F j, Y'); // Format the date here
-                        }
+                            // Add 24 months to get 2 years later
+                            $start_date->modify('+24 months');
 
-                        echo $next_three_months[2]; // This will print the last month (e.g., 'November')
-                    ?>
+                            // Add 30 months to get 2 years and 6 months later
+                            $end_date->modify('+30 months');
+
+                            // Format and output the date range
+                            echo $start_date->format('F j, Y') . ' - ' . $end_date->format('F j, Y');
+                        ?>
 
                     </p>
-
+                    <p><strong>Harvest Count:</strong> <?php echo $plantData['harvest_count']; ?></p>
                     
                     <a class="btn btn-primary px-5" href="download_pdf.php?nurseryID=<?php echo htmlspecialchars($nurseryID); ?>"> 
                         Print 

@@ -1,5 +1,5 @@
 <?php
-    $title = "NurseryOwner Update";
+    $title = "Type";
     require_once('../../../services/PlantTypeService.php');
     include_once('../../components/header.php');
     // Redirect to login if not logged in

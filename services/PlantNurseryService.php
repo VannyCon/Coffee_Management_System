@@ -9,9 +9,8 @@ class PlantInfo extends config {
             $query = "SELECT 
                             n.id,
                             n.nursery_id,
-                            s.source_fullname,
-                            s.source_contact_number,
-                            s.source_address,
+                            n.nursery_field,
+                            n.nursery_seedling_source,
                             n.type_id,
                             t.type_name,
                             t.description AS type_description,
@@ -23,8 +22,6 @@ class PlantInfo extends config {
                             n.created_date
                         FROM 
                             tbl_nursery n
-                        JOIN 
-                            tbl_source s ON n.source_id = s.source_id
                         JOIN 
                             tbl_type t ON n.type_id = t.type_id
                         JOIN 
@@ -40,15 +37,16 @@ class PlantInfo extends config {
         }
     }
 
-    public function create($source_id, $type_id, $variety_id, $quantity, $planted_date) {
+    public function create($nursery_field, $nursery_seedling_source, $type_id, $variety_id, $quantity, $planted_date) {
         try {
             // Define the query with placeholders
-            $query = "INSERT INTO `tbl_nursery`(`nursery_id`, `source_id`, `type_id`, `variety_id`,`quantity`, `planted_date`) 
-                      VALUES (UUID(), :source_id, :type_id, :variety_id, :quantity, :planted_date)";
+            $query = "INSERT INTO `tbl_nursery`(`nursery_id`, `nursery_field`, `nursery_seedling_source`, `type_id`, `variety_id`,`quantity`, `planted_date`) 
+                      VALUES (UUID(), :nursery_field, :nursery_seedling_source, :type_id, :variety_id, :quantity, :planted_date)";
             // Prepare the query
             $stmt = $this->pdo->prepare($query);
             // Bind the values to the placeholders
-            $stmt->bindParam(':source_id', $source_id);
+            $stmt->bindParam(':nursery_field', $nursery_field);
+            $stmt->bindParam(':nursery_seedling_source', $nursery_seedling_source);
             $stmt->bindParam(':type_id', $type_id);
             $stmt->bindParam(':variety_id', $variety_id);
             $stmt->bindParam(':quantity', $quantity);
@@ -71,8 +69,8 @@ class PlantInfo extends config {
                 $query = "SELECT 
                                 n.id,
                                 n.nursery_id,
-                                s.source_id,
-                                s.source_fullname,
+                                n.nursery_field,
+                                n.nursery_seedling_source,
                                 n.type_id,
                                 t.type_name,
                                 n.variety_id,
@@ -81,8 +79,6 @@ class PlantInfo extends config {
                                 n.planted_date
                             FROM 
                                 tbl_nursery n
-                            JOIN 
-                                tbl_source s ON n.source_id = s.source_id
                             JOIN 
                                 tbl_type t ON n.type_id = t.type_id
                             JOIN 
@@ -105,9 +101,8 @@ class PlantInfo extends config {
             $query = "SELECT 
                             n.id,
                             n.nursery_id,
-                            s.source_fullname,
-                            s.source_contact_number,
-                            s.source_address,
+                            n.nursery_field,
+                            n.nursery_seedling_source,
                             n.type_id,
                             t.type_name,
                             t.description AS type_description,
@@ -123,8 +118,6 @@ class PlantInfo extends config {
                              WHERE timeline_title = 'Harvested' AND nursery_id_fk = n.nursery_id) AS harvest_count
                         FROM 
                             tbl_nursery n
-                        JOIN 
-                            tbl_source s ON n.source_id = s.source_id
                         JOIN 
                             tbl_type t ON n.type_id = t.type_id
                         JOIN 
@@ -142,11 +135,12 @@ class PlantInfo extends config {
     }
     
 
-    public function update($id, $source_id, $type_id, $variety_id, $quantity, $planted_date) {
+    public function update($id, $nursery_field, $nursery_seedling_source, $type_id, $variety_id, $quantity, $planted_date) {
         try {
             // Define the query with placeholders for updating an existing record
             $query = "UPDATE `tbl_nursery` 
-                      SET `source_id` = :source_id,
+                      SET `nursery_field` = :nursery_field,
+                          `nursery_seedling_source` = :nursery_seedling_source,
                           `type_id` = :type_id,
                           `variety_id` = :variety_id,
                           `quantity` = :quantity,
@@ -156,12 +150,13 @@ class PlantInfo extends config {
             // Prepare the query
             $stmt = $this->pdo->prepare($query);
             // Bind the values to the placeholders
-            $stmt->bindParam(':source_id', $source_id);
+            $stmt->bindParam(':nursery_field', $nursery_field);
+            $stmt->bindParam(':nursery_seedling_source', $nursery_seedling_source);
             $stmt->bindParam(':type_id', $type_id);
             $stmt->bindParam(':variety_id', $variety_id);
             $stmt->bindParam(':quantity', $quantity);
             $stmt->bindParam(':planted_date', $planted_date);
-            $stmt->bindParam(':id', $id);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);  // Explicitly specify type for $id
      
             // Execute the query
             $stmt->execute();

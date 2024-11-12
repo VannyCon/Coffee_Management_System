@@ -118,40 +118,37 @@
         <div class="menu-bar">
             <div class="menu">
                 <ul class="menu-links p-0">
-                    <li class="nav-link">
+                    <li class="nav-link <?php echo $title == 'Dashboard' ? 'active' : ''; ?>">
                         <a href="../dashboard/index.php">
                             <i class='bx bx-home-alt icon'></i>
                             <span class="text nav-text">Dashboard</span>
                         </a>
                     </li>
-                    <li class="nav-link">
+                    <li class="nav-link <?php echo $title == 'Type' ? 'active' : ''; ?>">
                         <a href="../plant_type/index.php">
                             <i class='bx bx-list-ol icon'></i>
                             <span class="text nav-text">Type</span>
                         </a>
                     </li>
-
-                    <li class="nav-link">
+                    <li class="nav-link <?php echo $title == 'Variety' ? 'active' : ''; ?>">
                         <a href="../plant_variety/index.php">
                             <i class='bx bx-layer icon'></i>
-                            <span class="text nav-text">Varienty</span>
+                            <span class="text nav-text">Variety</span>
                         </a>
                     </li>
-
-                    <li class="nav-link">
-                        <a href="../plant_source/index.php">
-                            <i class='bx bx-face icon'></i>
-                            <span class="text nav-text">Source</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-link">
+                    <li class="nav-link <?php echo $title == 'Nursery' ? 'active' : ''; ?>">
                         <a href="../plant_nursery/index.php">
                             <i class='bx bx-leaf icon'></i>
                             <span class="text nav-text">Nursery</span>
                         </a>
                     </li>
-
+                    <li class="nav-link <?php echo $title == 'Source' ? 'active' : ''; ?>">
+                        <a href="../plant_source/index.php">
+                            <i class='bx bx-face icon'></i>
+                            <span class="text nav-text">Source</span>
+                        </a>
+                    </li>
+                   
                 </ul>
             </div>
 

@@ -37,13 +37,14 @@
         }
     } else if (isset($_POST['action']) && $_POST['action'] == 'create') {
         // Clean input data
-        $source_id = $nurseryServices->clean('source_id', 'post');
+        $nursery_field = $nurseryServices->clean('nursery_field', 'post');
+        $nursery_seedling_source = $nurseryServices->clean('nursery_seedling_source', 'post');
         $type_id = $nurseryServices->clean('type_id', 'post');
         $variety_id = $nurseryServices->clean('variety_id', 'post');
         $quantity = $nurseryServices->clean('quantity', 'post');
         $planted_date = $nurseryServices->clean('planted_date', 'post');
         // Call create method to add the new owner
-        $plantStatus = $nurseryServices->create($source_id, $type_id, $variety_id, $quantity, $planted_date);
+        $plantStatus = $nurseryServices->create($nursery_field, $nursery_seedling_source, $type_id, $variety_id, $quantity, $planted_date);
         // Optionally, you can redirect or show a success message after creation
         if($plantStatus == true){
             header("Location: index.php"); 
@@ -53,7 +54,7 @@
         }
     }
 
-    if ($title == "PlantInfo Update") {
+    if ($title_Info == "Nursery Update") {
         // Check if 'userID' is set in the GET request
         if (isset($_GET['ID'])) {
             $id = $_GET['ID'];
@@ -62,13 +63,14 @@
             // Check if form is submitted
             if (isset($_POST['action']) && $_POST['action'] == 'update') {
                 // Clean input data
-                $source_id = $nurseryServices->clean('source_id', 'post');
+                $nursery_field = $nurseryServices->clean('nursery_field', 'post');
+                $nursery_seedling_source = $nurseryServices->clean('nursery_seedling_source', 'post');
                 $type_id = $nurseryServices->clean('type_id', 'post');
                 $variety_id = $nurseryServices->clean('variety_id', 'post');
                 $quantity = $nurseryServices->clean('quantity', 'post');
                 $planted_date = $nurseryServices->clean('planted_date', 'post');
                 // Call create method to add the new owner
-                $plantStatus = $nurseryServices->update($id, $source_id, $type_id, $variety_id, $quantity, $planted_date);
+                $plantStatus = $nurseryServices->update($id, $nursery_field, $nursery_seedling_source, $type_id, $variety_id, $quantity, $planted_date);
                 // Optionally, you can redirect or show a success message after creation
                 if ($plantStatus == true) {
                     // Redirect to index.php
@@ -76,7 +78,7 @@
                     exit(); // Important to stop the script after the redirection
                 } else if ($plantStatus) {
                     echo "<br> nursery ID is $id";
-                    echo "<br> nursery ID is $source_id";
+                    echo "<br> nursery ID is $nursery_field";
                     echo "<br> nursery ID is $type_id";
                     echo "<br> nursery ID is $variety_id";
                     echo "<br> nursery ID is $planted_date";

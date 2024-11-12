@@ -1,6 +1,6 @@
 <?php 
 
-  $title = "PlantNursery";
+  $title = "Nursery";
   require_once('../../../services/PlantNurseryService.php');
   include_once('../../../controller/PlantNurseryController.php');
   include_once('../../components/header.php');
@@ -37,7 +37,7 @@
 
     <!-- Search Input -->
     <div class="mb-3">
-        <input type="text" id="searchInput" class="form-control" placeholder="Search for owner...">
+        <input type="text" id="searchInput" class="form-control" placeholder="Search for Nursery...">
     </div>
 
     <div class="my-2">
@@ -49,7 +49,7 @@
                     <thead>
                         <tr>
                             
-                            <th>Source Fullname</th>
+                            <th>Field</th>
                             <th>Quantity</th>
                             <th>Type</th>
                             <th>Variety</th>
@@ -65,7 +65,7 @@
                             <?php foreach ($nurserys as $nursery): ?>
                                 <tr> 
                                     
-                                    <td><?php echo htmlspecialchars($nursery['source_fullname']); ?></td>
+                                    <td><?php echo htmlspecialchars($nursery['nursery_field']); ?></td>
                                     <td><?php echo htmlspecialchars($nursery['quantity']); ?></td>
                                     <td><?php echo htmlspecialchars($nursery['type_name']); ?></td>
                                     <td><?php echo htmlspecialchars($nursery['variety_name']); ?></td>
@@ -108,7 +108,7 @@
                                               echo '<span class="badge text-bg-success">Harvested</span>';
                                           }
                                           // Check if the difference is 3 months or more
-                                          else if ($interval->y > 0 || $interval->m >= 3) {
+                                          else if ($interval->y > 0 || $interval->m >= 24) {
                                               echo '<span class="badge text-bg-warning text-white">Ready</span>';
                                           }
                                           // Otherwise, show "Not Ready"

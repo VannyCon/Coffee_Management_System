@@ -1,5 +1,5 @@
 <?php
-    $title = "Nursery";
+    $title = "Variety";
     include_once('../../components/header.php');
     include_once('../../../controller/PlantVarietyController.php');
 ?>

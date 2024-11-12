@@ -13,6 +13,28 @@ $timelines = $timeline->getTimelineById($nurseryID);
 
 // Calculate Plant Age
 $plantedDate = $plantData['planted_date']; // Format: YYYY-MM-DD
+
+
+// Example $history_date array with 'relevant_date'
+$history_date = $plant->getHarvestStatus($plantData['nursery_id']);
+$relevant_date = $history_date['relevant_date']; // '2024-11-01' (example)
+
+// Create a DateTime object from the relevant date (planted date)
+$start_date = new DateTime($relevant_date);
+
+// Clone the date to create the end date range
+$end_date = clone $start_date;
+
+// Add 24 months to get 2 years later
+$start_date->modify('+24 months');
+
+// Add 30 months to get 2 years and 6 months later
+$end_date->modify('+30 months');
+
+// Format and output the date range
+$HarvestDate =  $start_date->format('F j, Y') . ' - ' . $end_date->format('F j, Y');
+
+
 $plantedDateObj = new DateTime($plantedDate);
 $currentDate = new DateTime();
 $interval = $plantedDateObj->diff($currentDate);
@@ -44,10 +66,14 @@ $pdf->Cell(0, 10, "Plant Information", 0, 1, 'C', true);
 // Plant Details
 $pdf->Ln(5);
 $pdf->SetTextColor(0, 0, 0); // Black text
+
+
+
 $pdf->SetFont('helvetica', 'B', 12);
-$pdf->Cell(45, 10, "Source Fullname", 0, 0);
+$pdf->Cell(45, 10, "Field", 0, 0);
 $pdf->SetFont('helvetica', '', 12);
-$pdf->Cell(0, 10, $plantData['source_fullname'], 0, 1);
+$pdf->Cell(0, 10, $plantData['nursery_field'], 0, 1);
+
 
 $pdf->SetFont('helvetica', 'B', 12);
 $pdf->Cell(45, 10, "Type:", 0, 0);
@@ -69,6 +95,12 @@ $pdf->Cell(45, 10, "Variety Description:", 0, 0);
 $pdf->SetFont('helvetica', '', 12);
 $pdf->Cell(0, 10, $plantData['variety_description'], 0, 1);
 
+
+$pdf->SetFont('helvetica', 'B', 12);
+$pdf->Cell(45, 10, "Source Fullname", 0, 0);
+$pdf->SetFont('helvetica', '', 12);
+$pdf->Cell(0, 10, $plantData['nursery_seedling_source'], 0, 1);
+
 $pdf->SetFont('helvetica', 'B', 12);
 $pdf->Cell(45, 10, "Age:", 0, 0);
 $pdf->SetFont('helvetica', '', 12);
@@ -78,6 +110,16 @@ $pdf->SetFont('helvetica', 'B', 12);
 $pdf->Cell(45, 10, "Planted Date:", 0, 0);
 $pdf->SetFont('helvetica', '', 12);
 $pdf->Cell(0, 10, $plantData['planted_date'], 0, 1);
+
+$pdf->SetFont('helvetica', 'B', 12);
+$pdf->Cell(45, 10, "Harvest Date:", 0, 0);
+$pdf->SetFont('helvetica', '', 12);
+$pdf->Cell(0, 10, $HarvestDate, 0, 1);
+
+$pdf->SetFont('helvetica', 'B', 12);
+$pdf->Cell(45, 10, "Harvest Count:", 0, 0);
+$pdf->SetFont('helvetica', '', 12);
+$pdf->Cell(0, 10, $plantData['harvest_count'], 0, 1);
 
 $pdf->Ln(10);
 

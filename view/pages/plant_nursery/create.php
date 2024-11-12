@@ -1,5 +1,5 @@
 <?php
-    $title = "PlantInfo Create";
+    $title = "Nursery";
 
     include_once('../../../controller/PlantNurseryController.php');
     include_once('../../components/header.php');
@@ -11,25 +11,16 @@
     <div class="card p-4">
         <h1>Create Plant</h1>
         <form method="POST" action="">
+            <!-- Quantity and Planted Date -->
+            <div class="form-group">
+                <label for="nursery_field">nursery_field</label>
+                <input type="text" class="form-control" value="" name="nursery_field" id="nursery_field" placeholder="ex. Batch 3" required>
+            </div>
 
-            <!-- Source Dropdown -->
-            <label for="fullname">Nursery Owner</label>
-            <div class="col">
-                <div class="dropdown w-100">
-                    <input type="text" id="searchSourceInput" class="form-control" name="source_id" placeholder="Choose Source" onkeyup="filterSourceOptions()" onclick="toggleSourceDropdown()" required autocomplete="off">
-                    <input type="hidden" id="source_id" name="source_id">
-                    <div id="sourceDropdownContent" class="dropdown-content w-100">
-                        <?php if (!empty($sources)): ?>
-                            <?php foreach ($sources as $source): ?>
-                                <div onclick="selectSource(this)" data-id="<?php echo $source['source_id']; ?>">
-                                    <?php echo htmlspecialchars(trim($source['source_fullname'])); ?>
-                                </div>
-                            <?php endforeach; ?>
-                        <?php else: ?>
-                            <div>No records found</div>
-                        <?php endif; ?>
-                    </div>
-                </div>
+                        <!-- Quantity and Planted Date -->
+            <div class="form-group">
+                <label for="nursery_seedling_source">Seedling Source</label>
+                <input type="text" class="form-control" value="" name="nursery_seedling_source" id="nursery_seedling_source" placeholder="ex. Cadiz Agriculture " required>
             </div>
 
             <!-- Type Dropdown -->
