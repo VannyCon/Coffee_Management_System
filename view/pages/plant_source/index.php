@@ -47,6 +47,8 @@
             <thead>
                 <tr>
                     <th>Full Name</th>
+                    <th>Variety</th>
+                    <th>Quantity</th>
                     <th>Contact Number</th>
                     <th>Email</th>
                     <th>Address</th>
@@ -58,6 +60,8 @@
                     <?php foreach ($owners as $owner): ?>
                         <tr>
                             <td><?php echo htmlspecialchars($owner['source_fullname']); ?></td>
+                            <td><?php echo htmlspecialchars($owner['source_variety']); ?></td>
+                            <td><?php echo htmlspecialchars($owner['source_quantity']); ?></td>
                             <td><?php echo htmlspecialchars($owner['source_contact_number']); ?></td>
                             <td><?php echo htmlspecialchars($owner['source_email']); ?></td>
                             <td><?php echo htmlspecialchars($owner['source_address']); ?></td>

@@ -21,6 +21,14 @@
                 <input type="text" value="<?php echo htmlspecialchars($getSpecificOwner['source_fullname']); ?>" class="form-control" name="fullname" id="fullname" placeholder="ex. Juan Dela Cruz" required>
             </div>
             <div class="form-group">
+                <label for="source_variety">Variety</label>
+                <input type="text" value="<?php echo htmlspecialchars($getSpecificOwner['source_variety']); ?>" class="form-control" name="source_variety" id="source_variety" placeholder="ex. Robuska" required>
+            </div>
+            <div class="form-group">
+                <label for="source_quantity">Quantity</label>
+                <input type="number" value="<?php echo htmlspecialchars($getSpecificOwner['source_quantity']); ?>" class="form-control" name="source_quantity" id="source_quantity" placeholder="1000" required>
+            </div>
+            <div class="form-group">
                 <label for="contact_number">Contact Number</label>
                 <input type="number" value="<?php echo htmlspecialchars($getSpecificOwner['source_contact_number']); ?>" class="form-control" name="contact_number" id="contact_number" placeholder="ex. 0912341232324" required>
             </div>
@@ -31,10 +39,6 @@
             <div class="form-group">
                 <label for="address">Address</label>
                 <input type="text" value="<?php echo htmlspecialchars($getSpecificOwner['source_address']); ?>" class="form-control" name="address" id="address" placeholder="ex. Brgy. Banquerohan" required>
-            </div>
-            <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                <label class="form-check-label" for="exampleCheck1">Check me out</label>
             </div>
             <input type="hidden" name="action" value="update">
             <button type="submit" class="btn btn-primary">Submit</button>

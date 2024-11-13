@@ -22,10 +22,6 @@
                 <label for="contact_number">Description</label>
                 <textarea class="form-control" id="description" name="description"><?php echo $getSpecificType['description']; ?></textarea>
             </div>
-            <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                <label class="form-check-label" for="exampleCheck1">Check me out</label>
-            </div>
             <input type="hidden" name="action" value="update">
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
