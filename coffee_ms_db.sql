@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 09, 2024 at 07:07 AM
+-- Generation Time: Nov 13, 2024 at 02:39 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -76,7 +76,8 @@ CREATE TABLE `tbl_content` (
 CREATE TABLE `tbl_nursery` (
   `id` int(255) NOT NULL,
   `nursery_id` varchar(255) DEFAULT NULL,
-  `source_id` varchar(255) DEFAULT NULL,
+  `nursery_field` varchar(255) NOT NULL,
+  `nursery_seedling_source` varchar(255) NOT NULL,
   `type_id` varchar(255) DEFAULT NULL,
   `variety_id` varchar(255) DEFAULT NULL,
   `quantity` int(255) NOT NULL,
@@ -88,8 +89,8 @@ CREATE TABLE `tbl_nursery` (
 -- Dumping data for table `tbl_nursery`
 --
 
-INSERT INTO `tbl_nursery` (`id`, `nursery_id`, `source_id`, `type_id`, `variety_id`, `quantity`, `planted_date`, `created_date`) VALUES
-(35, '459d61ef-9e56-11ef-a7c1-6c2408a7860e', '3796cfc4-7944-11ef-945c-6c2408a7860e', 'TID-002', 'VID-002', 20, '2024-08-09', '2024-11-09 04:51:23.282467');
+INSERT INTO `tbl_nursery` (`id`, `nursery_id`, `nursery_field`, `nursery_seedling_source`, `type_id`, `variety_id`, `quantity`, `planted_date`, `created_date`) VALUES
+(41, '16eb6add-a0f8-11ef-a84f-6c2408a7860e', 'Batch 3', 'agri 3', 'TID-003', 'VID-003', 3, '2024-11-03', '2024-11-12 13:14:45.738546');
 
 -- --------------------------------------------------------
 
@@ -101,6 +102,8 @@ CREATE TABLE `tbl_source` (
   `id` int(255) NOT NULL,
   `source_id` varchar(255) DEFAULT NULL,
   `source_fullname` varchar(255) DEFAULT NULL,
+  `source_variety` varchar(255) NOT NULL,
+  `source_quantity` int(255) NOT NULL,
   `source_contact_number` varchar(255) DEFAULT NULL,
   `source_email` varchar(255) NOT NULL,
   `source_address` varchar(255) DEFAULT NULL,
@@ -111,11 +114,11 @@ CREATE TABLE `tbl_source` (
 -- Dumping data for table `tbl_source`
 --
 
-INSERT INTO `tbl_source` (`id`, `source_id`, `source_fullname`, `source_contact_number`, `source_email`, `source_address`, `created_date`) VALUES
-(1, '3ce2b267-793f-11ef-945c-6c2408a7860e', 'Dr. Patrick Escalante', '097123213435', 'dr.pat@gmail.com', 'Cadiz City', '2024-11-09 06:06:13.729958'),
-(3, '3796cfc4-7944-11ef-945c-6c2408a7860e', 'Angel Paborada', '09812323224', 'angel@gmail.com', 'Calatrava City', '2024-11-09 06:06:21.142822'),
-(4, '3b8909f2-7944-11ef-945c-6c2408a7860e', 'Beverly Saabanal', '0922222222', 'bev@gmail.com', 'Toboso', '2024-11-09 06:06:30.485247'),
-(7, '12eece16-79ac-11ef-ab8b-6c2408a7860e', 'Jessa Mae Nicos', '09232451222', 'jes@gmail.com', 'Escalante City, Negros Occidental', '2024-11-09 06:06:37.518360');
+INSERT INTO `tbl_source` (`id`, `source_id`, `source_fullname`, `source_variety`, `source_quantity`, `source_contact_number`, `source_email`, `source_address`, `created_date`) VALUES
+(1, '3ce2b267-793f-11ef-945c-6c2408a7860e', 'Dr. Patrick Escalante', 'Rubosks', 500, '097123213435', 'dr.pat@gmail.com', 'Cadiz City', '2024-11-13 01:33:23.169392'),
+(3, '3796cfc4-7944-11ef-945c-6c2408a7860e', 'Angel Paborada', 'Ruboska', 80, '09812323224', 'angel@gmail.com', 'Calatrava City', '2024-11-13 01:18:05.126670'),
+(4, '3b8909f2-7944-11ef-945c-6c2408a7860e', 'Beverly Saabanal', 'Ruboska', 90, '0922222222', 'bev@gmail.com', 'Toboso', '2024-11-13 01:18:01.385943'),
+(7, '12eece16-79ac-11ef-ab8b-6c2408a7860e', 'Jessa Mae Nicos', 'Ruboska', 100, '09232451222', 'jes@gmail.com', 'Escalante City, Negros Occidental', '2024-11-13 01:17:55.510815');
 
 -- --------------------------------------------------------
 
@@ -238,9 +241,7 @@ ALTER TABLE `tbl_content`
 ALTER TABLE `tbl_nursery`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `plant_id` (`nursery_id`),
-  ADD KEY `nurser_owner_id_fk` (`source_id`),
   ADD KEY `nursery_id` (`nursery_id`),
-  ADD KEY `source_id` (`source_id`),
   ADD KEY `plant_type_id` (`type_id`),
   ADD KEY `plant_variety_id` (`variety_id`),
   ADD KEY `variety_id` (`variety_id`);
@@ -298,19 +299,19 @@ ALTER TABLE `tbl_content`
 -- AUTO_INCREMENT for table `tbl_nursery`
 --
 ALTER TABLE `tbl_nursery`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `tbl_source`
 --
 ALTER TABLE `tbl_source`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `tbl_timeline`
 --
 ALTER TABLE `tbl_timeline`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `tbl_type`
@@ -338,7 +339,6 @@ ALTER TABLE `tbl_content`
 -- Constraints for table `tbl_nursery`
 --
 ALTER TABLE `tbl_nursery`
-  ADD CONSTRAINT `plant_owner` FOREIGN KEY (`source_id`) REFERENCES `tbl_source` (`source_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `type` FOREIGN KEY (`type_id`) REFERENCES `tbl_type` (`type_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `variety` FOREIGN KEY (`variety_id`) REFERENCES `tbl_variety` (`variety_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 

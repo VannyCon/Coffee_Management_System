@@ -36,7 +36,7 @@
             </div>
             
             <input type="hidden" name="action" value="create">
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary mt-2">Submit</button>
         </form>
     </div>
 </div>

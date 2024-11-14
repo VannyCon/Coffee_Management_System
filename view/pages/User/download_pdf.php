@@ -67,7 +67,10 @@ $pdf->Cell(0, 10, "Plant Information", 0, 1, 'C', true);
 $pdf->Ln(5);
 $pdf->SetTextColor(0, 0, 0); // Black text
 
-
+$pdf->SetFont('helvetica', 'B', 12);
+$pdf->Cell(45, 10, "Nursery Owner", 0, 0);
+$pdf->SetFont('helvetica', '', 12);
+$pdf->Cell(0, 10, "Dr. Patrick G. Escalante", 0, 1);
 
 $pdf->SetFont('helvetica', 'B', 12);
 $pdf->Cell(45, 10, "Field", 0, 0);
@@ -97,7 +100,7 @@ $pdf->Cell(0, 10, $plantData['variety_description'], 0, 1);
 
 
 $pdf->SetFont('helvetica', 'B', 12);
-$pdf->Cell(45, 10, "Source Fullname", 0, 0);
+$pdf->Cell(45, 10, "Seedling Source", 0, 0);
 $pdf->SetFont('helvetica', '', 12);
 $pdf->Cell(0, 10, $plantData['nursery_seedling_source'], 0, 1);
 

@@ -12,7 +12,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        Are you sure you want to delete this owner?
+        Are you sure you want to delete this?
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
@@ -38,8 +38,12 @@
         <input type="text" id="searchInput" class="form-control" placeholder="Search for Variety...">
     </div>
     <div class="mb-3">
-        <a type="button" class="btn btn-warning " href="create.php">Add Record</a>
-        <a type="button" class="btn btn-primary mx-2" href="../plant_nursery/index.php">Check Plant List</a>
+        <a type="button" class="btn btn-sm d-md-none btn-warning " href="create.php">Add Record</a>
+        <a type="button" class="btn btn-sm d-md-none btn-primary mx-2" href="../plant_nursery/index.php">Check Plant List</a>
+
+        <a type="button" class="btn d-none d-md-inline-block btn-warning " href="create.php">Add Record</a>
+        <a type="button" class="btn d-none d-md-inline-block btn-primary mx-2" href="../plant_nursery/index.php">Check Plant List</a>
+
     </div>
     <div class="table-responsive">
        <!-- Table for nursery owners -->
@@ -48,6 +52,7 @@
                 <tr>
                     <th>Variety Name</th>
                     <th>Description</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -56,12 +61,15 @@
                         <tr>
                             <td><?php echo htmlspecialchars($variety['variety_name']); ?></td>
                             <td><?php echo htmlspecialchars($variety['description']); ?></td>
-                            <td>
-                                <a type="button" class="btn btn-info mx-0 mx-md-2 my-1 my-md-0" href="update.php?ID=<?php echo htmlspecialchars($variety['id']); ?>">Update</a>
-                                <button type="button" class="btn btn-danger" data-id="<?php echo htmlspecialchars($variety['id']); ?>" onclick="setDeleteId(this)">Delete</button>
+                            <td class=" justify-content-center align-items-center">
+                                <a type="button" class="btn btn-info mx-1 mb-1" href="update.php?ID=<?php echo htmlspecialchars($variety['id']); ?>">
+                                    <i class='bx bx-edit icon text-white'></i>
+                                </a>
+                                <button type="button" class="btn btn-danger mx-1 mb-1" data-id="<?php echo htmlspecialchars($variety['id']); ?>" onclick="setDeleteId(this)">
+                                    <i class='bx bx-trash icon'></i>
+                                </button>
                             </td>
 
-                            
                         </tr>
                     <?php endforeach; ?>
                 <?php else: ?>

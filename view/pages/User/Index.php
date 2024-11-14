@@ -103,7 +103,8 @@
         function startScanning() {
             codeReader.getVideoInputDevices()
                 .then((videoInputDevices) => {
-                    selectedDeviceId = videoInputDevices[0].deviceId;
+                    // Select the first back camera or environment-facing camera
+                    selectedDeviceId = videoInputDevices.find(device => device.label.toLowerCase().includes('back'))?.deviceId || videoInputDevices[0].deviceId;
                     return codeReader.decodeFromVideoDevice(selectedDeviceId, 'reader', (result, err) => {
                         if (result) {
                             console.log(result);

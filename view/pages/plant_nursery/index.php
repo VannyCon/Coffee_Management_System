@@ -14,7 +14,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        Are you sure you want to delete this owner?
+        Are you sure you want to delete this?
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
@@ -41,7 +41,8 @@
     </div>
 
     <div class="my-2">
-     <a type="button" class="btn btn-warning " href="create.php">Add Record</a>
+     <a type="button" class="btn btn-warning btn-sm d-md-none" href="create.php">Add Record</a>
+     <a type="button" class="btn btn-warning d-none d-md-inline-block" href="create.php">Add Record</a>
     </div>
       <div class="table-responsive">
                 <!-- Table for nursery owners -->
@@ -80,14 +81,17 @@
                                     </td>
 
                                     <td>
-                                        <a type="button" class="btn btn-info mx-0 mx-md-2 my-1 my-md-0" href="update.php?ID=<?php echo htmlspecialchars($nursery['id']); ?>">Update</a>
-                                        <button type="button" class="btn btn-danger" data-id="<?php echo htmlspecialchars($nursery['id']); ?>" onclick="setDeleteId(this)">Delete</button>
+                                        <a type="button" class="btn  btn-info mx-0 mx-md-2 my-1 my-md-0" href="update.php?ID=<?php echo htmlspecialchars($nursery['id']); ?>"><i class='bx bx-edit icon text-white'></i></a>
+                                        <button type="button" class="btn  btn-danger" data-id="<?php echo htmlspecialchars($nursery['id']); ?>" onclick="setDeleteId(this)"><i class='bx bx-trash icon'></i></button>
                                     </td>
                                     <td>
-                                      <a type="button" class="btn btn-primary mx-2" href="qr.php?plantID=<?php echo htmlspecialchars($nursery['nursery_id']); ?>">Donwload</a>
+                                      <a type="button" class="btn btn-sm d-md-none btn-primary mx-2" href="qr.php?plantID=<?php echo htmlspecialchars($nursery['nursery_id']); ?>">Donwload</a>
+
+                                      <a type="button" class="btn d-none d-md-inline-block btn-primary mx-2" href="qr.php?plantID=<?php echo htmlspecialchars($nursery['nursery_id']); ?>">Donwload</a>
                                     </td>
                                     <td>
-                                      <a type="button" class="btn btn-outline-success mx-2" href="../plant_timeline/index.php?id=<?php echo htmlspecialchars($nursery['id']); ?>&nurseryID=<?php echo htmlspecialchars($nursery['nursery_id']); ?>">Check</a>
+                                      <a type="button" class="btn btn-sm d-md-none btn-outline-success mx-2" href="../plant_timeline/index.php?id=<?php echo htmlspecialchars($nursery['id']); ?>&nurseryID=<?php echo htmlspecialchars($nursery['nursery_id']); ?>">Check</a>
+                                      <a type="button" class="btn d-none d-md-inline-block btn-outline-success mx-2" href="../plant_timeline/index.php?id=<?php echo htmlspecialchars($nursery['id']); ?>&nurseryID=<?php echo htmlspecialchars($nursery['nursery_id']); ?>">Check</a>
                                     </td>
                                     <td>
                                       <?php 

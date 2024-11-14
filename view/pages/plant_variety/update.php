@@ -23,7 +23,7 @@
                 <textarea class="form-control" id="description" name="description"><?php echo $getSpecificType['description']; ?></textarea>
             </div>
             <input type="hidden" name="action" value="update">
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary mt-2">Submit</button>
         </form>
     </div>
 </div>

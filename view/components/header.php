@@ -20,10 +20,6 @@
 <body class="px-1 px-md-5">
 <style>
     
-.navbar {
-    margin-top: 20px
-}
-
 .navbar-brand {
     font-weight: bold;
 }
@@ -32,6 +28,8 @@
     background-color: #dc3545;
     color: white;
 } */
+
+
 
 .dashboard-card {
     background-color: white;
@@ -90,6 +88,7 @@
     flex-direction: column;
     justify-content: center;
 }
+
 </style>
 
 
@@ -97,8 +96,8 @@
     // Redirect to login if not logged in
     if (!isset($_SESSION['username']) && $title != "User") {
 ?>
-
-<nav class="sidebar close">
+    <!-- Sidebar Menu for Desktop -->
+    <nav class="sidebar close d-none d-md-block">
         <header>
             <div class="image-text">
                 <span class="image">
@@ -107,9 +106,8 @@
 
                 <div class="text logo-text">
                     <span class="name">CMS</span>
-                    <span class="profession">Admin
-                    </span>
-                                    </div>
+                    <span class="profession">Admin</span>
+                </div>
             </div>
 
             <i class='bx bx-chevron-right toggle'></i>
@@ -148,26 +146,77 @@
                             <span class="text nav-text">Source</span>
                         </a>
                     </li>
-                   
                 </ul>
             </div>
 
-            <div class="bottom-content" class="w-100">
-                <form action='' method='post' class="w-100">
+            <div class="bottom-content">
+                <form action='' method='post'>
                     <input type='hidden' name='action' value='logout'>
-                    <li class="w-100">
-                        <button type='submit' class="d-flex w-100 btn-logout p-0 py-3" style="padding-left: -10px">
-                            <i class='bx bx-log-out icon p-0 m-0' style="margin-left: -10px;"></i>
-                            <span class="text nav-text text-start" style="line-height: 1;">Logout</span>
+                    <li class="">
+                        <button type='submit' class="d-flex align-items-center btn-logout p-0 py-3">
+                            <i class='bx bx-log-out icon'></i>
+                            <span class="text nav-text">Logout</span>
                         </button>
                     </li>
                 </form>
             </div>
         </div>
     </nav>
+
+    <!-- Mobile Navigation -->
+    <nav class="navbar navbar-expand-md d-md-none fixed-top mobile-nav-bg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="../../../assets/images/logo.png" alt="" width="50" height="50">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mobileNav" 
+                    aria-controls="mobileNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse bg-light p-2 rounded" id="mobileNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
+                    <li class="nav-item">
+                        <a class="nav-link <?php echo $title == 'Dashboard' ? 'active' : ''; ?>" href="../dashboard/index.php">
+                            <i class='bx bx-home-alt'></i> Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <?php echo $title == 'Type' ? 'active' : ''; ?>" href="../plant_type/index.php">
+                            <i class='bx bx-list-ol'></i> Type
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <?php echo $title == 'Variety' ? 'active' : ''; ?>" href="../plant_variety/index.php">
+                            <i class='bx bx-layer'></i> Variety
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <?php echo $title == 'Nursery' ? 'active' : ''; ?>" href="../plant_nursery/index.php">
+                            <i class='bx bx-leaf'></i> Nursery
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <?php echo $title == 'Source' ? 'active' : ''; ?>" href="../plant_source/index.php">
+                            <i class='bx bx-face'></i> Source
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <form action='' method='post'>
+                            <input type='hidden' name='action' value='logout'>
+                            <button type='submit' class="nav-link text-danger border-0 bg-transparent">
+                                <i class='bx bx-log-out'></i> Logout
+                            </button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
     <?php
     }
 ?>
 
-   <section class="home mb-3 p-4">
+   <section class="home mb-3 p-1 p-lg-4 pt-5 pt-md-0 mt-5 mt-lg-0">
 

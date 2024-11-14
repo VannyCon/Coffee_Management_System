@@ -13,7 +13,7 @@
         <form method="POST" action="">
             <!-- Quantity and Planted Date -->
             <div class="form-group">
-                <label for="nursery_field">nursery_field</label>
+                <label for="nursery_field">Field</label>
                 <input type="text" class="form-control" value="" name="nursery_field" id="nursery_field" placeholder="ex. Batch 3" required>
             </div>
 

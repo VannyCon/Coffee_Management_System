@@ -41,7 +41,7 @@
                 <input type="text" value="<?php echo htmlspecialchars($getSpecificOwner['source_address']); ?>" class="form-control" name="address" id="address" placeholder="ex. Brgy. Banquerohan" required>
             </div>
             <input type="hidden" name="action" value="update">
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary mt-2">Submit</button>
         </form>
     </div>
 </div>

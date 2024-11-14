@@ -30,6 +30,11 @@ body {
     transition: var(--tran-05);
 }
 
+.mobile-nav-bg {
+    background-color: #f3ccaf;
+
+}
+
 ::selection {
     background-color: var(--primary-color);
     color: #fff;
@@ -60,6 +65,32 @@ body.dark {
 .sidebar.close {
     width: 88px;
 }
+
+/* Hide sidebar on mobile */
+@media (max-width: 767.98px) {
+    .sidebar {
+        display: none !important;
+        position: static !important;
+        width: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .home {
+        left: 0 !important;
+        width: 100% !important;
+        padding-top: 60px;
+        /* Space for mobile navbar */
+    }
+}
+
+/* Show sidebar on desktop */
+@media (min-width: 768px) {
+    .navbar {
+        display: none !important;
+    }
+}
+
 
 /* ===== Reusable code - Here ===== */
 .sidebar li {

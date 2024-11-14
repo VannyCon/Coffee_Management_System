@@ -17,10 +17,7 @@
 
                                 <select class="form-select" name="timeline_title" id="timeline_title" aria-label="Plant Status">
                                     <option value="Harvested">Harvesting</option>
-                                    <option value="Abuno">Abuno</option>
                                     <option value="Fertilizing">Fertilizing</option>
-                                    <option value="Weeding">Weeding</option>
-                                    <option value="Mulching">Mulching</option>
                                 </select>
 
                             </div>
