@@ -103,16 +103,16 @@
                 <div class="modal-body">
                     <form method="POST" action="">
                             <div class="form-group">
-                                <label for="content">Content</label>
-                                <input type="text" class="form-control" id="content"  name="content"  placeholder="Enter first value">
-                            </div>
-                            <div class="form-group">
                                 <label for="status">Status</label>
                                 <input type="text" class="form-control" id="status"  name="status"  placeholder="Enter first value">
                             </div>
                             <div class="form-group">
                                 <label for="history_time">Time</label>
-                                <input type="time" class="form-control" id="status"  name="status"  placeholder="10:00pm">
+                                <input type="time" class="form-control" id="status"  name="history_time"  placeholder="10:00pm">
+                            </div>
+                            <div class="form-group">
+                                <label for="content">Content</label>
+                                <textarea class="form-control" id="content" name="content" placeholder="Enter first value" rows="4"></textarea>
                             </div>
                         </div>
                         <input type="hidden" name="contentID" id="contentID">
@@ -138,12 +138,12 @@
             <div class="modal-body">
                 <form method="POST" action="">
                     <div class="form-group">
-                        <label for="content">Content</label>
-                        <input type="text" class="form-control" id="edit_content" name="content" placeholder="Enter first value">
-                    </div>
-                    <div class="form-group">
                         <label for="status">Status</label>
                         <input type="text" class="form-control" id="edit_status" name="status" placeholder="Enter status">
+                    </div>
+                    <div class="form-group">
+                        <label for="content">Content</label>
+                        <textarea class="form-control" id="edit_content" name="content" placeholder="Enter first value" rows="4"></textarea>
                     </div>
                     <!-- Use hidden field for contentID -->
                     <input type="hidden" name="contentID" id="edit_id"> <!-- Correct hidden field ID -->

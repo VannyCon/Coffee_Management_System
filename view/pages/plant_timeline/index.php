@@ -153,7 +153,7 @@
 
                                 <div class="card mb-2">
                                     <div class="card-body d-flex justify-content-between align-items-center
-                                    <?php echo ($content['status'] == 'success') ? 'my-bg-success' : 'my-bg-info'; ?> 
+                                    <?php echo ($content['status'] == 'Success') ? 'my-bg-success' : 'my-bg-info'; ?> 
                                     rounded">
                                         <p class="me-3"><?php echo htmlspecialchars($content['content']); ?></p>
                                         <div>
