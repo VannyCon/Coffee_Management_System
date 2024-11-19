@@ -9,13 +9,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nursery Owners</title>
     <!-- Bootstrap CSS CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="../../css/bootsrap.css">
     <link rel="stylesheet" href="../../css/style.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../../js/chart.js"></script>
     <!-- Font Awesome CDN -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+    <link rel="stylesheet" href="../../css/fontawesome.css">
     <link rel="stylesheet" href="../../css/sidebar.css">
+    <!-- <link rel="stylesheet" href="../../css/boxicons.css"> -->
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+     
 </head>
 <body class="px-1 px-md-5">
 <style>
@@ -153,9 +157,9 @@
                 <form action='' method='post'>
                     <input type='hidden' name='action' value='logout'>
                     <li class="">
-                        <button type='submit' class="d-flex align-items-center btn-logout p-0 py-3">
-                            <i class='bx bx-log-out icon'></i>
-                            <span class="text nav-text">Logout</span>
+                        <button type='submit' class="d-flex w-100 btn-logout p-0 py-3" style="padding-left: -10px">
+                            <i class='bx bx-log-out icon p-0 m-0' style="margin-left: -10px;"></i>
+                            <span class="text nav-text text-start" style="line-height: 1;">Logout</span>
                         </button>
                     </li>
                 </form>
