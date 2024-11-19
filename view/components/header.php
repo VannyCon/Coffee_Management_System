@@ -134,16 +134,16 @@
                             <span class="text nav-text">Variety</span>
                         </a>
                     </li>
+                    <li class="nav-link <?php echo $title == 'Source' ? 'active' : ''; ?>">
+                        <a href="../plant_source/index.php">
+                            <i class='bx bx-face icon'></i>
+                            <span class="text nav-text">Sources</span>
+                        </a>
+                    </li>
                     <li class="nav-link <?php echo $title == 'Nursery' ? 'active' : ''; ?>">
                         <a href="../plant_nursery/index.php">
                             <i class='bx bx-leaf icon'></i>
                             <span class="text nav-text">Nursery</span>
-                        </a>
-                    </li>
-                    <li class="nav-link <?php echo $title == 'Source' ? 'active' : ''; ?>">
-                        <a href="../plant_source/index.php">
-                            <i class='bx bx-face icon'></i>
-                            <span class="text nav-text">Source</span>
                         </a>
                     </li>
                 </ul>
@@ -192,15 +192,16 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link <?php echo $title == 'Source' ? 'active' : ''; ?>" href="../plant_source/index.php">
+                            <i class='bx bx-face'></i> Sources
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link <?php echo $title == 'Nursery' ? 'active' : ''; ?>" href="../plant_nursery/index.php">
                             <i class='bx bx-leaf'></i> Nursery
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link <?php echo $title == 'Source' ? 'active' : ''; ?>" href="../plant_source/index.php">
-                            <i class='bx bx-face'></i> Source
-                        </a>
-                    </li>
+                 
                     <li class="nav-item">
                         <form action='' method='post'>
                             <input type='hidden' name='action' value='logout'>
