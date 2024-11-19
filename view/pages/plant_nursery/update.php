@@ -23,12 +23,28 @@ error_reporting(E_ALL);
                 <input type="text" class="form-control" value="<?php echo htmlspecialchars($nurserySpecificInfo['nursery_field']); ?>" name="nursery_field" id="nursery_field" placeholder="ex. Batch 3" required>
             </div>
 
-                        <!-- Quantity and Planted Date -->
-            <div class="form-group">
-                <label for="nursery_seedling_source">Seedling Source</label>
-                <input type="text" class="form-control" value="<?php echo htmlspecialchars($nurserySpecificInfo['nursery_seedling_source']); ?>" name="nursery_seedling_source" id="nursery_seedling_source" placeholder="ex. Cadiz Agriculture " required>
+              
+            <!-- Source Dropdown -->
+            <div class="form-group my-1">
+                <label for="source_id">Seedling Source</label>
+                <div class="dropdown w-100">
+                    <input type="text" id="searchSourceInput" class="form-control" name="source_id" placeholder="Choose Source" onkeyup="filterSourceOptions()" value="<?php echo htmlspecialchars($nurserySpecificInfo['source_fullname']); ?>" onclick="toggleSourceDropdown()" required autocomplete="off">
+                    <input type="hidden" id="source_id" name="source_id" value="<?php echo htmlspecialchars($nurserySpecificInfo['source_id']); ?>">
+                    <div id="sourceDropdownContent" class="dropdown-content w-100">
+                        <?php if (!empty($sources)): ?>
+                            <?php foreach ($sources as $source): ?>
+                                <div onclick="selectSource(this)" data-id="<?php echo $source['source_id']; ?>">
+                                    <?php echo htmlspecialchars(trim($source['source_fullname'])); ?>
+                                </div>
+                               
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <div>No records found</div>
+                        <?php endif; ?>
+                    </div>
+                </div>
             </div>
-
+            
             <!-- Type Dropdown -->
             <div class="form-group my-1">
                 <label for="plant_type">Type</label>

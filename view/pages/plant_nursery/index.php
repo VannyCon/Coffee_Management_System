@@ -85,9 +85,9 @@
                                         <button type="button" class="btn  btn-danger" data-id="<?php echo htmlspecialchars($nursery['id']); ?>" onclick="setDeleteId(this)"><i class='bx bx-trash icon'></i></button>
                                     </td>
                                     <td>
-                                      <a type="button" class="btn btn-sm d-md-none btn-primary mx-2" href="qr.php?plantID=<?php echo htmlspecialchars($nursery['nursery_id']); ?>">Donwload</a>
+                                      <a type="button" class="btn btn-sm d-md-none btn-primary mx-2" href="qr.php?plantID=<?php echo htmlspecialchars($nursery['nursery_id']); ?>">Download</a>
 
-                                      <a type="button" class="btn d-none d-md-inline-block btn-primary mx-2" href="qr.php?plantID=<?php echo htmlspecialchars($nursery['nursery_id']); ?>">Donwload</a>
+                                      <a type="button" class="btn d-none d-md-inline-block btn-primary mx-2" href="qr.php?plantID=<?php echo htmlspecialchars($nursery['nursery_id']); ?>">Download</a>
                                     </td>
                                     <td>
                                       <a type="button" class="btn btn-sm d-md-none btn-outline-success mx-2" href="../plant_timeline/index.php?id=<?php echo htmlspecialchars($nursery['id']); ?>&nurseryID=<?php echo htmlspecialchars($nursery['nursery_id']); ?>">Check</a>

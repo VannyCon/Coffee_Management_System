@@ -27,12 +27,13 @@
             <div class="row">
                 <div class="col-md-12 text-left">
                     <p><strong>Nursery Owner:</strong> Doc. Patrick Escalante</p>
+                    <p><strong>Address:</strong> Brgy. Daga, Cadiz City, Negros Occidental,6121</p>
                     <p><strong>Field:</strong> <?php echo $plantData['nursery_field']; ?></p>
                     <p><strong>Type:</strong> <?php echo $plantData['type_name']; ?></p>
                     <p><strong>Type Description:</strong> <?php echo $plantData['type_description']; ?></p>
                     <p><strong>Variety:</strong> <?php echo $plantData['variety_name']; ?></p>
                     <p><strong>Variety Description:</strong> <?php echo $plantData['variety_description']; ?></p>
-                    <p><strong>Seedling Source Fullname:</strong> <?php echo $plantData['nursery_seedling_source']; ?></p>
+                    <p><strong>Seedling Source:</strong> <?php echo $plantData['source_fullname']; ?></p>
                     <p><strong>Age: </strong> <?php
                                                     // Sample planted_date from $plantData
                                                     $plantedDate = $plantData['planted_date']; // Format: YYYY-MM-DD
@@ -126,10 +127,11 @@
                                 </div>
                                 <div class="col-6 col-md-2 d-flex justify-content-center align-items-center mt-2 mt-md-0">
                                     <a class="btn btn-info mx-1 px-3 px-md-5" onclick="setEditTimelineData(<?php echo htmlspecialchars(json_encode($timelineItem)); ?>)">
-                                        Edit
+                                        <i class='bx
+                                        bx-edit icon text-white'></i>
                                     </a>
                                     <a class="btn btn-danger mx-1 px-3 px-md-5" onclick="setDeleteTimelineId('<?php echo htmlspecialchars($timelineItem['id']); ?>')">
-                                        Delete
+                                     <i class='bx bx-trash icon'></i>
                                     </a>
                                 </div>
                             </div>
@@ -157,12 +159,13 @@
                                     rounded">
                                         <p class="me-3"><?php echo htmlspecialchars($content['content']); ?></p>
                                         <div>
-                                            <a class="btn btn-outline-info mx-1 px-3 px-md-5" onclick="setEditContentData(<?php echo htmlspecialchars(json_encode($content)); ?>)">
-                                                Edit
+                                            <a class="btn btn-info mx-1 px-3 px-md-5" onclick="setEditContentData(<?php echo htmlspecialchars(json_encode($content)); ?>)">
+                                                <i class='bx
+                                                bx-edit icon text-white'></i>
                                             </a>
-                                            <a class="btn btn-outline-danger mx-1 px-3 px-md-5" onclick="setDeleteContent('<?php echo htmlspecialchars($content['id']); ?>')">
+                                            <!-- <a class="btn btn-outline-danger mx-1 px-3 px-md-5" onclick="setDeleteContent('<?php echo htmlspecialchars($content['id']); ?>')">
                                                 Delete
-                                            </a>
+                                            </a> -->
                                         </div>
                                     </div>
                                 </div>

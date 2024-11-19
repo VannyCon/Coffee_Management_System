@@ -49,10 +49,10 @@
         <table border="1" class="table" id="nurseryOwnersTable">
             <thead>
                 <tr>
-                    <th>Full Name</th>
+                    <th>Source Name</th>
                     <th>Variety</th>
                     <th>Quantity</th>
-                    <th>Contact Number</th>
+                    <th>Contact</th>
                     <th>Email</th>
                     <th>Address</th>
                     <th>Manage</th>
@@ -61,6 +61,7 @@
             <tbody>
                 <?php if (!empty($owners)): ?>
                     <?php foreach ($owners as $owner): ?>
+                        <?php if ($owner['id'] == 0) continue; // Skip entries with ID 0 ?>
                         <tr>
                             <td><?php echo htmlspecialchars($owner['source_fullname']); ?></td>
                             <td><?php echo htmlspecialchars($owner['source_variety']); ?></td>
@@ -70,7 +71,8 @@
                             <td><?php echo htmlspecialchars($owner['source_address']); ?></td>
                             <td class="justify-content-center align-items-center">
                                 <a type="button" class="btn btn-info mx-1 mb-1" href="update.php?userID=<?php echo htmlspecialchars($owner['id']); ?>">
-                                    <i class='bx bx-edit icon text-white'></i>
+                                    <i class='bx
+                                     bx-edit icon text-white'></i>
                                 </a>
                                 <button type="button" class="btn btn-danger mx-1 mb-1" data-id="<?php echo htmlspecialchars($owner['id']); ?>" onclick="setDeleteId(this)">
                                     <i class='bx bx-trash icon'></i>

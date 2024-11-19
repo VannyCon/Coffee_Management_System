@@ -29,7 +29,7 @@
                     <p><strong>Type Description:</strong> <?php echo $plantData['type_description']; ?></p>
                     <p><strong>Variety:</strong> <?php echo $plantData['variety_name']; ?></p>
                     <p><strong>Variety Description:</strong> <?php echo $plantData['variety_description']; ?></p>
-                    <p><strong>Seedling Source Fullname:</strong> <?php echo $plantData['nursery_seedling_source']; ?></p>
+                    <p><strong>Seedling Source:</strong> <?php echo $plantData['nursery_seedling_source']; ?></p>
                     <p><strong>Age: </strong> <?php
                                                     // Sample planted_date from $plantData
                                                     $plantedDate = $plantData['planted_date']; // Format: YYYY-MM-DD

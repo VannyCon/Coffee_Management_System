@@ -10,7 +10,6 @@ class PlantInfo extends config {
                             n.id,
                             n.nursery_id,
                             n.nursery_field,
-                            n.nursery_seedling_source,
                             n.type_id,
                             t.type_name,
                             t.description AS type_description,
@@ -37,16 +36,16 @@ class PlantInfo extends config {
         }
     }
 
-    public function create($nursery_field, $nursery_seedling_source, $type_id, $variety_id, $quantity, $planted_date) {
+    public function create($nursery_field, $source_id, $type_id, $variety_id, $quantity, $planted_date) {
         try {
             // Define the query with placeholders
-            $query = "INSERT INTO `tbl_nursery`(`nursery_id`, `nursery_field`, `nursery_seedling_source`, `type_id`, `variety_id`,`quantity`, `planted_date`) 
-                      VALUES (UUID(), :nursery_field, :nursery_seedling_source, :type_id, :variety_id, :quantity, :planted_date)";
+            $query = "INSERT INTO `tbl_nursery`(`nursery_id`, `nursery_field`, `source_id`, `type_id`, `variety_id`,`quantity`, `planted_date`) 
+                      VALUES (UUID(), :nursery_field, :source_id, :type_id, :variety_id, :quantity, :planted_date)";
             // Prepare the query
             $stmt = $this->pdo->prepare($query);
             // Bind the values to the placeholders
             $stmt->bindParam(':nursery_field', $nursery_field);
-            $stmt->bindParam(':nursery_seedling_source', $nursery_seedling_source);
+            $stmt->bindParam(':source_id', $source_id);
             $stmt->bindParam(':type_id', $type_id);
             $stmt->bindParam(':variety_id', $variety_id);
             $stmt->bindParam(':quantity', $quantity);
@@ -70,21 +69,25 @@ class PlantInfo extends config {
                                 n.id,
                                 n.nursery_id,
                                 n.nursery_field,
-                                n.nursery_seedling_source,
+                                n.source_id,
                                 n.type_id,
                                 t.type_name,
                                 n.variety_id,
                                 v.variety_name,
                                 n.quantity,
-                                n.planted_date
+                                n.planted_date,
+                                s.source_fullname,
+                                s.source_id
                             FROM 
                                 tbl_nursery n
                             JOIN 
                                 tbl_type t ON n.type_id = t.type_id
                             JOIN 
                                 tbl_variety v ON n.variety_id = v.variety_id
+                            JOIN 
+                                tbl_source s ON n.source_id = s.source_id
                             WHERE
-                                n.id = :id
+                                n.id =  :id
                             ";
                 $stmt = $this->pdo->prepare($query); // Prepare the query
                 $stmt->bindParam(':id', $id); // Bind the value
@@ -102,7 +105,6 @@ class PlantInfo extends config {
                             n.id,
                             n.nursery_id,
                             n.nursery_field,
-                            n.nursery_seedling_source,
                             n.type_id,
                             t.type_name,
                             t.description AS type_description,
@@ -112,6 +114,8 @@ class PlantInfo extends config {
                             n.quantity,
                             n.planted_date,
                             n.created_date,
+                            s.source_fullname,
+                            s.source_id,
                             -- This will count the number of harvested plants for the specific nursery ID
                             (SELECT COUNT(*) 
                              FROM tbl_timeline 
@@ -122,6 +126,8 @@ class PlantInfo extends config {
                             tbl_type t ON n.type_id = t.type_id
                         JOIN 
                             tbl_variety v ON n.variety_id = v.variety_id
+                        JOIN 
+                            tbl_source s ON n.source_id = s.source_id
                         WHERE
                             n.nursery_id = :nurseryID";
             $stmt = $this->pdo->prepare($query); // Prepare the query
@@ -135,12 +141,12 @@ class PlantInfo extends config {
     }
     
 
-    public function update($id, $nursery_field, $nursery_seedling_source, $type_id, $variety_id, $quantity, $planted_date) {
+    public function update($id, $nursery_field, $source_id, $type_id, $variety_id, $quantity, $planted_date) {
         try {
             // Define the query with placeholders for updating an existing record
             $query = "UPDATE `tbl_nursery` 
                       SET `nursery_field` = :nursery_field,
-                          `nursery_seedling_source` = :nursery_seedling_source,
+                          `source_id` = :source_id,
                           `type_id` = :type_id,
                           `variety_id` = :variety_id,
                           `quantity` = :quantity,
@@ -151,7 +157,7 @@ class PlantInfo extends config {
             $stmt = $this->pdo->prepare($query);
             // Bind the values to the placeholders
             $stmt->bindParam(':nursery_field', $nursery_field);
-            $stmt->bindParam(':nursery_seedling_source', $nursery_seedling_source);
+            $stmt->bindParam(':source_id', $source_id);
             $stmt->bindParam(':type_id', $type_id);
             $stmt->bindParam(':variety_id', $variety_id);
             $stmt->bindParam(':quantity', $quantity);

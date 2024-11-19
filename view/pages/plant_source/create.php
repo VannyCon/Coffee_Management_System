@@ -11,7 +11,7 @@
       <h1>Create Nursery Owner</h1>
         <form method="POST" action="">
             <div class="form-group">
-                <label for="fullname">Fullname</label>
+                <label for="fullname">Source Name</label>
                 <input type="text" class="form-control" name="fullname" id="fullname" placeholder="ex. Juan Dela Cruz" required>
             </div>
             <div class="form-group">
@@ -28,7 +28,7 @@
             </div>
             <div class="form-group">
                 <label for="source_email">Email</label>
-                <input type="email" class="form-control" name="source_email" id="source_email" placeholder="ex. 0912341232324" required>
+                <input type="email" class="form-control" name="source_email" id="source_email" placeholder="ex. gmail.com" required>
             </div>
             <div class="form-group">
                 <label for="address">Address</label>

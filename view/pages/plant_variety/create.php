@@ -11,7 +11,7 @@
       <h1>Create Variety</h1>
         <form method="POST" action="">
             <div class="form-group">
-                <label for="variety_name">Type Name</label>
+                <label for="variety_name">Variety Name</label>
                 <input type="text" class="form-control" name="variety_name" id="variety_name" placeholder="ex. Variety 1" required>
             </div>
             <div class="form-group">

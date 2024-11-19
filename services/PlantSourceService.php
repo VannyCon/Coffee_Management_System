@@ -4,6 +4,26 @@ require_once("../../../connection/connection.php");
 
 class NurseryOwner extends config {
 
+    function generateSourceID() {
+        // Prefix (optional) for the patient ID (e.g., "patient-")
+        $prefix = "SRC-";
+        
+        // Get the current timestamp in microseconds
+        $timestamp = microtime(true);
+        
+        // Generate a random number to add more uniqueness
+        $randomNumber = mt_rand(100000, 999999);
+        
+        // Hash the timestamp and random number to create a unique identifier
+        $uniqueHash = hash('sha256', $timestamp . $randomNumber);
+        
+        // Take the first 12 characters of the hash (or any desired length)
+        $patientID = substr($uniqueHash, 0, 10);
+        
+        // Return the final patient ID with prefix
+        return $prefix . strtoupper($patientID);
+    }
+
     public function getNurseryOwners() {
         try {
             $query = "SELECT `id`, `source_id`, `source_fullname`, `source_variety`, `source_quantity`, `source_contact_number`, `source_email`, `source_address`, `created_date` FROM `tbl_source` WHERE 1";
@@ -16,12 +36,15 @@ class NurseryOwner extends config {
     }
     public function create($fullname,  $source_variety, $source_quantity, $contact_number, $source_email,  $address) {
         try {
+
+            $sourceID = $this->generateSourceID(); // Generate a unique source ID
             // Define the query with placeholders
             $query = "INSERT INTO `tbl_source` (`source_id`, `source_fullname`, `source_variety`, `source_quantity`, `source_contact_number`, `source_email`,  `source_address`, `created_date`) 
-                      VALUES (UUID(), :fullname, :source_variety, :source_quantity, :contact_number, :source_email,  :address, NOW())";
+                      VALUES (:sourceID, :fullname, :source_variety, :source_quantity, :contact_number, :source_email,  :address, NOW())";
             // Prepare the query
             $stmt = $this->pdo->prepare($query);
             // Bind the values to the placeholders
+            $stmt->bindParam(':sourceID',  $sourceID);
             $stmt->bindParam(':fullname', $fullname);
             $stmt->bindParam(':source_variety', $source_variety);
             $stmt->bindParam(':source_quantity', $source_quantity);

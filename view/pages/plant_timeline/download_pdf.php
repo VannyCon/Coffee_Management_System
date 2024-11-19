@@ -75,6 +75,10 @@ $pdf->Cell(45, 10, "Nursery Owner", 0, 0);
 $pdf->SetFont('helvetica', '', 12);
 $pdf->Cell(0, 10, "Dr. Patrick G. Escalante", 0, 1);
 
+$pdf->SetFont('helvetica', 'B', 12);
+$pdf->Cell(45, 10, "Address", 0, 0);
+$pdf->SetFont('helvetica', '', 12);
+$pdf->Cell(0, 10, "Brgy. Daga, Cadiz City, Negros Occidental, 6121", 0, 1);
 
 $pdf->SetFont('helvetica', 'B', 12);
 $pdf->Cell(45, 10, "Field", 0, 0);
@@ -90,7 +94,22 @@ $pdf->Cell(0, 10, $plantData['type_name'], 0, 1);
 $pdf->SetFont('helvetica', 'B', 12);
 $pdf->Cell(45, 10, "Type Description:", 0, 0);
 $pdf->SetFont('helvetica', '', 12);
-$pdf->Cell(0, 10, $plantData['type_description'], 0, 1);
+$typeDescription = $plantData['type_description'];
+// Split the text into chunks of 50 characters
+$lines = str_split($typeDescription, 70);
+
+// Loop through the lines and print each one
+foreach ($lines as $index => $line) {
+    if ($index === 0) {
+        // First line remains on the same row
+        $pdf->Cell(0, 10, $line, 0, 1);
+    } else {
+        // Subsequent lines start on a new row
+        $pdf->Cell(45, 10, '', 0, 0); // Add empty space for alignment
+        $pdf->Cell(0, 10, $line, 0, 1);
+    }
+}
+
 
 $pdf->SetFont('helvetica', 'B', 12);
 $pdf->Cell(45, 10, "Variety:", 0, 0);
@@ -100,13 +119,27 @@ $pdf->Cell(0, 10, $plantData['variety_name'], 0, 1);
 $pdf->SetFont('helvetica', 'B', 12);
 $pdf->Cell(45, 10, "Variety Description:", 0, 0);
 $pdf->SetFont('helvetica', '', 12);
-$pdf->Cell(0, 10, $plantData['variety_description'], 0, 1);
+$varietyDescription = $plantData['variety_description'];
+
+$varietyDescript = str_split($typeDescription, 70);
+// Loop through the lines and print each one
+foreach ($varietyDescript as $index => $line) {
+    if ($index === 0) {
+        // First line remains on the same row
+        $pdf->Cell(0, 10, $line, 0, 1);
+    } else {
+        // Subsequent lines start on a new row
+        $pdf->Cell(45, 10, '', 0, 0); // Add empty space for alignment
+        $pdf->Cell(0, 10, $line, 0, 1);
+    }
+}
+
 
 
 $pdf->SetFont('helvetica', 'B', 12);
 $pdf->Cell(45, 10, "Seedling Source", 0, 0);
 $pdf->SetFont('helvetica', '', 12);
-$pdf->Cell(0, 10, $plantData['nursery_seedling_source'], 0, 1);
+$pdf->Cell(0, 10, $plantData['source_fullname'], 0, 1);
 
 $pdf->SetFont('helvetica', 'B', 12);
 $pdf->Cell(45, 10, "Age:", 0, 0);
@@ -155,13 +188,31 @@ foreach ($timelines as $timelineItem) {
             $historyTime = htmlspecialchars($content['history_time']); // Access from $content
             $timeObject = DateTime::createFromFormat('H:i:s.u', $historyTime);
             $formattedTime = $timeObject->format('h:i A'); // 12:27 PM
-
-            $pdf->Cell(95, 10, $content['content'], 1, 0);
-            $pdf->Cell(0, 10, $formattedTime, 1, 1);
+    
+            // Wrap content text
+            $contentText = htmlspecialchars($content['content']);
+    
+            // Save the current Y position before writing the cell
+            $startY = $pdf->GetY();
+    
+            // Use MultiCell to wrap the content
+            $pdf->MultiCell(95, 10, $contentText, 1, 'L', false);
+    
+            // Determine the height of the content cell
+            $currentY = $pdf->GetY();
+            $contentHeight = $currentY - $startY;
+    
+            // Draw the Activity Time cell at the same height
+            $pdf->SetXY(105, $startY); // Move to the right column (adjust 105 based on your table's layout)
+            $pdf->MultiCell(0, $contentHeight, $formattedTime, 1, 'L', false);
+    
+            // Move to the next line
+            $pdf->SetY($currentY);
         }
     } else {
         $pdf->Cell(0, 10, "No content available", 1, 1);
     }
+    
 
     // Add some space between timeline entries
     $pdf->Ln(5);
