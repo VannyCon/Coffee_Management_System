@@ -51,7 +51,7 @@
                 <tr>
                     <th>Source Name</th>
                     <th>Variety</th>
-                    <th>Quantity</th>
+                    <!-- <th>Quantity</th> -->
                     <th>Contact</th>
                     <th>Email</th>
                     <th>Address</th>
@@ -67,7 +67,7 @@
                         <tr>
                             <td><?php echo htmlspecialchars($owner['source_fullname']); ?></td>
                             <td><?php echo htmlspecialchars($owner['source_variety']); ?></td>
-                            <td><?php echo htmlspecialchars($owner['source_quantity']); ?></td>
+                            <!-- <td><?php echo htmlspecialchars($owner['source_quantity']); ?></td> -->
                             <td><?php echo htmlspecialchars($owner['source_contact_number']); ?></td>
                             <td><?php echo htmlspecialchars($owner['source_email']); ?></td>
                             <td><?php echo htmlspecialchars($owner['source_address']); ?></td>
@@ -86,6 +86,7 @@
                                 <button class="btn btn-success" data-bs-toggle="modal"  
                                     data-source-id="<?php echo htmlspecialchars($owner['source_id']); ?>" 
                                     data-source-name="<?php echo htmlspecialchars($owner['source_fullname']); ?>" 
+                                    data-source-contact="<?php echo htmlspecialchars($owner['source_contact_number']); ?>" 
                                     data-bs-target="#addOrderModal">
                                     <i class='bx bx-shopping-bag icon'></i> Order
                                 </button>
@@ -138,6 +139,10 @@
                         <input type="text" class="form-control" id="source_name" name="source_name" readonly>
                     </div>
                     <div class="mb-3">
+                        <label for="source_contact" class="form-label">Contact</label>
+                        <input type="text" class="form-control" id="source_contact" name="source_contact" readonly>
+                    </div>
+                    <div class="mb-3">
                         <label for="orderQuantity" class="form-label">Quantity</label>
                         <input type="number" class="form-control" id="orderQuantity" name="order_quantity" min="1" required>
                     </div>
@@ -182,6 +187,10 @@
                         <span id="confirmSourceId" class="detail-value"></span>
                     </div>
                     <div class="detail-item">
+                        <span class="detail-label">Contact</span>
+                        <span id="confirmContact" class="detail-value"></span>
+                    </div>
+                    <div class="detail-item">
                         <span class="detail-label">Quantity</span>
                         <span id="confirmOrderQuantity" class="detail-value"></span>
                     </div>
@@ -218,6 +227,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const button = event.relatedTarget;
         const sourceId = button.getAttribute('data-source-id');
         const sourceName = button.getAttribute('data-source-name');
+        const sourceContact = button.getAttribute('data-source-contact');
             // Set current date/time
         const now = new Date();
         now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
@@ -225,6 +235,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         document.getElementById('source_id').value = sourceId;
         document.getElementById('source_name').value = sourceName;
+        document.getElementById('source_contact').value = sourceContact;
     });
 
     document.getElementById('orderQuantity').addEventListener('input', calculateTotal);
@@ -253,6 +264,7 @@ function showConfirmationModal() {
 
     // Update confirmation details
     document.getElementById('confirmSourceId').textContent = document.getElementById('source_id').value;
+    document.getElementById('confirmContact').textContent = document.getElementById('source_contact').value;
     document.getElementById('confirmOrderQuantity').textContent = document.getElementById('orderQuantity').value;
     document.getElementById('confirmOrderPrice').textContent = '₱' + parseFloat(document.getElementById('orderPrice').value).toFixed(2);
     document.getElementById('confirmOrderTotal').textContent = '₱' + document.getElementById('orderTotal').value;

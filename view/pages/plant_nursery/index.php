@@ -52,6 +52,7 @@
                             
                             <th>Field</th>
                             <th>Quantity</th>
+                            <th>Price</th>
                             <th>Type</th>
                             <th>Variety</th>
                             <th>Planted Date</th>
@@ -68,6 +69,7 @@
                                     
                                     <td><?php echo htmlspecialchars($nursery['nursery_field']); ?></td>
                                     <td><?php echo htmlspecialchars($nursery['quantity']); ?></td>
+                                    <td>₱<?php echo htmlspecialchars($nursery['bought_price']); ?></td>
                                     <td><?php echo htmlspecialchars($nursery['type_name']); ?></td>
                                     <td><?php echo htmlspecialchars($nursery['variety_name']); ?></td>
                                     <td>

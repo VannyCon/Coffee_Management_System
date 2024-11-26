@@ -92,6 +92,11 @@ error_reporting(E_ALL);
             </div>
 
             <div class="form-group">
+                <label for="bought_price">Bought Price</label>
+                <input type="number" class="form-control" value="<?php echo htmlspecialchars($nurserySpecificInfo['bought_price']); ?>" name="bought_price" id="bought_price" placeholder="5" required>
+            </div>
+
+            <div class="form-group">
                 <label for="planted_date">Planted Date</label>
                 <input type="date" class="form-control"  value="<?php echo htmlspecialchars($nurserySpecificInfo['planted_date']); ?>"  name="planted_date" id="id_planted_date" placeholder="01/01/2024" required>
             </div>

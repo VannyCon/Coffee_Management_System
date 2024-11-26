@@ -43,18 +43,39 @@ if (isset($_POST['action']) && $_POST['action'] == 'delete') {
     $order_quantity = $sourceService->clean('order_quantity', 'post');
     $order_price = $sourceService->clean('order_price', 'post');
     $order_total = $sourceService->clean('order_total', 'post');
-    // Call create method to add the new owner
-    $owners = $sourceService->createSourceOrder($source_id,  $order_quantity, $order_price, $order_total);
-    // Optionally, you can redirect or show a success message after creation
-    if($owners == true){
-         // Redirect to index.php
-         header("Location: index.php"); 
-         exit(); // Important to stop the script after the redirection
-         
-    }else{
-        header("Location: create.php"); 
+    $source_contact = $sourceService->clean('source_contact', 'post');
+    
+    
+    // Call create method to add the new order
+    $owners = $sourceService->createSourceOrder($source_id, $order_quantity, $order_price, $order_total);
+    
+    if ($owners == true) {
+        // POST data to order_reminder.php
+        $postData = [
+            'order_quantity' => $order_quantity,
+            'order_price' => $order_price,
+            'order_total' => $order_total,
+            'source_contact' => $source_contact
+        ];
+        
+        $ch = curl_init('http://localhost:8080/new_project/coffee-tracking-system/view/pages/plant_source/order_reminder.php');
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
+        
+        $response = curl_exec($ch);
+        curl_close($ch);
+
+        // After posting to order_reminder.php, redirect to index.php
+        header("Location: index.php");
+        exit(); // Important to stop the script after the redirection
+    } else {
+        // Redirect to create.php on failure
+        header("Location: create.php");
+        exit();
     }
 }
+
 
 
 ///// IF UPDATE ACTION

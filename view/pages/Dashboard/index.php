@@ -3,23 +3,86 @@
   include_once('../../components/header.php'); 
   require_once('../../../controller/DashboardController.php');
 
-
+  $sales = $dashboard->getSalesSummary(); // Fetch sales summary
 ?>
+<style>
+    
+</style>
+<!-- Font Awesome CDN -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+
     <h1 class="ps-2"> Dashboard</h1>
     <div class="container-fluid mt-2">
-        <div class="row g-3">
+        <div class="row g-2">
             <div class="col-md-12 p-2 mb-0">
                 <div class="dashboard-card" style="height: 100%;">
-                <div class="stat-label"><strong>Planted this Year</strong></div>
+                    <div class="stat-label"><strong>Planted this Year</strong></div>
                     <div style="width: 100%; margin: auto;" class="mt-2">
                         <canvas id="nurseryPlantChart"></canvas>
                     </div>
                 </div>
             </div>
+
+            <div class="col-md-12 p-2 ">
+                <div class="dashboard-card">
+                    <div class="stat-label mb-0"><strong>Sales Summary</strong></div>
+                    <div class="table-responsive">
+                        <table class="table table-hover table-striped">
+                            <thead class="bg-dark">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Nursery ID</th>
+                                    <th>Bought Price</th>
+                                    <th>Selling Price</th>
+                                    <th>Quantity</th>   
+                                    <th>Total</th>
+                                    <th>Profit/Unit</th>
+                                    <th>Total Profit</th>
+                                    <th>Cost</th>
+                                    <th>Net Income</th>
+                                    <th>Status</th>
+                                    <th>Date/Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php if (!empty($sales)): ?>
+                                    <?php foreach ($sales as $index => $sale): ?>
+                                        <tr>
+                                            <td><?php echo $index + 1; ?></td>
+                                            <td><?php echo htmlspecialchars($sale['nursery_field']); ?></td>
+                                            <td>₱<?php echo htmlspecialchars($sale['plant_bought_price']); ?></td>
+                                            <td>₱<?php echo htmlspecialchars($sale['plant_selling_price']); ?></td>
+                                            <td><?php echo htmlspecialchars($sale['order_quantity']); ?></td>
+                                            <td>₱<?php echo htmlspecialchars($sale['order_total']); ?></td>
+                                            <td>₱<?php echo htmlspecialchars($sale['profit_per_unit']); ?></td>
+                                            <td>₱<?php echo htmlspecialchars($sale['total_profit']); ?></td>
+                                            <td>₱<?php echo htmlspecialchars($sale['total_cost']); ?></td>
+                                            <td>₱<?php echo htmlspecialchars($sale['net_income_or_loss']); ?></td>
+                                            <td>
+                                                <?php if ($sale['status'] === 'Profit'): ?>
+                                                    <span class="badge bg-success"><i class="fa-solid fa-arrow-up"></i> Profit</span>
+                                                <?php elseif ($sale['status'] === 'Loss'): ?>
+                                                    <span class="badge bg-danger"><i class="fa-solid fa-arrow-down"></i>Loss</span>
+                                                <?php endif; ?>
+                                            </td>
+                                            <td><?php echo htmlspecialchars($sale['order_datetime']); ?></td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                <?php else: ?>
+                                    <tr>
+                                        <td colspan="13" class="text-center">No sales data available.</td>
+                                    </tr>
+                                <?php endif; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
             <div class="col-md-12 p-2 mt-0">
                 <div class="stats-container">
-                 <div class="stats-row mb-3">
-                        <div class="stats-col me-2">
+                <div class="stats-row mb-3">
+                        <div class="stats-col ms-2">
                             <div class="dashboard-card text-center stats-card">
                                 <div class="stat-number"><?php echo $getSummary['total_plants']; ?></div>
                                 <div class="stat-label">Total Batch Plants</div>
@@ -31,9 +94,7 @@
                                 <div class="stat-label">Total Types</div>
                             </div>
                         </div>
-                    </div>
-                    <div class="stats-row">
-                        <div class="stats-col me-2">
+                        <div class="stats-col ms-2">
                             <div class="dashboard-card text-center stats-card">
                                 <div class="stat-number"><?php echo $getSummary['total_varieties']; ?></div>
                                 <div class="stat-label">Total Varieties</div>
@@ -46,11 +107,39 @@
                             </div>
                         </div>
                     </div>
+                    <div class="stats-row">
+                        <div class="stats-col ms-2">
+                                <div class="dashboard-card text-center stats-card">
+                                    <div class="stat-number"><?php echo $getSummary['total_centers']; ?></div>
+                                    <div class="stat-label">Total Center</div>
+                                </div>
+                            </div>
+                            <div class="stats-col ms-2">
+                                <div class="dashboard-card text-center stats-card">
+                                    <div class="stat-number"><?php echo $getSummary['total_quantity_center']; ?></div>
+                                    <div class="stat-label">Total Deploy</div>
+                                </div>
+                            </div>
+                            <div class="stats-col ms-2">
+                                <div class="dashboard-card text-center stats-card">
+                                    <div class="stat-number"><?php echo $getSummary['total_quantity_order']; ?></div>
+                                    <div class="stat-label">Total Order</div>
+                                </div>
+                            </div>
+                            <div class="stats-col ms-2">
+                                <div class="dashboard-card text-center stats-card">
+                                    <div class="stat-number"><?php echo $getSummary['total_order_price']; ?></div>
+                                    <div class="stat-label">Total Income</div>
+                                </div>
+                            </div>
+                        </div>
                 </div>
             </div>
         </div>
     </div>
+<br><br>
 
+</div>
     <script>
         // Fetch data from your MySQL database using AJAX or manually input the data
         const Jan = <?php echo isset($m['Jan']) ? $m['Jan'] : 0; ?>;
@@ -92,7 +181,10 @@
                 }
             }
         });
+
+        
     </script>
+    
 
 
     <?php include_once('../../components/footer.php'); ?>

@@ -1,5 +1,8 @@
 <?php 
     include_once('controller/LoginController.php');
+    include('sms_fertilized_reminder.php');
+    include('sms_harvest_reminder.php');
+    include('sms_watering_reminder.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -10,6 +10,7 @@ class PlantInfo extends config {
                             n.id,
                             n.nursery_id,
                             n.nursery_field,
+                            n.bought_price,
                             n.type_id,
                             t.type_name,
                             t.description AS type_description,
@@ -36,11 +37,11 @@ class PlantInfo extends config {
         }
     }
 
-    public function create($nursery_field, $source_id, $type_id, $variety_id, $quantity, $planted_date) {
+    public function create($nursery_field, $source_id, $type_id, $variety_id, $bought_price, $quantity, $planted_date) {
         try {
             // Define the query with placeholders
-            $query = "INSERT INTO `tbl_nursery`(`nursery_id`, `nursery_field`, `source_id`, `type_id`, `variety_id`,`quantity`, `planted_date`) 
-                      VALUES (UUID(), :nursery_field, :source_id, :type_id, :variety_id, :quantity, :planted_date)";
+            $query = "INSERT INTO `tbl_nursery`(`nursery_id`, `nursery_field`, `source_id`, `type_id`, `variety_id`,`bought_price`,`quantity`, `planted_date`) 
+                      VALUES (UUID(), :nursery_field, :source_id, :type_id, :variety_id, :bought_price, :quantity, :planted_date)";
             // Prepare the query
             $stmt = $this->pdo->prepare($query);
             // Bind the values to the placeholders
@@ -48,6 +49,7 @@ class PlantInfo extends config {
             $stmt->bindParam(':source_id', $source_id);
             $stmt->bindParam(':type_id', $type_id);
             $stmt->bindParam(':variety_id', $variety_id);
+            $stmt->bindParam(':bought_price', $bought_price);
             $stmt->bindParam(':quantity', $quantity);
             $stmt->bindParam(':planted_date', $planted_date);
             // Execute the query
@@ -69,6 +71,7 @@ class PlantInfo extends config {
                                 n.id,
                                 n.nursery_id,
                                 n.nursery_field,
+                                n.bought_price,
                                 n.source_id,
                                 n.type_id,
                                 t.type_name,
@@ -105,6 +108,7 @@ class PlantInfo extends config {
                             n.id,
                             n.nursery_id,
                             n.nursery_field,
+                            n.bought_price,
                             n.type_id,
                             t.type_name,
                             t.description AS type_description,
@@ -141,7 +145,7 @@ class PlantInfo extends config {
     }
     
 
-    public function update($id, $nursery_field, $source_id, $type_id, $variety_id, $quantity, $planted_date) {
+    public function update($id, $nursery_field, $source_id, $type_id, $variety_id, $bought_price, $quantity, $planted_date) {
         try {
             // Define the query with placeholders for updating an existing record
             $query = "UPDATE `tbl_nursery` 
@@ -150,6 +154,7 @@ class PlantInfo extends config {
                           `type_id` = :type_id,
                           `variety_id` = :variety_id,
                           `quantity` = :quantity,
+                          `bought_price` = :bought_price,
                           `planted_date` = :planted_date
                       WHERE `id` = :id";
      
@@ -160,6 +165,7 @@ class PlantInfo extends config {
             $stmt->bindParam(':source_id', $source_id);
             $stmt->bindParam(':type_id', $type_id);
             $stmt->bindParam(':variety_id', $variety_id);
+            $stmt->bindParam(':bought_price', $bought_price);
             $stmt->bindParam(':quantity', $quantity);
             $stmt->bindParam(':planted_date', $planted_date);
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);  // Explicitly specify type for $id

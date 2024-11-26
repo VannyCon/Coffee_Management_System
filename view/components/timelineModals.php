@@ -17,7 +17,7 @@
                                 <select class="form-select" name="timeline_title" id="timeline_title" aria-label="Plant Status" required>
                                 <option value="" selected disabled>Choose the Event</option>
                                 <option value="Harvested">Harvest</option>
-                                <option value="Fertilizing">Fertilizing</option>
+                                <option value="Fertilized">Fertilizing</option>
                                 <option value="Watering">Watering</option>
                             </select>
 

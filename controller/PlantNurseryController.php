@@ -44,9 +44,10 @@
         $type_id = $nurseryServices->clean('type_id', 'post');
         $variety_id = $nurseryServices->clean('variety_id', 'post');
         $quantity = $nurseryServices->clean('quantity', 'post');
+        $bought_price = $nurseryServices->clean('bought_price', 'post');
         $planted_date = $nurseryServices->clean('planted_date', 'post');
         // Call create method to add the new owner
-        $plantStatus = $nurseryServices->create($nursery_field, $source_id, $type_id, $variety_id, $quantity, $planted_date);
+        $plantStatus = $nurseryServices->create($nursery_field, $source_id, $type_id, $variety_id,  $bought_price, $quantity, $planted_date);
         // Optionally, you can redirect or show a success message after creation
         if($plantStatus == true){
             header("Location: index.php"); 
@@ -70,9 +71,10 @@
                 $type_id = $nurseryServices->clean('type_id', 'post');
                 $variety_id = $nurseryServices->clean('variety_id', 'post');
                 $quantity = $nurseryServices->clean('quantity', 'post');
+                $bought_price = $nurseryServices->clean('bought_price', 'post');
                 $planted_date = $nurseryServices->clean('planted_date', 'post');
                 // Call create method to add the new owner
-                $plantStatus = $nurseryServices->update($id, $nursery_field, $source_id, $type_id, $variety_id, $quantity, $planted_date);
+                $plantStatus = $nurseryServices->update($id, $nursery_field, $source_id, $type_id, $variety_id, $bought_price, $quantity, $planted_date);
                 // Optionally, you can redirect or show a success message after creation
                 if ($plantStatus == true) {
                     // Redirect to index.php

@@ -86,6 +86,11 @@
             </div>
 
             <div class="form-group">
+                <label for="bought_price">Bought Price</label>
+                <input type="number" class="form-control" name="bought_price" id="bought_price" placeholder="5" required>
+            </div>
+
+            <div class="form-group">
                 <label for="planted_date">Planted Date</label>
                 <input type="date" class="form-control" name="planted_date" id="planted_date" placeholder="01/01/2024" required>
             </div>

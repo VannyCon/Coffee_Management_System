@@ -8,6 +8,8 @@
     require('services/LoginAccessService.php');
     // Instantiate the class to get nursery owners
     $access = new LoginAccess();
+    $harvestableNurseries = $access->getHarvestStatus();
+    $fertilizationDue = $access->getFertilizationStatus();
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action']) && $_POST['action'] == 'login') {
         // Retrieve form input
         $username = $access->clean('username', 'post');
@@ -26,5 +28,7 @@
             $error = "Please fill in both fields.";
         }
     }
+
+    
 
 ?>

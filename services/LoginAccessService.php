@@ -28,6 +28,113 @@ class LoginAccess extends config {
             return false;
         }
     }
+
+    public function getFertilizationStatus() {
+        try {
+            $query = "
+                SELECT 
+                    n.id,
+                    n.nursery_id,
+                    n.nursery_field,
+                    n.source_id,
+                    n.type_id,
+                    n.variety_id,
+                    n.bought_price,
+                    n.quantity,
+                    n.planted_date,
+                    n.created_date,
+                    CASE 
+                        WHEN EXISTS (
+                            SELECT 1 
+                            FROM tbl_timeline t
+                            WHERE t.timeline_title = 'Fertilized' AND t.nursery_id_fk = n.nursery_id
+                        ) THEN (
+                            SELECT MAX(t.history_date) 
+                            FROM tbl_timeline t
+                            WHERE t.timeline_title = 'Fertilized' AND t.nursery_id_fk = n.nursery_id
+                        )
+                        ELSE n.planted_date
+                    END AS relevant_date,
+                    DATE_ADD(
+                        CASE 
+                            WHEN EXISTS (
+                                SELECT 1 
+                                FROM tbl_timeline t
+                                WHERE t.timeline_title = 'Fertilized' AND t.nursery_id_fk = n.nursery_id
+                            ) THEN (
+                                SELECT MAX(t.history_date) 
+                                FROM tbl_timeline t
+                                WHERE t.timeline_title = 'Fertilized' AND t.nursery_id_fk = n.nursery_id
+                            )
+                            ELSE n.planted_date
+                        END,
+                        INTERVAL 6 MONTH
+                    ) AS next_fertilization_date
+                FROM tbl_nursery n
+                HAVING next_fertilization_date = CURDATE()
+            ";
+    
+            $stmt = $this->pdo->prepare($query); // Prepare the query
+            $stmt->execute(); // Execute the query
+            return $stmt->fetchAll(PDO::FETCH_ASSOC); // Fetch all matching results
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+
+    
+    public function getHarvestStatus() {
+        try {
+            $query = "
+                SELECT 
+                    n.id,
+                    n.nursery_id,
+                    n.nursery_field,
+                    n.source_id,
+                    n.type_id,
+                    n.variety_id,
+                    n.bought_price,
+                    n.quantity,
+                    n.planted_date,
+                    n.created_date,
+                    CASE 
+                        WHEN EXISTS (
+                            SELECT 1 
+                            FROM tbl_timeline t
+                            WHERE t.timeline_title = 'Harvested' AND t.nursery_id_fk = n.nursery_id
+                        ) THEN (
+                            SELECT MAX(t.history_date) 
+                            FROM tbl_timeline t
+                            WHERE t.timeline_title = 'Harvested' AND t.nursery_id_fk = n.nursery_id
+                        )
+                        ELSE n.planted_date
+                    END AS relevant_date,
+                    DATE_ADD(
+                        CASE 
+                            WHEN EXISTS (
+                                SELECT 1 
+                                FROM tbl_timeline t
+                                WHERE t.timeline_title = 'Harvested' AND t.nursery_id_fk = n.nursery_id
+                            ) THEN (
+                                SELECT MAX(t.history_date) 
+                                FROM tbl_timeline t
+                                WHERE t.timeline_title = 'Harvested' AND t.nursery_id_fk = n.nursery_id
+                            )
+                            ELSE n.planted_date
+                        END,
+                        INTERVAL 2 YEAR
+                    ) AS harvestable_date
+                FROM tbl_nursery n
+                HAVING harvestable_date = CURDATE()
+            ";
+    
+            $stmt = $this->pdo->prepare($query); // Prepare the query
+            $stmt->execute(); // Execute the query
+            return $stmt->fetchAll(PDO::FETCH_ASSOC); // Fetch all matching results
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
     
 }
 ?>
