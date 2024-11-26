@@ -3,10 +3,11 @@
     // Check if form is submitted
     if (isset($_POST['action']) && $_POST['action'] == 'createTimeline') {
         // Clean input data
+        $quantity = $timeline->clean('quantity', 'post');
         $timeline_title = $timeline->clean('timeline_title', 'post');
         $history_date = $timeline->clean('history_date', 'post');
         // Call create method to add the new owner
-        $timelineCreate = $timeline->create($nurseryID,$timeline_title, $history_date);
+        $timelineCreate = $timeline->create($nurseryID,$timeline_title, $history_date, $quantity);
         // Optionally, you can redirect or show a success message after creation
         if($timelineCreate == true){
             // Redirect to index.php

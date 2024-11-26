@@ -133,8 +133,10 @@ foreach ($varietyDescript as $index => $line) {
         $pdf->Cell(0, 10, $line, 0, 1);
     }
 }
-
-
+$pdf->SetFont('helvetica', 'B', 12);
+$pdf->Cell(45, 10, "Quantity", 0, 0);
+$pdf->SetFont('helvetica', '', 12);
+$pdf->Cell(0, 10, $plantData['quantity'], 0, 1);
 
 $pdf->SetFont('helvetica', 'B', 12);
 $pdf->Cell(45, 10, "Seedling Source", 0, 0);
@@ -175,6 +177,52 @@ foreach ($timelines as $timelineItem) {
     $pdf->Cell(95, 10, $timelineItem['timeline_title'], 1, 0, 'L', true);
     $pdf->Cell(0, 10, DateTime::createFromFormat('Y-m-d', $timelineItem['history_date'])->format('F j, Y'), 1, 1, 'L', true);
 
+    if ($timelineItem['timeline_title'] === "Harvested") {
+        $totalPlanted = $plantData['quantity']; // Total planted quantity
+        $harvestedQuantity = $timelineItem['quantity']; // Harvested quantity
+        $totalDamage = $totalPlanted - $harvestedQuantity; // Total damage
+        $harvestPercentage = ($harvestedQuantity / $totalPlanted) * 100; // Harvest percentage
+        $damagePercentage = ($totalDamage / $totalPlanted) * 100; // Damage percentage
+        $profitPerPlant = 2; // Example profit per plant
+        $totalProfit = $harvestedQuantity * $profitPerPlant; // Total profit
+        $maxProfit = $totalPlanted * $profitPerPlant; // Maximum possible profit
+        $profitPercentage = ($totalProfit / $maxProfit) * 100; // Profit percentage
+
+    // Add table headers
+        $pdf->SetFont('helvetica', 'B', 10);
+        $pdf->SetFillColor(240, 240, 240); // Light gray background
+        $pdf->Cell(70, 10, "Detail", 1, 0, 'C', true);
+        $pdf->Cell(60, 10, "Value", 1, 0, 'C', true);
+        $pdf->Cell(60, 10, "Percentage", 1, 1, 'C', true);
+
+        // Add rows with text coloring
+        $pdf->SetFont('helvetica', '', 10);
+
+      // Total Harvest (Darker Sky Blue text)
+        $pdf->SetTextColor(70, 130, 180); // Darker sky blue
+        $pdf->Cell(70, 10, "Total Harvest", 1, 0, 'L');
+        $pdf->Cell(60, 10, "{$harvestedQuantity}/{$totalPlanted}", 1, 0, 'L');
+        $pdf->Cell(60, 10, number_format($harvestPercentage, 2) . "%", 1, 1, 'L');
+        $pdf->SetTextColor(0, 0, 0); // Reset to black text
+
+        // Total Damage (Darker Red text)
+        $pdf->SetTextColor(200, 0, 0); // Darker red
+        $pdf->Cell(70, 10, "Total Damage", 1, 0, 'L');
+        $pdf->Cell(60, 10, "{$totalDamage}", 1, 0, 'L');
+        $pdf->Cell(60, 10, number_format($damagePercentage, 2) . "%", 1, 1, 'L');
+        $pdf->SetTextColor(0, 0, 0); // Reset to black text
+
+        // Total Profit (Darker Green text)
+        $pdf->SetTextColor(34, 139, 34); // Darker green
+        $pdf->Cell(70, 10, "Total Profit", 1, 0, 'L');
+        $pdf->Cell(60, 10, "" . number_format($totalProfit, 2), 1, 0, 'L');
+        $pdf->Cell(60, 10, number_format($profitPercentage, 2) . "%", 1, 1, 'L');
+        $pdf->SetTextColor(0, 0, 0); // Reset to black text
+
+
+        $pdf->Ln(5); // Add some space before the next section
+    }
+
     // Content Section Title
     $pdf->SetFillColor(144, 238, 144); // Light green background
     $pdf->SetFont('helvetica', 'B', 12);
@@ -187,36 +235,33 @@ foreach ($timelines as $timelineItem) {
         foreach ($contents as $content) {
             $historyTime = htmlspecialchars($content['history_time']); // Access from $content
             $timeObject = DateTime::createFromFormat('H:i:s.u', $historyTime);
-            $formattedTime = $timeObject->format('h:i A'); // 12:27 PM
-    
-            // Wrap content text
-            $contentText = htmlspecialchars($content['content']);
-    
-            // Save the current Y position before writing the cell
-            $startY = $pdf->GetY();
-    
+            $formattedTime = $timeObject->format('h:i A'); // 12-hour format with AM/PM
+
+            $contentText = htmlspecialchars($content['content']); // Wrap content text
+
+            $startY = $pdf->GetY(); // Save Y position
+
             // Use MultiCell to wrap the content
             $pdf->MultiCell(95, 10, $contentText, 1, 'L', false);
-    
-            // Determine the height of the content cell
+
             $currentY = $pdf->GetY();
             $contentHeight = $currentY - $startY;
-    
-            // Draw the Activity Time cell at the same height
-            $pdf->SetXY(105, $startY); // Move to the right column (adjust 105 based on your table's layout)
+
+            // Draw the Activity Time cell
+            $pdf->SetXY(105, $startY); // Adjust based on layout
             $pdf->MultiCell(0, $contentHeight, $formattedTime, 1, 'L', false);
-    
+
             // Move to the next line
             $pdf->SetY($currentY);
         }
     } else {
         $pdf->Cell(0, 10, "No content available", 1, 1);
     }
-    
 
     // Add some space between timeline entries
     $pdf->Ln(5);
 }
+
 
 // Output PDF
 $pdf->Output('timeline.pdf', 'D'); // 'D' forces download

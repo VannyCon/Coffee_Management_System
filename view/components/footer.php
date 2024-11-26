@@ -41,6 +41,27 @@
 
 
         ////////////////////////////////////////////////////DROP DOWN//////////////////////////////////////////////////////////////
+        // SELECT ORDER DROPDOWN
+        function selectOrderPlants(element) {
+            var selectedValue = element.innerHTML.trim();
+            const selectedId = element.getAttribute('data-id');
+            const selectedField = element.getAttribute('data-field');
+            document.getElementById("searchOrderPlantsInput").value = selectedValue;
+            // Update the hidden input
+            document.getElementById('nurseryId').value = selectedId;
+            document.getElementById('nurseryField').value = selectedField;
+            document.getElementById("orderPlantsDropdownContent").classList.remove("show");
+        }
+
+        function toggleOrderPlantsDropdown() {
+            document.getElementById("orderPlantsDropdownContent").classList.toggle("show");
+        }
+
+        function filterOrderPlantsOptions() {
+            filterDropdown("searchOrderPlantsInput", "orderPlantsDropdownContent");
+        }
+
+
        // SELECT SOURCE DROPDOWN
         function selectSource(element) {
             var selectedValue = element.innerHTML.trim();
@@ -203,6 +224,7 @@
 
     </script>
     <script src="../../js/sidebar.js"></script>
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

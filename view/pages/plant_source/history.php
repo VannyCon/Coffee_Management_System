@@ -2,102 +2,72 @@
   $title = "Source";
   include_once('../../components/header.php');
   include_once('../../../controller/PlantSourceController.php');
+  // Check if 'id' is provided in the URL
+if (isset($_GET['sourceID'])) {
+    $source_id = $_GET['sourceID'];
+    // Fetch the specific center details
+    $sourceOrderHistorys = $sourceService->getSourceHistory($source_id);
+    
+
+} else {
+    echo "<div class='alert alert-danger'>No ID provided!</div>";
+    exit();
+}
+
 ?>
-<!-- Delete Confirmation Modal -->
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        Are you sure you want to delete this?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-        <form id="deleteForm" method="POST">
-          <input type="hidden" name="action" value="delete">
-          <input type="hidden" name="id" id="deleteId">
-          <button type="submit" class="btn btn-danger">Delete</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
+
 
 
 <div class="p-3">
-<a class="btn btn-outline-danger m-2" href="../dashboard/index.php" width="200"> Back </a>
+<a class="btn btn-outline-danger m-2" href="index.php" width="200"> Back </a>
     <div class="card p-4">
 
-    <h3>Manage Sources</h3>
+    <h3>Order History</h3>
 
     <!-- Search Input -->
-    <div class="mb-3">
-        <input type="text" id="searchInput" class="form-control" placeholder="Search for Source...">
+    <div class="mb-1">
+        <p>Source Name:
+            <span class="text-success">
+                <?php if (!empty($sourceOrderHistorys)): ?>
+                            <?php foreach ($sourceOrderHistorys as $sourceOrderHistory): ?>
+                                <?php echo htmlspecialchars($sourceOrderHistory['source_fullname']); ?>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                    <tr>
+                        <td colspan="5" class="text-center">No Transaction</td>
+                    </tr>
+                <?php endif; ?>
+            </span>
+        </p>
     </div>
     <div class="mb-3">
-        <a type="button" class="btn btn-sm d-md-none btn-warning " href="create.php">Add Record</a>
-        <a type="button" class="btn btn-sm d-md-none btn-primary mx-2" href="../plant_nursery/index.php">Check Plant List</a>
-
-        <a type="button" class="btn d-none d-md-inline-block btn-warning " href="create.php">Add Record</a>
-        <a type="button" class="btn d-none d-md-inline-block btn-primary mx-2" href="../plant_nursery/index.php">Check Plant List</a>
+        <input type="text" id="searchInput" class="form-control" placeholder="Search for History...">
     </div>
     <div class="table-responsive">
        <!-- Table for nursery owners -->
         <table border="1" class="table" id="nurseryOwnersTable">
             <thead>
                 <tr>
-                    <th>Source Name</th>
-                    <th>Variety</th>
                     <th>Quantity</th>
-                    <th>Contact</th>
-                    <th>Email</th>
-                    <th>Address</th>
-                    <th>Manage</th>
-                    <th>Order</th>
-                    <th>History</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                    <th>DateTime</th>
                 </tr>
             </thead>
             <tbody>
-                <?php if (!empty($owners)): ?>
-                    <?php foreach ($owners as $owner): ?>
-                        <?php if ($owner['id'] == 0) continue; // Skip entries with ID 0 ?>
+                <?php if (!empty($sourceOrderHistorys)): ?>
+                    <?php foreach ($sourceOrderHistorys as $sourceOrderHistory): ?>
                         <tr>
-                            <td><?php echo htmlspecialchars($owner['source_fullname']); ?></td>
-                            <td><?php echo htmlspecialchars($owner['source_variety']); ?></td>
-                            <td><?php echo htmlspecialchars($owner['source_quantity']); ?></td>
-                            <td><?php echo htmlspecialchars($owner['source_contact_number']); ?></td>
-                            <td><?php echo htmlspecialchars($owner['source_email']); ?></td>
-                            <td><?php echo htmlspecialchars($owner['source_address']); ?></td>
-                            <td class="justify-content-center align-items-center">
-                              <div class="btn-group">
-                                  <a type="button" class="btn btn-info" href="update.php?userID=<?php echo htmlspecialchars($owner['id']); ?>">
-                                      <i class='bx
-                                      bx-edit icon text-white'></i>
-                                  </a>
-                                  <button type="button" class="btn btn-danger" data-id="<?php echo htmlspecialchars($owner['id']); ?>" onclick="setDeleteId(this)">
-                                      <i class='bx bx-trash icon'></i>
-                                  </button>
-                              </div>
+                            <td><?php echo htmlspecialchars($sourceOrderHistory['order_quantity']); ?></td>
+                            <td>₱<?php echo htmlspecialchars($sourceOrderHistory['order_price']); ?></td>
+                            <td class="text-success">₱<?php echo htmlspecialchars($sourceOrderHistory['order_total']); ?></td>
+                            <td>
+                                    <?php 
+                                    $datetime = new DateTime($sourceOrderHistory['order_datetime']);
+                                    echo htmlspecialchars($datetime->format('F j, Y g:ia')); 
+                                    ?>
+                        
                             </td>
-                            <td class="justify-content-center align-items-center">
-                                <button class="btn btn-success" data-bs-toggle="modal"  
-                                    data-source-id="<?php echo htmlspecialchars($owner['source_id']); ?>" 
-                                    data-source-name="<?php echo htmlspecialchars($owner['source_fullname']); ?>" 
-                                    data-bs-target="#addOrderModal">
-                                    <i class='bx bx-shopping-bag icon'></i> Order
-                                </button>
-                            </td>
-                            <td class="justify-content-center align-items-center">
-                                  <a type="button" class="btn btn-outline-info" href="history.php?sourceID=<?php echo htmlspecialchars($owner['source_id']); ?>">
-                                    <i class='bx bx-history icon'></i> History
-                                  </a>
-                            </td>
-
-
-
                             
                         </tr>
                     <?php endforeach; ?>
@@ -131,7 +101,7 @@
             </div>
             <div class="modal-body">
                 <form id="addOrderForm" method="POST">
-                    <input type="hidden" name="action" value="addSourceOrder">
+                    <input type="hidden" name="action" value="add">
                     <input type="hidden" id="source_id" name="source_id">
                     <div class="mb-3">
                         <label for="source_name" class="form-label">Source Name</label>

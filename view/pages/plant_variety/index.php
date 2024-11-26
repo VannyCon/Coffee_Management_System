@@ -62,12 +62,14 @@
                             <td><?php echo htmlspecialchars($variety['variety_name']); ?></td>
                             <td><?php echo htmlspecialchars($variety['description']); ?></td>
                             <td class=" justify-content-center align-items-center">
-                                <a type="button" class="btn btn-info mx-1 mb-1" href="update.php?ID=<?php echo htmlspecialchars($variety['id']); ?>">
-                                    <i class='bx bx-edit icon text-white'></i>
-                                </a>
-                                <button type="button" class="btn btn-danger mx-1 mb-1" data-id="<?php echo htmlspecialchars($variety['id']); ?>" onclick="setDeleteId(this)">
-                                    <i class='bx bx-trash icon'></i>
-                                </button>
+                                <div class="btn-group">
+                                    <a type="button" class="btn btn-info" href="update.php?ID=<?php echo htmlspecialchars($variety['id']); ?>">
+                                        <i class='bx bx-edit icon text-white'></i>
+                                    </a>
+                                    <button type="button" class="btn btn-danger" data-id="<?php echo htmlspecialchars($variety['id']); ?>" onclick="setDeleteId(this)">
+                                        <i class='bx bx-trash icon'></i>
+                                    </button>
+                                </div>
                             </td>
 
                         </tr>

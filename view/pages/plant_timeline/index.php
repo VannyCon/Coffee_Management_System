@@ -33,6 +33,7 @@
                     <p><strong>Type Description:</strong> <?php echo $plantData['type_description']; ?></p>
                     <p><strong>Variety:</strong> <?php echo $plantData['variety_name']; ?></p>
                     <p><strong>Variety Description:</strong> <?php echo $plantData['variety_description']; ?></p>
+                    <p><strong>Quantity:</strong> <?php echo $plantData['quantity']; ?></p>
                     <p><strong>Seedling Source:</strong> <?php echo $plantData['source_fullname']; ?></p>
                     <p><strong>Age: </strong> <?php
                                                     // Sample planted_date from $plantData
@@ -124,12 +125,57 @@
                                             </small>
                                         </p>
                                     </a>
+                                    <?php if ($timelineItem['timeline_title'] === "Harvested") { ?>
+                                            <?php 
+                                                // Total quantity of plants initially planted
+                                                $totalPlanted = $plantData['quantity'];
+                                                
+                                                // Harvested quantity
+                                                $harvestedQuantity = $timelineItem['quantity'];
+                                                
+                                                // Calculate Total Damage
+                                                $totalDamage = $totalPlanted - $harvestedQuantity;
+                                                
+                                                // Calculate percentages
+                                                $harvestPercentage = ($harvestedQuantity / $totalPlanted) * 100; // Harvest percentage
+                                                $damagePercentage = ($totalDamage / $totalPlanted) * 100;       // Damage percentage
+
+                                                // Calculate Total Profit (assuming profit is from harvested plants)
+                                                $profitPerPlant = 2; // Replace with the actual profit per plant value
+                                                $totalProfit = $harvestedQuantity * $profitPerPlant;
+                                            ?>
+                                                <p>Total Harvest: 
+                                                    <span class="text-info">
+                                                        <?php echo $harvestedQuantity . "/" . $totalPlanted . " (" . number_format($harvestPercentage, 2) . "%)"; ?>
+                                                    </span>
+                                                </p>
+                                                <p>Total Damage: 
+                                                    <span class="text-danger">
+                                                        <?php echo $totalDamage . " (" . number_format($damagePercentage, 2) . "%)"; ?>
+                                                    </span>
+                                                </p>
+                                                <p>Total Profit: 
+                                                    <span class="text-success">
+                                                        <?php 
+                                                            // Assuming profit per plant is fixed
+                                                            $profitPerPlant = 2; // Replace with the actual profit per plant
+                                                            $maxProfit = $plantData['quantity'] * $profitPerPlant; // Maximum possible profit
+                                                            $profitPercentage = ($totalProfit / $maxProfit) * 100; // Profit percentage
+                                                            
+                                                            // Display total profit with currency formatting and percentage
+                                                            echo "₱" . number_format($totalProfit, 2) . " (" . number_format($profitPercentage, 2) . "%)";
+                                                        ?>
+                                                    </span>
+                                                </p>
+
+                                        <?php } ?>
+
                                 </div>
                                 <div class="col-6 col-md-2 d-flex justify-content-center align-items-center mt-2 mt-md-0">
-                                    <a class="btn btn-info mx-1 px-3 px-md-5" onclick="setEditTimelineData(<?php echo htmlspecialchars(json_encode($timelineItem)); ?>)">
+                                    <!-- <a class="btn btn-info mx-1 px-3 px-md-5" onclick="setEditTimelineData(<?php echo htmlspecialchars(json_encode($timelineItem)); ?>)">
                                         <i class='bx
                                         bx-edit icon text-white'></i>
-                                    </a>
+                                    </a> -->
                                     <a class="btn btn-danger mx-1 px-3 px-md-5" onclick="setDeleteTimelineId('<?php echo htmlspecialchars($timelineItem['id']); ?>')">
                                      <i class='bx bx-trash icon'></i>
                                     </a>
@@ -195,5 +241,29 @@
            
         </div>
     </div>
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+            const timelineTitle = document.getElementById("timeline_title");
+            const descriptionField = document.getElementById("description-field");
+            const quantityField = document.getElementById("quantity-field");
+
+            timelineTitle.addEventListener("change", function () {
+                const selectedValue = timelineTitle.value;
+
+                // Show/hide fields based on selection
+                if (selectedValue === "Harvested") {
+                    quantityField.style.display = "block";
+                    descriptionField.style.display = "none";
+                } else if (selectedValue === "Fertilizing" || selectedValue === "Watering") {
+                    descriptionField.style.display = "none";
+                    quantityField.style.display = "none";
+                } else {
+                    // Reset fields
+                    descriptionField.style.display = "none";
+                    quantityField.style.display = "none";
+                }
+            });
+        });
+</script>
 
 <?php include_once('../../components/footer.php'); ?>

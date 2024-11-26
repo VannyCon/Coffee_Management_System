@@ -12,7 +12,9 @@
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> -->
     <link rel="stylesheet" href="../../css/bootsrap.css">
     <link rel="stylesheet" href="../../css/style.css">
-    <script src="../../js/chart.js"></script>
+    <!-- <script src="../../js/chart.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <!-- Font Awesome CDN -->
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
     <link rel="stylesheet" href="../../css/fontawesome.css">
@@ -93,6 +95,52 @@
     justify-content: center;
 }
 
+.modal.fade .modal-dialog.modal-dialog-slideright {
+    transform: translate(100%, 0);
+    transition: transform 0.3s ease-out;
+}
+
+.modal.show .modal-dialog.modal-dialog-slideright {
+    transform: translate(0, 0);
+}
+
+.confirmation-details {
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.detail-item {
+    padding: 12px;
+    border-bottom: 1px solid #dee2e6;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.detail-item:last-child {
+    border-bottom: none;
+}
+
+.detail-label {
+    font-weight: 600;
+    color: #495057;
+}
+
+.detail-value {
+    color: #212529;
+}
+
+.table-responsive {
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.table th {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #dee2e6;
+}
 </style>
 
 
@@ -126,6 +174,12 @@
                             <span class="text nav-text">Dashboard</span>
                         </a>
                     </li>
+                    <li class="nav-link <?php echo $title == 'Order' ? 'active' : ''; ?>">
+                        <a href="../plant_order/index.php">
+                            <i class='bx bx-store-alt icon'></i>
+                            <span class="text nav-text">Order</span>
+                        </a>
+                    </li>
                     <li class="nav-link <?php echo $title == 'Type' ? 'active' : ''; ?>">
                         <a href="../plant_type/index.php">
                             <i class='bx bx-list-ol icon'></i>
@@ -148,6 +202,12 @@
                         <a href="../plant_nursery/index.php">
                             <i class='bx bx-leaf icon'></i>
                             <span class="text nav-text">Nursery</span>
+                        </a>
+                    </li>
+                    <li class="nav-link <?php echo $title == 'Center' ? 'active' : ''; ?>">
+                        <a href="../plant_center/index.php">
+                            <i class='bx bx-building-house icon'></i>
+                            <span class="text nav-text">Center</span>
                         </a>
                     </li>
                 </ul>

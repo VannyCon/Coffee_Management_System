@@ -4,15 +4,16 @@ require_once("../../../connection/connection.php");
 
 class Timeline extends config {
 
-    public function create($nurseryID, $timeline_title, $history_date) {
+    public function create($nurseryID, $timeline_title, $history_date, $quantity) {
         try {
             // Define the query with placeholders
-            $query = "INSERT INTO `tbl_timeline`(`nursery_id_fk`, `content_id`, `timeline_title`, `history_date`) 
-                      VALUES (:nursery_id_fk, UUID(), :timeline_title, :history_date)";
+            $query = "INSERT INTO `tbl_timeline`(`nursery_id_fk`, `content_id`, `quantity`, `timeline_title`, `history_date`) 
+                      VALUES (:nursery_id_fk, UUID(), :quantity, :timeline_title, :history_date)";
             // Prepare the query
             $stmt = $this->pdo->prepare($query);
             // Bind the values to the placeholders
             $stmt->bindParam(':nursery_id_fk', $nurseryID);
+            $stmt->bindParam(':quantity', $quantity);
             $stmt->bindParam(':timeline_title', $timeline_title);
             $stmt->bindParam(':history_date', $history_date);
             // Execute the query
@@ -27,10 +28,10 @@ class Timeline extends config {
     
     public function getTimelineById($nursery_id_fk) {
         try {
-                $query = "SELECT `id`, `nursery_id_fk`, `content_id`, `timeline_title`, `history_date`
+                $query = "SELECT `id`, `nursery_id_fk`, `content_id`, `quantity`, `timeline_title`, `history_date`
                           FROM `tbl_timeline` 
                           WHERE `nursery_id_fk` = :nursery_id_fk 
-                          ORDER BY `history_date` DESC";
+                          ORDER BY `history_date` DESC, `created_time` DESC;";
                 $stmt = $this->pdo->prepare($query); // Prepare the query
                 $stmt->bindParam(':nursery_id_fk', $nursery_id_fk); // Bind the value
                 $stmt->execute(); // Execute the query

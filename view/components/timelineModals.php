@@ -14,13 +14,27 @@
                             <div class="form-group">
                                 <label for="timeline_title">Timeline Title</label>
                                 <!-- <input type="text" class="form-control" id="timeline_title"  name="timeline_title"  placeholder="Enter first value" required> -->
-
-                                <select class="form-select" name="timeline_title" id="timeline_title" aria-label="Plant Status">
-                                    <option value="Harvested">Harvesting</option>
-                                    <option value="Fertilizing">Fertilizing</option>
-                                </select>
+                                <select class="form-select" name="timeline_title" id="timeline_title" aria-label="Plant Status" required>
+                                <option value="" selected disabled>Choose the Event</option>
+                                <option value="Harvested">Harvest</option>
+                                <option value="Fertilizing">Fertilizing</option>
+                                <option value="Watering">Watering</option>
+                            </select>
 
                             </div>
+
+                            <!-- Use this if Fertilizing or Watering -->
+                            <div class="form-group" id="description-field" style="display: none;">
+                                <label for="description">Description</label>
+                                <input type="text" class="form-control" id="description" name="description" placeholder="Enter description" value="">
+                            </div>
+
+                            <!-- Use this if Harvest -->
+                            <div class="form-group" id="quantity-field" style="display: none;">
+                                <label for="quantity">Quantity</label>
+                                <input type="number" class="form-control" id="quantity" name="quantity" placeholder="Enter quantity">
+                            </div>
+
                             <div class="form-group">
                                 <label for="history_date">Date</label>
                                 <input type="date" class="form-control" id="history_date" name="history_date" placeholder="Enter second value" required>

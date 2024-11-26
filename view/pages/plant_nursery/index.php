@@ -81,8 +81,10 @@
                                     </td>
 
                                     <td>
-                                        <a type="button" class="btn  btn-info mx-0 mx-md-2 my-1 my-md-0" href="update.php?ID=<?php echo htmlspecialchars($nursery['id']); ?>"><i class='bx bx-edit icon text-white'></i></a>
-                                        <button type="button" class="btn  btn-danger" data-id="<?php echo htmlspecialchars($nursery['id']); ?>" onclick="setDeleteId(this)"><i class='bx bx-trash icon'></i></button>
+                                      <div class="btn-group">
+                                          <a type="button" class="btn  btn-info" href="update.php?ID=<?php echo htmlspecialchars($nursery['id']); ?>"><i class='bx bx-edit icon text-white'></i></a>
+                                          <button type="button" class="btn  btn-danger" data-id="<?php echo htmlspecialchars($nursery['id']); ?>" onclick="setDeleteId(this)"><i class='bx bx-trash icon'></i></button>
+                                      </div>
                                     </td>
                                     <td>
                                       <a type="button" class="btn btn-sm d-md-none btn-primary mx-2" href="qr.php?plantID=<?php echo htmlspecialchars($nursery['nursery_id']); ?>">Download</a>
