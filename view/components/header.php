@@ -246,6 +246,11 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link <?php echo $title == 'Order' ? 'active' : ''; ?>" href="../plant_order/index.php">
+                            <i class='bx bx-store-alt'></i> Order
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link <?php echo $title == 'Type' ? 'active' : ''; ?>" href="../plant_type/index.php">
                             <i class='bx bx-list-ol'></i> Type
                         </a>
@@ -263,6 +268,11 @@
                     <li class="nav-item">
                         <a class="nav-link <?php echo $title == 'Nursery' ? 'active' : ''; ?>" href="../plant_nursery/index.php">
                             <i class='bx bx-leaf'></i> Nursery
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <?php echo $title == 'Center' ? 'active' : ''; ?>" href="../Nursery/index.php">
+                            <i class='bx bx-building-house'></i> Center
                         </a>
                     </li>
                  
