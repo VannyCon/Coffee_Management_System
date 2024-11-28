@@ -87,6 +87,7 @@
                                     data-source-id="<?php echo htmlspecialchars($owner['source_id']); ?>" 
                                     data-source-name="<?php echo htmlspecialchars($owner['source_fullname']); ?>" 
                                     data-source-contact="<?php echo htmlspecialchars($owner['source_contact_number']); ?>" 
+                                    data-source-variety="<?php echo htmlspecialchars($owner['source_variety']); ?>" 
                                     data-bs-target="#addOrderModal">
                                     <i class='bx bx-shopping-bag icon'></i> Order
                                 </button>
@@ -139,6 +140,10 @@
                         <input type="text" class="form-control" id="source_name" name="source_name" readonly>
                     </div>
                     <div class="mb-3">
+                        <label for="source_variety" class="form-label">Variety</label>
+                        <input type="text" class="form-control" id="source_variety" name="source_variety" readonly>
+                    </div>
+                    <div class="mb-3">
                         <label for="source_contact" class="form-label">Contact</label>
                         <input type="text" class="form-control" id="source_contact" name="source_contact" readonly>
                     </div>
@@ -187,6 +192,10 @@
                         <span id="confirmSourceId" class="detail-value"></span>
                     </div>
                     <div class="detail-item">
+                        <span class="detail-label">Variety</span>
+                        <span id="confirmVariety" class="detail-value"></span>
+                    </div>
+                    <div class="detail-item">
                         <span class="detail-label">Contact</span>
                         <span id="confirmContact" class="detail-value"></span>
                     </div>
@@ -228,6 +237,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const sourceId = button.getAttribute('data-source-id');
         const sourceName = button.getAttribute('data-source-name');
         const sourceContact = button.getAttribute('data-source-contact');
+        const sourceVariety = button.getAttribute('data-source-variety');
+
+       
             // Set current date/time
         const now = new Date();
         now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
@@ -236,6 +248,9 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('source_id').value = sourceId;
         document.getElementById('source_name').value = sourceName;
         document.getElementById('source_contact').value = sourceContact;
+        document.getElementById('source_variety').value = sourceVariety;
+
+
     });
 
     document.getElementById('orderQuantity').addEventListener('input', calculateTotal);
@@ -264,6 +279,8 @@ function showConfirmationModal() {
 
     // Update confirmation details
     document.getElementById('confirmSourceId').textContent = document.getElementById('source_id').value;
+    document.getElementById('confirmVariety').textContent = document.getElementById('source_variety').value;
+
     document.getElementById('confirmContact').textContent = document.getElementById('source_contact').value;
     document.getElementById('confirmOrderQuantity').textContent = document.getElementById('orderQuantity').value;
     document.getElementById('confirmOrderPrice').textContent = '₱' + parseFloat(document.getElementById('orderPrice').value).toFixed(2);

@@ -10,13 +10,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Ensure that all required data is available
     if ($order_quantity && $order_price && $order_total && $source_contact) {
         // Your Infobip API key
-        $apiKey = '00b76d32504ca8a887765dbc398f01b1-424273f6-0a31-4c03-823f-1e49682f3cbf';
-
-        // The endpoint for sending SMS
-        $apiUrl = 'https://api.infobip.com/sms/2/text/advanced';
-
-        // Recipient phone number
-        $recipient = '+639948226443';
+        $apiKey = 'cba5c9e80d8390195214918fb620c961-f3ae1174-a83e-4535-9776-553c6e3b0ae1';
+        $apiUrl = 'https://m38ve6.api.infobip.com/sms/2/text/advanced';
+        $recipient = '+639934778549'; // Adjust recipient based on your requirements
+        
 
         // Correct message format with proper concatenation
         $message = "Hello this is Dr. Patrick Escalante, I am placing an order for seeds at your farm.\n"

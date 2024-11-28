@@ -43,6 +43,10 @@
     padding: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+.stat-number a {
+    text-decoration: none;
+    color: inherit;
+}
 
 .stat-number {
     font-size: 3rem;
@@ -174,10 +178,28 @@
                             <span class="text nav-text">Dashboard</span>
                         </a>
                     </li>
+                    <li class="nav-link <?php echo $title == 'Nursery' ? 'active' : ''; ?>">
+                        <a href="../plant_nursery/index.php">
+                            <i class='bx bx-leaf icon'></i>
+                            <span class="text nav-text">Nursery</span>
+                        </a>
+                    </li>
                     <li class="nav-link <?php echo $title == 'Order' ? 'active' : ''; ?>">
                         <a href="../plant_order/index.php">
                             <i class='bx bx-store-alt icon'></i>
                             <span class="text nav-text">Order</span>
+                        </a>
+                    </li>
+                    <li class="nav-link <?php echo $title == 'Reminder' ? 'active' : ''; ?>">
+                        <a href="../plant_reminder/index.php">
+                            <i class='bx bx-calendar-check icon'></i>
+                            <span class="text nav-text">Reminder</span>
+                        </a>
+                    </li>
+                    <li class="nav-link <?php echo $title == 'Source' ? 'active' : ''; ?>">
+                        <a href="../plant_source/index.php">
+                            <i class='bx bx-face icon'></i>
+                            <span class="text nav-text">Sources</span>
                         </a>
                     </li>
                     <li class="nav-link <?php echo $title == 'Type' ? 'active' : ''; ?>">
@@ -192,22 +214,16 @@
                             <span class="text nav-text">Variety</span>
                         </a>
                     </li>
-                    <li class="nav-link <?php echo $title == 'Source' ? 'active' : ''; ?>">
-                        <a href="../plant_source/index.php">
-                            <i class='bx bx-face icon'></i>
-                            <span class="text nav-text">Sources</span>
-                        </a>
-                    </li>
-                    <li class="nav-link <?php echo $title == 'Nursery' ? 'active' : ''; ?>">
-                        <a href="../plant_nursery/index.php">
-                            <i class='bx bx-leaf icon'></i>
-                            <span class="text nav-text">Nursery</span>
-                        </a>
-                    </li>
                     <li class="nav-link <?php echo $title == 'Center' ? 'active' : ''; ?>">
                         <a href="../plant_center/index.php">
                             <i class='bx bx-building-house icon'></i>
                             <span class="text nav-text">Center</span>
+                        </a>
+                    </li>
+                    <li class="nav-link <?php echo $title == 'Report' ? 'active' : ''; ?>">
+                        <a href="../plant_report/index.php">
+                            <i class='bx bx-book-content icon'></i>
+                            <span class="text nav-text">Report</span>
                         </a>
                     </li>
                 </ul>
@@ -246,8 +262,23 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link <?php echo $title == 'Nursery' ? 'active' : ''; ?>" href="../plant_nursery/index.php">
+                            <i class='bx bx-leaf'></i> Nursery
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link <?php echo $title == 'Order' ? 'active' : ''; ?>" href="../plant_order/index.php">
                             <i class='bx bx-store-alt'></i> Order
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <?php echo $title == 'Reminder' ? 'active' : ''; ?>" href="../plant_reminder/index.php">
+                            <i class='bx bx-calendar-check'></i> Reminder
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <?php echo $title == 'Source' ? 'active' : ''; ?>" href="../plant_source/index.php">
+                            <i class='bx bx-face'></i> Sources
                         </a>
                     </li>
                     <li class="nav-item">
@@ -260,22 +291,18 @@
                             <i class='bx bx-layer'></i> Variety
                         </a>
                     </li>
+
+                   
                     <li class="nav-item">
-                        <a class="nav-link <?php echo $title == 'Source' ? 'active' : ''; ?>" href="../plant_source/index.php">
-                            <i class='bx bx-face'></i> Sources
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link <?php echo $title == 'Nursery' ? 'active' : ''; ?>" href="../plant_nursery/index.php">
-                            <i class='bx bx-leaf'></i> Nursery
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link <?php echo $title == 'Center' ? 'active' : ''; ?>" href="../Nursery/index.php">
+                        <a class="nav-link <?php echo $title == 'Center' ? 'active' : ''; ?>" href="../plant_center/index.php">
                             <i class='bx bx-building-house'></i> Center
                         </a>
                     </li>
-                 
+                    <li class="nav-item">
+                        <a class="nav-link <?php echo $title == 'Report' ? 'active' : ''; ?>" href="../plant_report/index.php">
+                            <i class='bx bx-book-content'></i> Report
+                        </a>
+                    </li>
                     <li class="nav-item">
                         <form action='' method='post'>
                             <input type='hidden' name='action' value='logout'>

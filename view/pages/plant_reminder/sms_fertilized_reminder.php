@@ -7,10 +7,11 @@ if (!empty($fertilizationDue)) {
         // Prepare SMS message
         $message = "Fertilized Reminder: Field {$nursery['nursery_field']} in Can be Fertilized Now! ";
 
-        // Your Infobip API key
-        $apiKey = '00b76d32504ca8a887765dbc398f01b1-424273f6-0a31-4c03-823f-1e49682f3cbf';
-        $apiUrl = 'https://api.infobip.com/sms/2/text/advanced';
-        $recipient = '+639948226443'; // Adjust recipient based on your requirements
+        $apiKey = 'cba5c9e80d8390195214918fb620c961-f3ae1174-a83e-4535-9776-553c6e3b0ae1';
+        $apiUrl = 'https://m38ve6.api.infobip.com/sms/2/text/advanced';
+        $recipient = '+639934778549'; // Adjust recipient based on your requirements
+        
+        
 
         // Prepare the payload
         $payload = [

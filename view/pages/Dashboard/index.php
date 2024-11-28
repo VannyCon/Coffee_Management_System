@@ -81,60 +81,79 @@
 
             <div class="col-md-12 p-2 mt-0">
                 <div class="stats-container">
-                <div class="stats-row mb-3">
+                    <div class="stats-row mb-3">
                         <div class="stats-col ms-2">
                             <div class="dashboard-card text-center stats-card">
-                                <div class="stat-number"><?php echo $getSummary['total_plants']; ?></div>
+                                <div class="stat-number">
+                                    <a href="../plant_nursery/index.php"><?php echo $getSummary['total_plants']; ?></a>
+                                </div>
                                 <div class="stat-label">Total Batch Plants</div>
                             </div>
                         </div>
                         <div class="stats-col ms-2">
                             <div class="dashboard-card text-center stats-card">
-                                <div class="stat-number"><?php echo $getSummary['total_types']; ?></div>
+                                <div class="stat-number">
+                                    <a href="../plant_nursery/index.php"><?php echo $getSummary['total_types']; ?></a>
+                                </div>
                                 <div class="stat-label">Total Types</div>
                             </div>
                         </div>
                         <div class="stats-col ms-2">
                             <div class="dashboard-card text-center stats-card">
-                                <div class="stat-number"><?php echo $getSummary['total_varieties']; ?></div>
+                                <div class="stat-number">
+                                    <a href="../plant_variety/index.php"><?php echo $getSummary['total_varieties']; ?></a>
+                                </div>
                                 <div class="stat-label">Total Varieties</div>
                             </div>
                         </div>
                         <div class="stats-col ms-2">
                             <div class="dashboard-card text-center stats-card">
-                                <div class="stat-number"><?php echo $getSummary['total_varieties']; ?></div>
+                                <div class="stat-number">
+                                    <a href="../plant_source/index.php"><?php echo $getSummary['total_varieties']; ?></a>
+                                </div>
                                 <div class="stat-label">Total Source</div>
                             </div>
                         </div>
                     </div>
                     <div class="stats-row">
                         <div class="stats-col ms-2">
-                                <div class="dashboard-card text-center stats-card">
-                                    <div class="stat-number"><?php echo $getSummary['total_centers']; ?></div>
-                                    <div class="stat-label">Total Center</div>
+                            <div class="dashboard-card text-center stats-card">
+                                <div class="stat-number">
+                                    <a href="../plant_center/index.php"><?php echo $getSummary['total_centers']; ?></a>
                                 </div>
-                            </div>
-                            <div class="stats-col ms-2">
-                                <div class="dashboard-card text-center stats-card">
-                                    <div class="stat-number"><?php echo $getSummary['total_quantity_center']; ?></div>
-                                    <div class="stat-label">Total Deploy</div>
-                                </div>
-                            </div>
-                            <div class="stats-col ms-2">
-                                <div class="dashboard-card text-center stats-card">
-                                    <div class="stat-number"><?php echo $getSummary['total_quantity_order']; ?></div>
-                                    <div class="stat-label">Total Order</div>
-                                </div>
-                            </div>
-                            <div class="stats-col ms-2">
-                                <div class="dashboard-card text-center stats-card">
-                                    <div class="stat-number"><?php echo $getSummary['total_order_price']; ?></div>
-                                    <div class="stat-label">Total Income</div>
-                                </div>
+                                <div class="stat-label">Total Center</div>
                             </div>
                         </div>
+                        <div class="stats-col ms-2">
+                            <div class="dashboard-card text-center stats-card">
+                                <div class="stat-number">
+                                    <a href="../plant_center/index.php"><?php echo $getSummary['total_quantity_center']; ?></a>
+                                </div>
+                                <div class="stat-label">Total Deploy</div>
+                            </div>
+                        </div>
+                        <div class="stats-col ms-2">
+                            <div class="dashboard-card text-center stats-card">
+                                <div class="stat-number">
+                                    <a href="../plant_order/index.php"><?php echo $getSummary['total_quantity_order']; ?></a>
+                                </div>
+                                <div class="stat-label">Total Order</div>
+                            </div>
+                        </div>
+                        <div class="stats-col ms-2">
+                            <div class="dashboard-card text-center stats-card">
+                                <div class="stat-number">
+                                    <a href="../plant_order/index.php"><?php echo $getSummary['total_order_price']; ?></a>
+                                </div>
+                                <div class="stat-label">Total Income</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+
+
+
         </div>
     </div>
 <br><br>

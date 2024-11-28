@@ -7,10 +7,11 @@ if (!empty($harvestableNurseries)) {
         // Prepare SMS message
         $message = "Harvest Reminder: Field {$nursery['nursery_field']} can be Harvested Now!";
 
-        // Your Infobip API key
-        $apiKey = '00b76d32504ca8a887765dbc398f01b1-424273f6-0a31-4c03-823f-1e49682f3cbf';
-        $apiUrl = 'https://api.infobip.com/sms/2/text/advanced';
-        $recipient = '+639948226443'; // Adjust recipient based on your requirements
+        $apiKey = 'cba5c9e80d8390195214918fb620c961-f3ae1174-a83e-4535-9776-553c6e3b0ae1';
+        $apiUrl = 'https://m38ve6.api.infobip.com/sms/2/text/advanced';
+        $recipient = '+639934778549'; // Adjust recipient based on your requirements
+        
+        
 
         // Prepare the payload
         $payload = [
@@ -54,7 +55,7 @@ if (!empty($harvestableNurseries)) {
         curl_close($ch);
 
         // Optional: Delay between requests to avoid rate limiting
-        sleep(2); // Sleep for 1 second between each request (adjust as needed)
+        sleep(5); // Sleep for 1 second between each request (adjust as needed)
     }
 } else {
     // Log if no nurseries are available for harvesting

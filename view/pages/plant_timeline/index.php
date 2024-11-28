@@ -154,6 +154,27 @@
                                                         <?php echo $totalDamage . " (" . number_format($damagePercentage, 2) . "%)"; ?>
                                                     </span>
                                                 </p>
+                                                <p>Survival Rate:  
+                                                    <span class="
+                                                        <?php 
+
+                                                            // Assuming profit per plant is fixed
+                                                            $profitPerPlant = 2; // Replace with the actual profit per plant
+                                                            $maxProfit = $plantData['quantity'] * $profitPerPlant; // Maximum possible profit
+                                                            $profitPercentage = ($totalProfit / $maxProfit) * 100; // Profit percentage
+
+                                                            if ($profitPercentage <= 50) {
+                                                                echo 'text-danger'; // Danger for 50% or less
+                                                            } elseif ($profitPercentage <= 90) {
+                                                                echo 'text-warning'; // Warning for more than 50% up to 90%
+                                                            } else {
+                                                                echo 'text-success'; // Success for above 90%
+                                                            }
+                                                        ?>">
+                                                        <?php echo number_format($profitPercentage, 2) . "%"; ?>
+                                                    </span>
+                                                </p>
+
                                                 <p>Total Profit: 
                                                     <span class="text-success">
                                                         <?php 
