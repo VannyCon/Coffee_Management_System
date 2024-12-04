@@ -64,8 +64,8 @@
                             <td><?php echo htmlspecialchars($type['type_name']); ?></td>
                             <td><?php echo htmlspecialchars($type['description']); ?></td>
                             <td class="justify-content-center align-items-center">
-                                <div class="btn-group">
-                                    <a type="button" class="btn btn-info" href="update.php?ID=<?php echo htmlspecialchars($type['id']); ?>">
+                                <div class="d-flex">
+                                    <a type="button" class="btn btn-info mx-2" href="update.php?ID=<?php echo htmlspecialchars($type['id']); ?>">
                                         <i class='bx bx-edit icon text-white'></i>
                                     </a>
                                     <button type="button" class="btn btn-danger" data-id="<?php echo htmlspecialchars($type['id']); ?>" onclick="setDeleteId(this)">

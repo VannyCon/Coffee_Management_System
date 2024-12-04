@@ -72,7 +72,7 @@
                             <td><?php echo htmlspecialchars($owner['source_email']); ?></td>
                             <td><?php echo htmlspecialchars($owner['source_address']); ?></td>
                             <td class="justify-content-center align-items-center">
-                              <div class="btn-group">
+                              <div class="">
                                   <a type="button" class="btn btn-info" href="update.php?userID=<?php echo htmlspecialchars($owner['id']); ?>">
                                       <i class='bx
                                       bx-edit icon text-white'></i>

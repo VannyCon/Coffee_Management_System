@@ -69,7 +69,7 @@
 
                     
                     <p>
-                    <strong>Harvest Date:</strong>
+                    <strong>Estimated Harvest Date:</strong>
                         <?php 
                             // Example $history_date array with 'relevant_date'
                             $history_date = $plant->getHarvestStatus($plantData['nursery_id']);
@@ -193,10 +193,10 @@
 
                                 </div>
                                 <div class="col-6 col-md-2 d-flex justify-content-center align-items-center mt-2 mt-md-0">
-                                    <!-- <a class="btn btn-info mx-1 px-3 px-md-5" onclick="setEditTimelineData(<?php echo htmlspecialchars(json_encode($timelineItem)); ?>)">
+                                    <a class="btn btn-info mx-1 px-3 px-md-5" onclick="setEditTimelineData(<?php echo htmlspecialchars(json_encode($timelineItem)); ?>)">
                                         <i class='bx
                                         bx-edit icon text-white'></i>
-                                    </a> -->
+                                    </a>
                                     <a class="btn btn-danger mx-1 px-3 px-md-5" onclick="setDeleteTimelineId('<?php echo htmlspecialchars($timelineItem['id']); ?>')">
                                      <i class='bx bx-trash icon'></i>
                                     </a>
@@ -230,9 +230,10 @@
                                                 <i class='bx
                                                 bx-edit icon text-white'></i>
                                             </a>
-                                            <!-- <a class="btn btn-outline-danger mx-1 px-3 px-md-5" onclick="setDeleteContent('<?php echo htmlspecialchars($content['id']); ?>')">
-                                                Delete
-                                            </a> -->
+                                            <a class="btn btn-danger mx-1 px-3 px-md-5" onclick="setDeleteContent('<?php echo htmlspecialchars($content['id']); ?>')">
+                                                <i class='bx
+                                                bx-trash icon text-white'></i>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>

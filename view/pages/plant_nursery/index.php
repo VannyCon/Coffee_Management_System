@@ -83,7 +83,7 @@
                                     </td>
 
                                     <td>
-                                      <div class="btn-group">
+                                      <div class="">
                                           <a type="button" class="btn  btn-info" href="update.php?ID=<?php echo htmlspecialchars($nursery['id']); ?>"><i class='bx bx-edit icon text-white'></i></a>
                                           <button type="button" class="btn  btn-danger" data-id="<?php echo htmlspecialchars($nursery['id']); ?>" onclick="setDeleteId(this)"><i class='bx bx-trash icon'></i></button>
                                       </div>

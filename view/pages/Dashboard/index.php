@@ -79,78 +79,78 @@
                 </div>
             </div>
 
-            <div class="col-md-12 p-2 mt-0">
-                <div class="stats-container">
-                    <div class="stats-row mb-3">
-                        <div class="stats-col ms-2">
-                            <div class="dashboard-card text-center stats-card">
-                                <div class="stat-number">
-                                    <a href="../plant_nursery/index.php"><?php echo $getSummary['total_plants']; ?></a>
-                                </div>
-                                <div class="stat-label">Total Batch Plants</div>
+            <div class=" mx-1 mt-1 mb-3">
+                <div class="row g-3">
+                    <!-- First Row -->
+                    <div class="col-12 col-sm-6 col-md-3">
+                        <div class="dashboard-card text-center">
+                            <div class="stat-number">
+                                <a href="../plant_nursery/index.php"><?php echo $getSummary['total_plants']; ?></a>
                             </div>
-                        </div>
-                        <div class="stats-col ms-2">
-                            <div class="dashboard-card text-center stats-card">
-                                <div class="stat-number">
-                                    <a href="../plant_nursery/index.php"><?php echo $getSummary['total_types']; ?></a>
-                                </div>
-                                <div class="stat-label">Total Types</div>
-                            </div>
-                        </div>
-                        <div class="stats-col ms-2">
-                            <div class="dashboard-card text-center stats-card">
-                                <div class="stat-number">
-                                    <a href="../plant_variety/index.php"><?php echo $getSummary['total_varieties']; ?></a>
-                                </div>
-                                <div class="stat-label">Total Varieties</div>
-                            </div>
-                        </div>
-                        <div class="stats-col ms-2">
-                            <div class="dashboard-card text-center stats-card">
-                                <div class="stat-number">
-                                    <a href="../plant_source/index.php"><?php echo $getSummary['total_varieties']; ?></a>
-                                </div>
-                                <div class="stat-label">Total Source</div>
-                            </div>
+                            <div class="stat-label">Total Batch Plants</div>
                         </div>
                     </div>
-                    <div class="stats-row">
-                        <div class="stats-col ms-2">
-                            <div class="dashboard-card text-center stats-card">
-                                <div class="stat-number">
-                                    <a href="../plant_center/index.php"><?php echo $getSummary['total_centers']; ?></a>
-                                </div>
-                                <div class="stat-label">Total Center</div>
+                    <div class="col-12 col-sm-6 col-md-3">
+                        <div class="dashboard-card text-center">
+                            <div class="stat-number">
+                                <a href="../plant_nursery/index.php"><?php echo $getSummary['total_types']; ?></a>
                             </div>
+                            <div class="stat-label">Total Types</div>
                         </div>
-                        <div class="stats-col ms-2">
-                            <div class="dashboard-card text-center stats-card">
-                                <div class="stat-number">
-                                    <a href="../plant_center/index.php"><?php echo $getSummary['total_quantity_center']; ?></a>
-                                </div>
-                                <div class="stat-label">Total Deploy</div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-3">
+                        <div class="dashboard-card text-center">
+                            <div class="stat-number">
+                                <a href="../plant_variety/index.php"><?php echo $getSummary['total_varieties']; ?></a>
                             </div>
+                            <div class="stat-label">Total Varieties</div>
                         </div>
-                        <div class="stats-col ms-2">
-                            <div class="dashboard-card text-center stats-card">
-                                <div class="stat-number">
-                                    <a href="../plant_order/index.php"><?php echo $getSummary['total_quantity_order']; ?></a>
-                                </div>
-                                <div class="stat-label">Total Order</div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-3">
+                        <div class="dashboard-card text-center">
+                            <div class="stat-number">
+                                <a href="../plant_source/index.php"><?php echo $getSummary['total_varieties']; ?></a>
                             </div>
+                            <div class="stat-label">Total Source</div>
                         </div>
-                        <div class="stats-col ms-2">
-                            <div class="dashboard-card text-center stats-card">
-                                <div class="stat-number">
-                                    <a href="../plant_order/index.php"><?php echo $getSummary['total_order_price']; ?></a>
-                                </div>
-                                <div class="stat-label">Total Income</div>
+                    </div>
+
+                    <!-- Second Row -->
+                    <div class="col-12 col-sm-6 col-md-3">
+                        <div class="dashboard-card text-center">
+                            <div class="stat-number">
+                                <a href="../plant_center/index.php"><?php echo $getSummary['total_centers']; ?></a>
                             </div>
+                            <div class="stat-label">Total Center</div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-3">
+                        <div class="dashboard-card text-center">
+                            <div class="stat-number">
+                                <a href="../plant_center/index.php"><?php echo $getSummary['total_quantity_center']; ?></a>
+                            </div>
+                            <div class="stat-label">Total Deploy</div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-3">
+                        <div class="dashboard-card text-center">
+                            <div class="stat-number">
+                                <a href="../plant_order/index.php"><?php echo $getSummary['total_quantity_order']; ?></a>
+                            </div>
+                            <div class="stat-label">Total Order</div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-3">
+                        <div class="dashboard-card text-center">
+                            <div class="stat-number">
+                                <a href="../plant_order/index.php"><?php echo $getSummary['total_order_price']; ?></a>
+                            </div>
+                            <div class="stat-label">Total Income</div>
                         </div>
                     </div>
                 </div>
             </div>
+
 
 
 

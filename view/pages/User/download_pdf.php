@@ -133,7 +133,6 @@ foreach ($varietyDescript as $index => $line) {
         $pdf->Cell(0, 10, $line, 0, 1);
     }
 }
-
 $pdf->SetFont('helvetica', 'B', 12);
 $pdf->Cell(45, 10, "Quantity", 0, 0);
 $pdf->SetFont('helvetica', '', 12);
@@ -152,7 +151,8 @@ $pdf->Cell(0, 10, $age, 0, 1);
 $pdf->SetFont('helvetica', 'B', 12);
 $pdf->Cell(45, 10, "Planted Date:", 0, 0);
 $pdf->SetFont('helvetica', '', 12);
-$pdf->Cell(0, 10, $plantData['planted_date'], 0, 1);
+$pdf->Cell(0, 10, DateTime::createFromFormat('Y-m-d', $plantData['planted_date'])->format('F j, Y'), 0, 1);
+
 
 $pdf->SetFont('helvetica', 'B', 12);
 $pdf->Cell(45, 10, "Harvest Date:", 0, 0);
@@ -189,7 +189,7 @@ foreach ($timelines as $timelineItem) {
         $maxProfit = $totalPlanted * $profitPerPlant; // Maximum possible profit
         $profitPercentage = ($totalProfit / $maxProfit) * 100; // Profit percentage
 
-    // Add table headers
+        // Add table headers
         $pdf->SetFont('helvetica', 'B', 10);
         $pdf->SetFillColor(240, 240, 240); // Light gray background
         $pdf->Cell(70, 10, "Detail", 1, 0, 'C', true);
@@ -199,7 +199,7 @@ foreach ($timelines as $timelineItem) {
         // Add rows with text coloring
         $pdf->SetFont('helvetica', '', 10);
 
-      // Total Harvest (Darker Sky Blue text)
+        // Total Harvest (Darker Sky Blue text)
         $pdf->SetTextColor(70, 130, 180); // Darker sky blue
         $pdf->Cell(70, 10, "Total Harvest", 1, 0, 'L');
         $pdf->Cell(60, 10, "{$harvestedQuantity}/{$totalPlanted}", 1, 0, 'L');
@@ -213,13 +213,30 @@ foreach ($timelines as $timelineItem) {
         $pdf->Cell(60, 10, number_format($damagePercentage, 2) . "%", 1, 1, 'L');
         $pdf->SetTextColor(0, 0, 0); // Reset to black text
 
+        // Survival Rate
+        $pdf->SetTextColor(34, 139, 34); // Default green color
+
+        // Change color based on survival rate
+        if ($harvestPercentage < 50) {
+            $pdf->SetTextColor(255, 0, 0); // Red if below 50%
+        } elseif ($harvestPercentage >= 50 && $harvestPercentage < 90) {
+            $pdf->SetTextColor(245, 173, 66); // Yellow if between 50% and 90%
+        } elseif ($harvestPercentage >= 90) {
+            $pdf->SetTextColor(0, 128, 0); // Green if above 90%
+        }
+
+        // Display the survival rate
+        $pdf->Cell(70, 10, "Survival Rate: ", 1, 0, 'L');
+        $pdf->Cell(60, 10, "{$harvestedQuantity}/{$totalPlanted}", 1, 0, 'L');
+        $pdf->Cell(60, 10, number_format($harvestPercentage, 2) . "%", 1, 1, 'L');
+        $pdf->SetTextColor(0, 0, 0); // Reset to black text
+
         // Total Profit (Darker Green text)
         $pdf->SetTextColor(34, 139, 34); // Darker green
         $pdf->Cell(70, 10, "Total Profit", 1, 0, 'L');
         $pdf->Cell(60, 10, "" . number_format($totalProfit, 2), 1, 0, 'L');
         $pdf->Cell(60, 10, number_format($profitPercentage, 2) . "%", 1, 1, 'L');
         $pdf->SetTextColor(0, 0, 0); // Reset to black text
-
 
         $pdf->Ln(5); // Add some space before the next section
     }
@@ -262,6 +279,7 @@ foreach ($timelines as $timelineItem) {
     // Add some space between timeline entries
     $pdf->Ln(5);
 }
+
 
 
 // Output PDF

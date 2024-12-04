@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nursery Owners</title>
+    <title>Coffee Mangement System</title>
     <!-- Bootstrap CSS CDN -->
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> -->
     <link rel="stylesheet" href="../../css/bootsrap.css">
@@ -21,7 +21,10 @@
     <link rel="stylesheet" href="../../css/sidebar.css">
     <!-- <link rel="stylesheet" href="../../css/boxicons.css"> -->
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
-     
+         <!-- add icon link -->
+    <link rel="icon" href=
+"../../../assets/images/logo.png" 
+        type="image/x-icon" />
 </head>
 <body class="px-1 px-md-5">
 <style>
@@ -86,10 +89,24 @@
     flex: 1;
 }
 
+
 .stats-col {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
+    flex: 1 1 calc(25% - 15px); /* Adjust card size for responsiveness */
+    max-width: calc(25% - 15px);
+}
+
+@media (max-width: 768px) {
+    .stats-col {
+        flex: 1 1 calc(50% - 15px); /* Adjust card size for smaller screens */
+        max-width: calc(50% - 15px);
+    }
+}
+
+@media (max-width: 576px) {
+    .stats-col {
+        flex: 1 1 100%; /* Full width for very small screens */
+        max-width: 100%;
+    }
 }
 
 .stats-card {
