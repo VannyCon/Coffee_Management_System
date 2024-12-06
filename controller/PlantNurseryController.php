@@ -57,7 +57,7 @@
         }
     }
 
-    if ($title_Info == "Nursery Update") {
+    if (isset($title_Info) && $title_Info == "Nursery Update") {
         // Check if 'userID' is set in the GET request
         if (isset($_GET['ID'])) {
             $id = $_GET['ID'];

@@ -1,52 +1,57 @@
+
 <?php
+include_once('../../../controller/PlantNurseryController.php');
 
-$apiKey = 'cba5c9e80d8390195214918fb620c961-f3ae1174-a83e-4535-9776-553c6e3b0ae1';
-$apiUrl = 'https://m38ve6.api.infobip.com/sms/2/text/advanced';
-$recipient = '+639934778549'; // Adjust recipient based on your requirements
+        // Array to hold data to send
+        $send_data = [];
 
+        // START - Parameters to Change
+        // Set the Sender ID
+        $send_data['sender_id'] = "PhilSMS"; // Replace with your sender ID
 
-// Message content
-$message = 'Watering Reminder: Hello, Please Water Your Plant Thanks!';
+        // Add recipient(s) - use the international format (e.g., +63 for the Philippines)
+        $send_data['recipient'] = "+639934778549"; // Replace with the recipient's number
 
-// Prepare the payload
-$payload = [
-    'messages' => [
-        [
-            'from' => 'YourSenderID', // Sender ID (can be alphanumeric)
-            'destinations' => [
-                ['to' => $recipient]
-            ],
-            'text' => $message
-        ]
-    ]
-];
+        // Add your message content
+        $send_data['message'] = "Watering Reminder: Hello, Please Water Your Plant Thanks!";
 
-// Initialize cURL
-$ch = curl_init($apiUrl);
+        // Your API Token
+        $token = "1185|QIFNfb8NzFhL4HkbJ0hEgzkgOtrBQptuhkKKKkmF"; // Replace with your API token
+        // END - Parameters to Change
 
-// Set the necessary cURL options
-curl_setopt($ch, CURLOPT_HTTPHEADER, [
-    "Authorization: App $apiKey",
-    'Content-Type: application/json',
-    'Accept: application/json'
-]);
+        // Convert the data array to JSON
+        $parameters = json_encode($send_data);
 
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_POST, true);
-curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
+        // Initialize cURL
+        $ch = curl_init();
 
-// Execute the request and get the response
-$response = curl_exec($ch);
+        // Set the API endpoint for sending SMS
+        curl_setopt($ch, CURLOPT_URL, "https://app.philsms.com/api/v3/sms/send");
 
-// Check for errors
-if (curl_errno($ch)) {
-    // echo 'Error:' . curl_error($ch);
-} else {
-    // echo 'Response:' . $response;
-}
+        // Use POST method
+        curl_setopt($ch, CURLOPT_POST, true);
 
-// Close cURL
-curl_close($ch);
+        // Add the JSON data as the request body
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $parameters);
 
-// Optional: Delay between requests to avoid rate limiting
-sleep(2); // Sleep for 1 second between each request (adjust as needed)
+        // Expect a response from the server
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        // Add headers
+        $headers = [
+            "Content-Type: application/json",            // Set content type to JSON
+            "Authorization: Bearer $token"              // Add Authorization Bearer Token
+        ];
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+        // Execute the request
+        $get_sms_status = curl_exec($ch);
+
+        // Close the cURL session
+        curl_close($ch);
+
+        // Output the response
+        echo "Response from API:\n";
+        var_dump($get_sms_status);
+
+?>

@@ -87,7 +87,7 @@
                                     data-source-id="<?php echo htmlspecialchars($owner['source_id']); ?>" 
                                     data-source-name="<?php echo htmlspecialchars($owner['source_fullname']); ?>" 
                                     data-source-contact="<?php echo htmlspecialchars($owner['source_contact_number']); ?>" 
-                                    data-source-variety="<?php echo htmlspecialchars($owner['source_variety']); ?>" 
+                                    data-source-variety="<?php echo htmlspecialchars($owner['source_variety']); ?>"
                                     data-bs-target="#addOrderModal">
                                     <i class='bx bx-shopping-bag icon'></i> Order
                                 </button>

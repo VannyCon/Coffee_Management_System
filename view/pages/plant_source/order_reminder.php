@@ -8,68 +8,74 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $source_contact = $_POST['source_contact'] ?? null;
     $source_variety = $_POST['source_variety'] ?? null;
     // Ensure that all required data is available
-    if ($order_quantity && $order_price && $order_total && $source_contact ) {
-        // Your Infobip API key
-// Your Infobip API key
-$apiKey = '00b76d32504ca8a887765dbc398f01b1-424273f6-0a31-4c03-823f-1e49682f3cbf';
+    if ($order_quantity && $order_price && $order_total && $source_contact && $source_variety) {
 
-// The endpoint for sending SMS
-$apiUrl = 'https://api.infobip.com/sms/2/text/advanced';
 
-// Recipient phone number
-$recipient = '+639948226443';
+        // Array to hold data to send
+        $send_data = [];
 
-        // Correct message format with proper concatenation
-        $message = "Placing Order:.\n"
+        // START - Parameters to Change
+        // Set the Sender ID
+        $send_data['sender_id'] = "PhilSMS"; // Replace with your sender ID
+
+        // Add recipient(s) - use the international format (e.g., +63 for the Philippines)
+        // Remove the first character (assumed to be '0') from $source_contact
+        $cleaned_contact = ltrim($source_contact, '0');
+
+        // Prepend "+63" to the cleaned contact number
+        $send_data['recipient'] = "+63$cleaned_contact";
+
+
+        // Add your message content
+        $send_data['message'] = "Hello this is Dr. Patrick Escalante, I am placing an order for seeds at your farm. \n"
                  . "Order details:\n"
-                 . "  Variety: Testings\n"
+                 . "  Variety: " . $source_variety. "\n"
                  . "  Quantity: " . $order_quantity . "\n"
                  . "  Asking Price: " . $order_price . "\n"
                  . "  Order Total: " . $order_total . "\n"
                  . "\n"
+                 . "Contact us at: 09123456789\n"
+                 . "\n"
                  . "Thank you!";
 
-        // Prepare the payload
-        $payload = [
-            'messages' => [
-                [
-                    'from' => 'YourSenderID', // Sender ID (can be alphanumeric)
-                    'destinations' => [
-                        ['to' => $recipient]
-                    ],
-                    'text' => $message
-                ]
-            ]
-        ];
+        // Your API Token
+        $token = "1185|QIFNfb8NzFhL4HkbJ0hEgzkgOtrBQptuhkKKKkmF"; // Replace with your API token
+        // END - Parameters to Change
+
+        // Convert the data array to JSON
+        $parameters = json_encode($send_data);
 
         // Initialize cURL
-        $ch = curl_init($apiUrl);
+        $ch = curl_init();
 
-        // Set the necessary cURL options
-        curl_setopt($ch, CURLOPT_HTTPHEADER, [
-            "Authorization: App $apiKey",
-            'Content-Type: application/json',
-            'Accept: application/json'
-        ]);
+        // Set the API endpoint for sending SMS
+        curl_setopt($ch, CURLOPT_URL, "https://app.philsms.com/api/v3/sms/send");
 
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        // Use POST method
         curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
 
-        // Execute the request and get the response
-        $response = curl_exec($ch);
+        // Add the JSON data as the request body
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $parameters);
 
-        // Check for errors
-        if (curl_errno($ch)) {
-            echo 'Error:' . curl_error($ch);
-        } else {
-            echo 'Response:' . $response;
-        }
+        // Expect a response from the server
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
-        // Close cURL
+        // Add headers
+        $headers = [
+            "Content-Type: application/json",            // Set content type to JSON
+            "Authorization: Bearer $token"              // Add Authorization Bearer Token
+        ];
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+        // Execute the request
+        $get_sms_status = curl_exec($ch);
+
+        // Close the cURL session
         curl_close($ch);
-    } else {
-        echo 'Missing required fields.';
+
+        // Output the response
+        echo "Response from API:\n";
+        var_dump($get_sms_status);
     }
 } else {
     echo 'Invalid request method.';

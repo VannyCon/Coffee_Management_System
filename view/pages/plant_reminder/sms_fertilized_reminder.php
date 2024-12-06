@@ -1,62 +1,66 @@
-<?php 
-include_once('controller/LoginController.php');
+<?php
+include_once('../../../controller/PlantNurseryController.php');
 
-// Check if fertilizationDue is properly populated
+$fertilizationDue = $nurseryServices->getFertilizationStatus();
+
+    // Ensure $harvestableNurseries is populated
 if (!empty($fertilizationDue)) {
     foreach ($fertilizationDue as $nursery) {
-        // Prepare SMS message
-        $message = "Fertilized Reminder: Field {$nursery['nursery_field']} in Can be Fertilized Now! ";
+        // Array to hold data to send
+        $send_data = [];
 
-        $apiKey = 'cba5c9e80d8390195214918fb620c961-f3ae1174-a83e-4535-9776-553c6e3b0ae1';
-        $apiUrl = 'https://m38ve6.api.infobip.com/sms/2/text/advanced';
-        $recipient = '+639934778549'; // Adjust recipient based on your requirements
-        
-        
+        // START - Parameters to Change
+        // Set the Sender ID
+        $send_data['sender_id'] = "PhilSMS"; // Replace with your sender ID
 
-        // Prepare the payload
-        $payload = [
-            'messages' => [
-                [
-                    'from' => 'YourSenderID',
-                    'destinations' => [
-                        ['to' => $recipient]
-                    ],
-                    'text' => $message
-                ]
-            ]
-        ];
+        // Add recipient(s) - use the international format (e.g., +63 for the Philippines)
+        $send_data['recipient'] = "+639934778549"; // Replace with the recipient's number
+
+        // Add your message content
+        $send_data['message'] = "Fertilized Reminder: Field {$nursery['nursery_field']} in Can be Fertilized Now! ";
+
+        // Your API Token
+        $token = "1185|QIFNfb8NzFhL4HkbJ0hEgzkgOtrBQptuhkKKKkmF"; // Replace with your API token
+        // END - Parameters to Change
+
+        // Convert the data array to JSON
+        $parameters = json_encode($send_data);
 
         // Initialize cURL
-        $ch = curl_init($apiUrl);
+        $ch = curl_init();
 
-        // Set the necessary cURL options
-        curl_setopt($ch, CURLOPT_HTTPHEADER, [
-            "Authorization: App $apiKey",
-            'Content-Type: application/json',
-            'Accept: application/json'
-        ]);
+        // Set the API endpoint for sending SMS
+        curl_setopt($ch, CURLOPT_URL, "https://app.philsms.com/api/v3/sms/send");
 
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        // Use POST method
         curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
 
-        // Execute the request and get the response
-        $response = curl_exec($ch);
+        // Add the JSON data as the request body
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $parameters);
 
-        // Check for errors
-        if (curl_errno($ch)) {
-            // echo 'Error:' . curl_error($ch);
-        } else {
-            // Log or display the response for debugging
-            // echo 'Response:' . $response;
-        }
+        // Expect a response from the server
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
-        // Close cURL
+        // Add headers
+        $headers = [
+            "Content-Type: application/json",            // Set content type to JSON
+            "Authorization: Bearer $token"              // Add Authorization Bearer Token
+        ];
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+        // Execute the request
+        $get_sms_status = curl_exec($ch);
+
+        // Close the cURL session
         curl_close($ch);
 
-        // Optional: Delay between requests to avoid rate limiting
-        sleep(2); // Sleep for 1 second between each request (adjust as needed)
-    }
-} else {
-    // echo "No fertilization reminders available.";
+        // Output the response
+        echo "Response from API:\n";
+        var_dump($get_sms_status);
+        }
+    } else {
+    // Log if no nurseries are available for harvesting
+    // echo "No harvestable nurseries available.\n";
 }
+
+?>

@@ -44,7 +44,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'delete') {
     $order_price = $sourceService->clean('order_price', 'post');
     $order_total = $sourceService->clean('order_total', 'post');
     $source_contact = $sourceService->clean('source_contact', 'post');
-    
+    $source_variety = $sourceService->clean('source_variety', 'post');
     
     // Call create method to add the new order
     $owners = $sourceService->createSourceOrder($source_id, $order_quantity, $order_price, $order_total);
@@ -55,7 +55,8 @@ if (isset($_POST['action']) && $_POST['action'] == 'delete') {
             'order_quantity' => $order_quantity,
             'order_price' => $order_price,
             'order_total' => $order_total,
-            'source_contact' => $source_contact
+            'source_contact' => $source_contact,
+            'source_variety' => $source_variety
         ];
         
         $ch = curl_init('http://localhost:8080/new_project/coffee-tracking-system/view/pages/plant_source/order_reminder.php');
