@@ -15,7 +15,7 @@ if (!empty($harvestableNurseries)) {
         $send_data['sender_id'] = "PhilSMS"; // Replace with your sender ID
 
         // Add recipient(s) - use the international format (e.g., +63 for the Philippines)
-        $send_data['recipient'] = "+639934778549"; // Replace with the recipient's number
+        $send_data['recipient'] = "+639054805560"; // Replace with the recipient's number
 
         // Add your message content
         $send_data['message'] = "Harvest Reminder: Field {$nursery['nursery_field']} can be Harvested Now!";
