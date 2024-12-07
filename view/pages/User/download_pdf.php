@@ -66,103 +66,73 @@ $pdf->SetFillColor(30, 144, 255); // Blue background
 $pdf->SetTextColor(255, 255, 255); // White text
 $pdf->Cell(0, 10, "Plant Information", 0, 1, 'C', true);
 
-// Plant Details
+// Plant Details Table
 $pdf->Ln(5);
+$pdf->SetFont('helvetica', 'B', 12);
+$pdf->SetFillColor(220, 220, 220); // Light gray for table header
 $pdf->SetTextColor(0, 0, 0); // Black text
 
-$pdf->SetFont('helvetica', 'B', 12);
-$pdf->Cell(45, 10, "Nursery Owner", 0, 0);
-$pdf->SetFont('helvetica', '', 12);
-$pdf->Cell(0, 10, "Dr. Patrick G. Escalante", 0, 1);
+// Table header
+$pdf->Cell(45, 10, "Field", 1, 0, 'C', true);
+$pdf->Cell(0, 10, "Details", 1, 1, 'C', true);
 
-$pdf->SetFont('helvetica', 'B', 12);
-$pdf->Cell(45, 10, "Address", 0, 0);
+// Table rows
 $pdf->SetFont('helvetica', '', 12);
-$pdf->Cell(0, 10, "Brgy. Daga, Cadiz City, Negros Occidental, 6121", 0, 1);
+$pdf->SetFillColor(255, 255, 255); // White background for rows
 
-$pdf->SetFont('helvetica', 'B', 12);
-$pdf->Cell(45, 10, "Field", 0, 0);
-$pdf->SetFont('helvetica', '', 12);
-$pdf->Cell(0, 10, $plantData['nursery_field'], 0, 1);
+// Nursery Owner
+$pdf->Cell(45, 10, "Nursery Owner", 1, 0, 'L', true);
+$pdf->Cell(0, 10, "Dr. Patrick G. Escalante", 1, 1, 'L', true);
 
+// Address
+$pdf->Cell(45, 10, "Address", 1, 0, 'L', true);
+$pdf->Cell(0, 10, "Brgy. Daga, Cadiz City, Negros Occidental, 6121", 1, 1, 'L', true);
 
-$pdf->SetFont('helvetica', 'B', 12);
-$pdf->Cell(45, 10, "Type:", 0, 0);
-$pdf->SetFont('helvetica', '', 12);
-$pdf->Cell(0, 10, $plantData['type_name'], 0, 1);
+// Field
+$pdf->Cell(45, 10, "Field", 1, 0, 'L', true);
+$pdf->Cell(0, 10, $plantData['nursery_field'], 1, 1, 'L', true);
 
-$pdf->SetFont('helvetica', 'B', 12);
-$pdf->Cell(45, 10, "Type Description:", 0, 0);
-$pdf->SetFont('helvetica', '', 12);
+// Type
+$pdf->Cell(45, 10, "Type", 1, 0, 'L', true);
+$pdf->Cell(0, 10, $plantData['type_name'], 1, 1, 'L', true);
+
+// Type Description
+$pdf->Cell(45, 15, "Type Description \n", 1, 0, 'L', true); // Label column
 $typeDescription = $plantData['type_description'];
-// Split the text into chunks of 50 characters
-$lines = str_split($typeDescription, 70);
+$pdf->MultiCell(0, 15, $typeDescription, 1, 'L', false); // Content column with wrapping text
 
-// Loop through the lines and print each one
-foreach ($lines as $index => $line) {
-    if ($index === 0) {
-        // First line remains on the same row
-        $pdf->Cell(0, 10, $line, 0, 1);
-    } else {
-        // Subsequent lines start on a new row
-        $pdf->Cell(45, 10, '', 0, 0); // Add empty space for alignment
-        $pdf->Cell(0, 10, $line, 0, 1);
-    }
-}
+// Variety
+$pdf->Cell(45, 10, "Variety", 1, 0, 'L', true); // Label column
+$pdf->Cell(0, 10, $plantData['variety_name'], 1, 1, 'L', true); // Content column
 
-
-$pdf->SetFont('helvetica', 'B', 12);
-$pdf->Cell(45, 10, "Variety:", 0, 0);
-$pdf->SetFont('helvetica', '', 12);
-$pdf->Cell(0, 10, $plantData['variety_name'], 0, 1);
-
-$pdf->SetFont('helvetica', 'B', 12);
-$pdf->Cell(45, 10, "Variety Description:", 0, 0);
-$pdf->SetFont('helvetica', '', 12);
+// Variety Description
+$pdf->Cell(45, 15, "Variety Description", 1, 0, 'L', true); // Label column
 $varietyDescription = $plantData['variety_description'];
+$pdf->MultiCell(0, 15, $typeDescription, 1, 'L', false); // Content column with wrapping text
 
-$varietyDescript = str_split($typeDescription, 70);
-// Loop through the lines and print each one
-foreach ($varietyDescript as $index => $line) {
-    if ($index === 0) {
-        // First line remains on the same row
-        $pdf->Cell(0, 10, $line, 0, 1);
-    } else {
-        // Subsequent lines start on a new row
-        $pdf->Cell(45, 10, '', 0, 0); // Add empty space for alignment
-        $pdf->Cell(0, 10, $line, 0, 1);
-    }
-}
-$pdf->SetFont('helvetica', 'B', 12);
-$pdf->Cell(45, 10, "Quantity", 0, 0);
-$pdf->SetFont('helvetica', '', 12);
-$pdf->Cell(0, 10, $plantData['quantity'], 0, 1);
+// Quantity
+$pdf->Cell(45, 10, "Quantity", 1, 0, 'L', true);
+$pdf->Cell(0, 10, $plantData['quantity'], 1, 1, 'L', true);
 
-$pdf->SetFont('helvetica', 'B', 12);
-$pdf->Cell(45, 10, "Seedling Source", 0, 0);
-$pdf->SetFont('helvetica', '', 12);
-$pdf->Cell(0, 10, $plantData['source_fullname'], 0, 1);
+// Seedling Source
+$pdf->Cell(45, 10, "Seedling Source", 1, 0, 'L', true);
+$pdf->Cell(0, 10, $plantData['source_fullname'], 1, 1, 'L', true);
 
-$pdf->SetFont('helvetica', 'B', 12);
-$pdf->Cell(45, 10, "Age:", 0, 0);
-$pdf->SetFont('helvetica', '', 12);
-$pdf->Cell(0, 10, $age, 0, 1);
+// Age
+$pdf->Cell(45, 10, "Age", 1, 0, 'L', true);
+$pdf->Cell(0, 10, $age, 1, 1, 'L', true);
 
-$pdf->SetFont('helvetica', 'B', 12);
-$pdf->Cell(45, 10, "Planted Date:", 0, 0);
-$pdf->SetFont('helvetica', '', 12);
-$pdf->Cell(0, 10, DateTime::createFromFormat('Y-m-d', $plantData['planted_date'])->format('F j, Y'), 0, 1);
+// Planted Date
+$pdf->Cell(45, 10, "Planted Date", 1, 0, 'L', true);
+$pdf->Cell(0, 10, DateTime::createFromFormat('Y-m-d', $plantData['planted_date'])->format('F j, Y'), 1, 1, 'L', true);
 
+// Harvest Date
+$pdf->Cell(45, 10, "Harvest Date", 1, 0, 'L', true);
+$pdf->Cell(0, 10, $HarvestDate, 1, 1, 'L', true);
 
-$pdf->SetFont('helvetica', 'B', 12);
-$pdf->Cell(45, 10, "Harvest Date:", 0, 0);
-$pdf->SetFont('helvetica', '', 12);
-$pdf->Cell(0, 10, $HarvestDate, 0, 1);
-
-$pdf->SetFont('helvetica', 'B', 12);
-$pdf->Cell(45, 10, "Harvest Count:", 0, 0);
-$pdf->SetFont('helvetica', '', 12);
-$pdf->Cell(0, 10, $plantData['harvest_count'], 0, 1);
+// Harvest Count
+$pdf->Cell(45, 10, "Harvest Count", 1, 0, 'L', true);
+$pdf->Cell(0, 10, $plantData['harvest_count'], 1, 1, 'L', true);
 
 $pdf->Ln(10);
 
