@@ -107,11 +107,14 @@ $pdf->Ln(20);
 
 // Add signature line with underline
 $pdf->SetFont('helvetica', 'BU', 12); // 'BU' combines bold and underline styles
-$pdf->Cell(0, 10, 'DR. PATRICK ESCALANTE', 0, 1, 'R');
+$pdf->Cell(0, 5, 'DR. PATRICK ESCALANTE', 0, 1, 'R'); // Right-align the name
 
 // Add "Nursery Owner" text
 $pdf->SetFont('helvetica', '', 11);
-$pdf->Cell(0, 5, 'Nursery Owner', 0, 1, 'R');
+
+// Move the cursor back to the starting position of the previous line and center the "Nursery Owner" text
+$pdf->SetX($pdf->GetX() + 130); // You can adjust this offset to match your design
+$pdf->Cell(0, 2, 'Nursery Owner', 0, 1, 'C'); // Center align the "Nursery Owner" text
 
 // Output PDF
 $pdf->Output('summary_report.pdf', 'D'); // 'D' forces download

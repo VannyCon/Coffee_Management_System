@@ -55,6 +55,18 @@ class SourceService extends config {
         }
     }
 
+    public function getAllNurseryOwners() {
+        try {
+            $query = "SELECT `id`, `source_id`, `source_fullname`, `source_variety`, `source_quantity`, `source_contact_number`, `source_email`, `source_address`, `created_date` FROM `tbl_source` WHERE 1";
+            $stmt = $this->pdo->prepare($query); // Prepare the query
+            $stmt->execute(); // Execute the query
+            return $stmt->fetchAll(PDO::FETCH_ASSOC); // Fetch all results
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+
+
     
     public function create($fullname,  $source_variety, $source_quantity, $contact_number, $source_email,  $address) {
         try {

@@ -72,66 +72,104 @@ $pdf->SetFont('helvetica', 'B', 12);
 $pdf->SetFillColor(220, 220, 220); // Light gray for table header
 $pdf->SetTextColor(0, 0, 0); // Black text
 
-// Table header
-$pdf->Cell(45, 10, "Field", 1, 0, 'C', true);
-$pdf->Cell(0, 10, "Details", 1, 1, 'C', true);
 
 // Table rows
 $pdf->SetFont('helvetica', '', 12);
 $pdf->SetFillColor(255, 255, 255); // White background for rows
 
-// Nursery Owner
-$pdf->Cell(45, 10, "Nursery Owner", 1, 0, 'L', true);
-$pdf->Cell(0, 10, "Dr. Patrick G. Escalante", 1, 1, 'L', true);
+// Set the font for bold text
+$pdf->SetFont('helvetica', 'B', 12);
+// Nursery Owner (outside table)
+$pdf->Cell(45, 10, "Nursery Owner", 0, 0, 'L'); // No border, text only
+$pdf->SetFont('helvetica', '', 12); // Set back to regular font
+$pdf->Cell(0, 10, "Dr. Patrick G. Escalante", 0, 1, 'L'); // Regular font for the name
 
-// Address
-$pdf->Cell(45, 10, "Address", 1, 0, 'L', true);
-$pdf->Cell(0, 10, "Brgy. Daga, Cadiz City, Negros Occidental, 6121", 1, 1, 'L', true);
+// Address (outside table)
+$pdf->SetFont('helvetica', 'B', 12); // Bold for the label
+$pdf->Cell(45, 10, "Address", 0, 0, 'L'); // No border, text only
+$pdf->SetFont('helvetica', '', 12); // Regular font for the address
+$pdf->Cell(0, 10, "Brgy. Daga, Cadiz City, Negros Occidental, 6121", 0, 1, 'L'); 
+
+// Plant Information (outside table)
+$pdf->SetFont('helvetica', 'B', 12); // Bold for the label
+$pdf->Cell(0, 10, "Plant Information", 0, 1, 'C'); // Centered text across the page width
+
+
+// Set background color for the header row only
+$pdf->SetFillColor(200, 220, 255); // Light blue background
+// Header row: Field and Details
+$pdf->Cell(45, 10, "Field", 1, 0, 'C', true);  // True here applies the background color
+$pdf->Cell(0, 10, "Details", 1, 1, 'C', true);  // True here applies the background color
+
+// Set fill color to white for the rest of the table
+$pdf->SetFillColor(255, 255, 255);  // White background for the rest of the table
 
 // Field
+$pdf->SetFont('helvetica', 'B', 12);
 $pdf->Cell(45, 10, "Field", 1, 0, 'L', true);
+$pdf->SetFont('helvetica', '', 12); // Regular font for the address
 $pdf->Cell(0, 10, $plantData['nursery_field'], 1, 1, 'L', true);
 
 // Type
+$pdf->SetFont('helvetica', 'B', 12);
 $pdf->Cell(45, 10, "Type", 1, 0, 'L', true);
+$pdf->SetFont('helvetica', '', 12); // Regular font for the address
 $pdf->Cell(0, 10, $plantData['type_name'], 1, 1, 'L', true);
 
 // Type Description
+$pdf->SetFont('helvetica', 'B', 12);
 $pdf->Cell(45, 15, "Type Description \n", 1, 0, 'L', true); // Label column
 $typeDescription = $plantData['type_description'];
+$pdf->SetFont('helvetica', '', 12); // Regular font for the address
 $pdf->MultiCell(0, 15, $typeDescription, 1, 'L', false); // Content column with wrapping text
 
 // Variety
+$pdf->SetFont('helvetica', 'B', 12);
 $pdf->Cell(45, 10, "Variety", 1, 0, 'L', true); // Label column
+$pdf->SetFont('helvetica', '', 12); // Regular font for the address
 $pdf->Cell(0, 10, $plantData['variety_name'], 1, 1, 'L', true); // Content column
 
 // Variety Description
+$pdf->SetFont('helvetica', 'B', 12);
 $pdf->Cell(45, 15, "Variety Description", 1, 0, 'L', true); // Label column
 $varietyDescription = $plantData['variety_description'];
+$pdf->SetFont('helvetica', '', 12); // Regular font for the address
 $pdf->MultiCell(0, 15, $typeDescription, 1, 'L', false); // Content column with wrapping text
 
 // Quantity
+$pdf->SetFont('helvetica', 'B', 12);
 $pdf->Cell(45, 10, "Quantity", 1, 0, 'L', true);
+$pdf->SetFont('helvetica', '', 12); // Regular font for the address
 $pdf->Cell(0, 10, $plantData['quantity'], 1, 1, 'L', true);
 
 // Seedling Source
+$pdf->SetFont('helvetica', 'B', 12);
 $pdf->Cell(45, 10, "Seedling Source", 1, 0, 'L', true);
+$pdf->SetFont('helvetica', '', 12); // Regular font for the address
 $pdf->Cell(0, 10, $plantData['source_fullname'], 1, 1, 'L', true);
 
 // Age
+$pdf->SetFont('helvetica', 'B', 12);
 $pdf->Cell(45, 10, "Age", 1, 0, 'L', true);
+$pdf->SetFont('helvetica', '', 12); // Regular font for the address
 $pdf->Cell(0, 10, $age, 1, 1, 'L', true);
 
 // Planted Date
+$pdf->SetFont('helvetica', 'B', 12);
 $pdf->Cell(45, 10, "Planted Date", 1, 0, 'L', true);
+$pdf->SetFont('helvetica', '', 12); // Regular font for the address
 $pdf->Cell(0, 10, DateTime::createFromFormat('Y-m-d', $plantData['planted_date'])->format('F j, Y'), 1, 1, 'L', true);
 
 // Harvest Date
+$pdf->SetFont('helvetica', 'B', 12);
 $pdf->Cell(45, 10, "Harvest Date", 1, 0, 'L', true);
+$pdf->SetFont('helvetica', '', 12); // Regular font for the address
 $pdf->Cell(0, 10, $HarvestDate, 1, 1, 'L', true);
 
 // Harvest Count
+$pdf->SetFont('helvetica', 'B', 12);
 $pdf->Cell(45, 10, "Harvest Count", 1, 0, 'L', true);
+$pdf->SetFont('helvetica', '', 12); // Regular font for the address
 $pdf->Cell(0, 10, $plantData['harvest_count'], 1, 1, 'L', true);
 
 $pdf->Ln(10);

@@ -93,7 +93,7 @@
                     <div class="col-12 col-sm-6 col-md-3">
                         <div class="dashboard-card text-center">
                             <div class="stat-number">
-                                <a href="../plant_nursery/index.php"><?php echo $getSummary['total_types']; ?></a>
+                                <a href="../plant_type/index.php"><?php echo $getSummary['total_types']; ?></a>
                             </div>
                             <div class="stat-label">Total Types</div>
                         </div>

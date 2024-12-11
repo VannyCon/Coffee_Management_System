@@ -25,8 +25,8 @@
                     <input type="text" id="searchSourceInput" class="form-control" name="source_id" placeholder="Choose Source" onkeyup="filterSourceOptions()" onclick="toggleSourceDropdown()" required autocomplete="off">
                     <input type="hidden" id="source_id" name="source_id">
                     <div id="sourceDropdownContent" class="dropdown-content w-100">
-                        <?php if (!empty($sources)): ?>
-                            <?php foreach ($sources as $source): ?>
+                        <?php if (!empty($allsources)): ?>
+                            <?php foreach ($allsources as $source): ?>
                                 <div onclick="selectSource(this)" data-id="<?php echo $source['source_id']; ?>">
                                     <?php echo htmlspecialchars(trim($source['source_fullname'])); ?>
                                 </div>
