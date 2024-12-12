@@ -11,13 +11,106 @@ $getSummary = $dashboard->getPlantInfoSummary();
 $m = $dashboard->getThisYearSummary();
 $sales = $dashboard->getSalesSummary();
 ?>
+<style>
+/* Styles for print button */
+.print-btn {
+    background-color: #198754;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
 
+.print-btn:hover {
+    background-color: #157347;
+}
+
+@media print {
+    /* Set page margins */
+    @page {
+        margin: 1in;
+    }
+
+    /* Hide elements */
+    .print-btn,
+    .pdfdownload,
+    nav,
+    footer {
+        display: none !important;
+    }
+    body {
+        background-color: white !important;
+    }
+
+    /* More specific selectors for elements that might be overriding */
+    .container {
+        background-color: white !important;
+    }
+    .mobile-nav-bg {
+        background-color: white !important;
+    }
+
+
+    /* Card styles */
+    .card {
+        break-inside: avoid !important;
+        margin-bottom: 20px !important;
+        border: 1px solid #dee2e6 !important;
+        box-shadow: none !important;
+        page-break-inside: avoid !important;
+        background-color: white !important;
+    } 
+    
+    /* Header styles */
+    .card-header.bg-success {
+        background-color: rgb(25, 135, 84) !important;
+        color: white !important;
+        padding: 12px !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+    
+    /* Table styles */
+    .table {
+        width: 100% !important;
+        margin-bottom: 1rem !important;
+        border-collapse: collapse !important;
+        background-color: white !important;
+    }
+    
+    .table th,
+    .table td {
+        padding: 8px !important;
+        border: 1px solid #dee2e6 !important;
+        background-color: white !important;
+    }
+    
+    .table-success {
+        background-color: #f8f9fa !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+}
+</style>
 <div class="container my-4">
     <!-- Download Button -->
-    <div class="text-end mb-4">
-        <a href="reportpdf.php" class="btn btn-info">
+    <div class="text-end mb-4 d-flex justify-content-end">
+        <a href="reportpdf.php" class="btn btn-info pdfdownload"> 
             <i class='bx bx-note icon'></i> Download PDF
         </a>
+        <!-- Download Button -->
+        <button onclick="window.print()" class="print-btn mx-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/>
+                <path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2H5zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4V3zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2H5zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1z"/>
+            </svg>
+            Print Report
+        </button>
     </div>
     <!-- Plant Info Summary Section -->
     <div class="card mb-4">
@@ -89,7 +182,7 @@ $sales = $dashboard->getSalesSummary();
     </div>
 
     <!-- Yearly Summary Section -->
-    <div class="card mb-4">
+    <div class="card mb-5">
         <div class="card-header bg-success text-white">
             <h5 class="mb-0">This Year's Planting Summary</h5>
         </div>
